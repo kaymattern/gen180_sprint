@@ -1,11 +1,10 @@
 // How to Pay for Solar visualization
 
-const margin = {top:80, right:50, left:120, bottom:80}; 
+const margin = {top:80, right:50, left:120, bottom:80};
     
 const outerHeight = 800;   // can change dimensions
 const outerWidth = 1000;
     
-
 // make an inner svg to put graph in, put labels and other stuff in margins
 const innerHeight = outerHeight - margin.top - margin.bottom; 
 const innerWidth = outerWidth - margin.left - margin.right;   
