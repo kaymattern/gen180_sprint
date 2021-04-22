@@ -61,7 +61,7 @@ let stateData = [{state: 'Alabama', thirdParty: "Apparently disallowed by state 
                    {state: 'Wyoming', thirdParty: "Status unclear or unknown", solarSchools: 3, totalKW: 230}]
 
     
-const margin = {top:80, right:50, left:120, bottom:80}; 
+const margin = {top:80, right:50, left:50, bottom:80}; 
     
 const outerHeight = 800;
 const outerWidth = 1000;
@@ -90,8 +90,8 @@ d3.json('us_states.json').then( (states) => {
         .attr("class", "state-path")
         .attr("d", pathGenerator);
     
-    statePaths.attr("stroke", "white")
-    statePaths.attr("stroke-width", 3)
+    statePaths.attr("stroke", "black")
+    statePaths.attr("stroke-width", 2)
     
     
     // data join with array
@@ -111,5 +111,63 @@ d3.json('us_states.json').then( (states) => {
             }
         }
     }
+    
+    /*
+    yellow: #F3F1A5
+    orange: #F6772D
+    light blue: #4EB1E9
+    dark blue: #4C6B8B
+    */ 
+    
+    const lawColor = (lawStatus) => {
+        if (lawStatus == "Status unclear or unknown") {
+            return "white"; 
+        }
+        if (lawStatus == "Authorized by state or otherwise currently in use, at least in certain jurisdictions") {
+            return "#4C6B8B"; 
+        } else {return "#4EB1E9"}
+    }
+    
+    statePaths.style("fill", d=>lawColor(d.properties.thirdParty)); 
+    
+    
+    const uniqueLaws = ["Status unclear or unknown", "Apparently disallowed by state or otherwise restricted by legal barriers","Authorized by state or otherwise currently in use, at least in certain jurisdictions"]
+    
+    var size = 250;
+    const totalLegSpace = size*uniqueLaws.length + 5*uniqueLaws.length; 
+    const legendBottom = largeMap.append("g"); 
+    legendBottom.attr("transform", "translate("+(outerWidth/2 -  totalLegSpace/2)+","+(innerHeight + margin.top)+ ")"); 
+    
+    const legRects = legendBottom.selectAll(".legRects")
+                        .data(uniqueLaws)
+                        .join("rect")
+                        .attr("class", "legRects")
+                        .attr("width", size)
+                        .attr("height", 40)
+                        .attr("x", (d, i) => i*size)
+                        .style("fill", d=>lawColor(d))
+                        .style("border", "1px solid black"); 
+    
+    // http://bl.ocks.org/mundhradevang/1387786
+    const legLabels = legendBottom.selectAll(".legLabels")
+                        .data(uniqueLaws)
+                        .join("text")
+                        .attr("class", "legLabels")
+                        .attr("font-size", 10)
+                        .text(d => d)
+                        .style("max-length", 250)
+                        .attr("x", (d, i) => i*250 +5)
+                        .attr("y", 20)
+                        .attr("text-anchor", "left")
+                        .style("alignment-baseline", "middle"); 
+  
+    const legTitle = legendBottom.append("text")
+                        .attr("class", "legTitle")
+                        .attr("font-size", 20)
+                        .style("text-anchor", "middle")
+                        .text("Third party ownership laws")
+                        .attr("x", totalLegSpace/2)
+                        .attr("y", -15); 
+    
 
 })
