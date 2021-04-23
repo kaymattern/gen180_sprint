@@ -36,6 +36,7 @@ innerSolar.attr("transform", "translate(" +margin.left+","+margin.top+")");
 
 // Select everything in est_quantity variable and put it in innerSolar
 let quantRects = innerSolar.selectAll(".est_quantity");
+console.log(quantRects)
 
 // Join tucsonData with quantrects to create rectangles
 quantRects = quantRects.data(tucsonData)
