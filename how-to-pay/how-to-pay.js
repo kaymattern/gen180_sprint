@@ -23,3 +23,27 @@ innerPay.attr("transform", "translate(" +margin.left+","+margin.top+")");
    svg according to the margins (which you can change)
 */
 
+let payData = [{finType: 'Third-Party Ownership', amount: 79},
+               {finType: 'Direct Ownership - Grants and Donations', amount: 7},
+               {finTYpe: 'Direct Ownership - Bonds/Loan/Cash/Other', amount: 14}]
+
+var radius = Math.min(innerHeight, innerWidth) / 2 - margin
+
+var color = d3.scaleOrdinal()
+              .domain(payData)
+              .range(["#4c6b8b", "#f3f1a5", "#d3d3d3"]);
+
+var pie = d3.pie().value(function(d) {
+                  return d.amount;
+});
+      var arc = g.selectAll("arc")
+                 .data(pie(data))  
+                 .enter();
+
+      var path = d3.arc()
+                   .outerRadius(radius)
+                   .innerRadius(0);
+      arc.append("path")
+         .atrr("d", path)
+         .attr("fill", function(d) { return color(d.payData.finTYpe); });
+
