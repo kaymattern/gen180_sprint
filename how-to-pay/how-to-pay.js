@@ -27,16 +27,16 @@ let payData = [{finType: 'Third-Party Ownership', amount: 79},
                {finType: 'Direct Ownership - Grants and Donations', amount: 7},
                {finTYpe: 'Direct Ownership - Bonds/Loan/Cash/Other', amount: 14}]
 
-var radius = Math.min(innerHeight, innerWidth) / 2 - margin
+var radius = Math.min(innerHeight, innerWidth) / 2 - 40
 
 var color = d3.scaleOrdinal()
-              .domain(payData)
-              .range(["#4c6b8b", "#f3f1a5", "#d3d3d3"]);
+    .domain(payData)
+    .range(["#4c6b8b", "#f3f1a5", "#d3d3d3"]);
 
-var pie = d3.pie().value(function(d) {
-                  return d.amount;
-});
-      var arc = g.selectAll("arc")
+var pie = d3.pie()
+    .value(function(d) {return d.amount; });
+
+var arc = g.selectAll("arc")
                  .data(pie(data))  
                  .enter();
 
@@ -45,5 +45,5 @@ var pie = d3.pie().value(function(d) {
                    .innerRadius(0);
       arc.append("path")
          .atrr("d", path)
-         .attr("fill", function(d) { return color(d.payData.finTYpe); });
+         .attr("fill", function(d) { return color(d.payData.amount); });
 
