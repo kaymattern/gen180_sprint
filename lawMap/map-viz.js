@@ -80,7 +80,7 @@ const innerMap = largeMap.append("g");
 innerMap.attr("transform", "translate(" +margin.left+","+margin.top+")"); 
 
 d3.json('us_states.json').then( (states) => {
-    const projection = d3.geoAlbersUsa().scale(1000)
+    const projection = d3.geoAlbersUsa().scale(innerWidth)
         //.center()
     const pathGenerator = d3.geoPath().projection(projection);
 
@@ -172,7 +172,7 @@ const drawLaws = (statePaths) => {
                         .attr("y", -15); 
     
      statePaths.on("mouseover", function() {
-        statePaths.style("opacity", 0.6)
+        statePaths.style("opacity", 0.7)
         d3.select(this).style("fill", "#4EB1E9")
                         .style("opacity", 1)
         const thisData = d3.select(this).data()[0]

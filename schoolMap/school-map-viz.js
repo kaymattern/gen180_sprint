@@ -60,11 +60,11 @@ let stateData = [{state: 'Alabama', thirdParty: "Apparently disallowed by state 
                    {state: 'Wisconsin', thirdParty: "Status unclear or unknown", solarSchools: 129, totalKW: 4827},
                    {state: 'Wyoming', thirdParty: "Status unclear or unknown", solarSchools: 3, totalKW: 230}]
 
-const sortDataByCapacity = (data) => {
+const sortDataBySchools = (data) => {
     const sorted = data.sort(function(a,b) {
-        return b.totalKW - a.totalKW;
+        return b.solarSchools - a.solarSchools;
     });
-    return sorted.map((state, index) => ({...state, capacityRank: index+1 }));
+    return sorted.map((state, index) => ({...state, schoolRank: index+1 }));
 }
     
 const margin = {top:80, right:50, left:50, bottom:80}; 
@@ -86,6 +86,7 @@ const innerMap = largeMap.append("g");
 innerMap.attr("transform", "translate(" +margin.left+","+margin.top+")"); 
 
 d3.json('us_states.json').then( (states) => {
+
     const projection = d3.geoAlbersUsa().scale(innerWidth)
         //.center()
     const pathGenerator = d3.geoPath().projection(projection);
@@ -96,8 +97,8 @@ d3.json('us_states.json').then( (states) => {
         .attr("class", "state-path")
         .attr("d", pathGenerator);
     
-    statePaths.attr("stroke", "white")
-    statePaths.attr("stroke-width", 3)
+    statePaths.attr("stroke", "black")
+    statePaths.attr("stroke-width", 1)
     
     
     // data join with array
@@ -118,88 +119,48 @@ d3.json('us_states.json').then( (states) => {
         }
     }
     
-const drawCap = (statePaths) => {
-
-    const calcOpacity = (totalKW) => {
-        const totalMW = totalKW / 1000;
-        if (totalMW < 0.5) {
-            return 0.2;
-        } else if (totalMW < 1.99) {
-            return 0.4;
-        } else if (totalMW < 4.99) {
-            return 0.6;
-        } else if (totalMW < 19.99) {
-            return 0.8;
-        } else {
-            return 1;
+const drawSchools = (statePaths) => {
+    
+     /*
+    yellow: #F3F1A5
+    orange: #F6772D
+    light blue: #4EB1E9
+    dark blue: #4C6B8B
+    */ 
+   
+    
+    const lawColor = (lawStatus) => {
+        if (lawStatus == "Status unclear or unknown") {
+            return "white"; 
         }
+        if (lawStatus == "Authorized by state or otherwise currently in use, at least in certain jurisdictions") {
+            return "#F3F1A5"; 
+        } else {return "#F6772D"}
     }
-
-    statePaths.style("fill", "#F6772D")
-    statePaths.style("opacity", d => calcOpacity(d.properties.totalKW))
-
-    statePaths.on("mouseover", function() {
-        d3.select(this).style("fill", "#4C6B8B")
-        d3.select(this).style("opacity", 1)
-        const thisData = d3.select(this).data()[0]
-        stateNameSpan.text(thisData.properties.NAME)
-        stateCapacitySpan.text((thisData.properties.totalKW/1000).toFixed(2) + " MW")
-        const sortedData = sortDataByCapacity(stateData)
-        const ranking = sortedData.find(s => s.state === thisData.properties.NAME).capacityRank
-        stateRankingSpan.text("" + ranking)
-        tooltip.style("opacity", 1)
-
-    }).on("mouseout", function() {
-        d3.select(this).style("fill", "#F6772D")
-        d3.select(this).style("opacity", d => calcOpacity(d.properties.totalKW))
-        tooltip.style("opacity", 0)
-    }).on("mousemove", function(event) {
-        tooltip.style("left", d3.pointer(event)[0] + "px")
-        tooltip.style("top", d3.pointer(event)[1] + "px")
-    })
-
-    const tooltip = d3.select("body").append("div")
-        .attr("id", "tooltip")
-        .style("border", "1px solid black")
-        .style("padding", "10px")
-        .style("position", "absolute")
-        .style("opacity", 0)
-        .style("background-color", "white")
-        .style("pointer-events", "none")
-
-    let stateName = tooltip.append("div").text("State: ")
-    let stateNameSpan = stateName.append("span")
-
-    let stateCapacity = tooltip.append("div").text("Capacity: ")
-    let stateCapacitySpan = stateCapacity.append("span")
-
-    let stateRanking = tooltip.append("div").text("Ranking: ")
-    let stateRankingSpan = stateRanking.append("span")
     
-      
-    const rangeNames = ["0-0.5 MW", "0.5-1.99 MW","2-4.99 MW", "5-19.99 MW", ">20 MW"]
+    statePaths.style("fill", d=>lawColor(d.properties.thirdParty)); 
     
-    const rangeVals = [400, 1000, 3000, 6000, 21000]
     
-    var size = 150;
-    const totalLegSpace = size*rangeNames.length + 5*rangeNames.length; 
+    const uniqueLaws = ["Status unclear or unknown", "Apparently disallowed by state or otherwise restricted by legal barriers","Authorized by state or otherwise currently in use, at least in certain jurisdictions"]
+    
+    var size = 250;
+    const totalLegSpace = size*uniqueLaws.length + 5*uniqueLaws.length; 
     const legendBottom = largeMap.append("g"); 
     legendBottom.attr("transform", "translate("+(outerWidth/2 -  totalLegSpace/2)+","+(innerHeight + margin.top)+ ")"); 
     
     const legRects = legendBottom.selectAll(".legRects")
-                        .data(rangeVals)
+                        .data(uniqueLaws)
                         .join("rect")
                         .attr("class", "legRects")
                         .attr("width", size)
                         .attr("height", 40)
                         .attr("x", (d, i) => i*size)
-                        .style("fill", "#F6772D")
-                        .style("opacity", d=>calcOpacity(d))
+                        .style("fill", d=>lawColor(d))
                         .style("border", "1px solid black"); 
     
     // http://bl.ocks.org/mundhradevang/1387786
     const legLabels = legendBottom.selectAll(".legLabels")
-                        .data(rangeNames)
+                        .data(uniqueLaws)
                         .join("text")
                         .attr("class", "legLabels")
                         .attr("font-size", 10)
@@ -214,11 +175,71 @@ const drawCap = (statePaths) => {
                         .attr("class", "legTitle")
                         .attr("font-size", 20)
                         .style("text-anchor", "middle")
-                        .text("Total Solar Capacity in K-12 Schools by State:")
+                        .text("Third party ownership laws")
                         .attr("x", totalLegSpace/2)
                         .attr("y", -15); 
     
+    statePaths.on("mouseover", function() {
+        d3.select(this).style("fill", "#4EB1E9")
+        statePaths.style("opacity", 0.7)
+        d3.select(this).style("opacity", 1)
+        const thisData = d3.select(this).data()[0]
+        stateNameSpan.text(thisData.properties.NAME)
+        stateSchoolsSpan.text(thisData.properties.solarSchools)
+        const sortedData = sortDataBySchools(stateData)
+        const ranking = sortedData.find(s => s.state === thisData.properties.NAME).schoolRank
+        stateRankingSpan.text("" + ranking)
+        tooltip.style("opacity", 1)
+
+    }).on("mouseout", function() {
+        statePaths.style("opacity", 1)
+        d3.select(this).style("fill", d=>lawColor(d.properties.thirdParty))
+        tooltip.style("opacity", 0)
+    }).on("mousemove", function(event) {
+        tooltip.style("left", d3.pointer(event)[0] + "px")
+        tooltip.style("top", d3.pointer(event)[1] + "px")
+    })
+    
+    const tooltip = d3.select("body").append("div")
+        .attr("id", "tooltip")
+        .style("border", "1px solid black")
+        .style("padding", "10px")
+        .style("position", "absolute")
+        .style("opacity", 0)
+        .style("background-color", "white")
+        .style("pointer-events", "none")
+
+    let stateName = tooltip.append("div").text("State: ")
+    let stateNameSpan = stateName.append("span")
+
+    let stateSchools = tooltip.append("div").text("Total solar schools: ")
+    let stateSchoolsSpan = stateSchools.append("span")
+
+    let stateRanking = tooltip.append("div").text("Schools Ranking: ")
+    let stateRankingSpan = stateRanking.append("span")
+    
+    let maxSchools = d3.max(stateData, d=>d.solarSchools); 
+    
+    const rScale = d3.scaleSqrt()
+                    .domain([0, maxSchools])
+                    .range([0, 20]); 
+
+    
+     innerMap.selectAll(".school-centroid").data(states.features)
+        .join("circle")
+        .attr("class", "school-centroid")
+        .attr("fill", "#4C6B8B")
+        .style("opacity", .9)
+        .attr("stroke", "white")
+        .attr("stroke-width", 1)
+        .style("opacity", .8)
+        .attr("r", d=>rScale(d.properties.solarSchools))
+        .attr("cx", function(d){ return pathGenerator.centroid(d)[0];})
+        .attr("cy", function(d){ return  pathGenerator.centroid(d)[1];}); 
+    
+    
+    
     }
 
-    drawCap(statePaths); 
+    drawSchools(statePaths); 
 })
