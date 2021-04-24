@@ -1,0 +1,49 @@
+body {
+    overflow-x: hidden; 
+}
+
+#sections {
+    position: relative; 
+    display: inline-block; 
+    width: 500px; 
+    top: 60px; 
+    z-index: 90; 
+    margin-right: 20px; 
+}
+
+.step {
+    margin-bottom: 100px; 
+    height: 700px; 
+    text-align: justify; 
+}
+
+#graphic {
+    margin: auto; 
+    width: 1500px; 
+    flex-direction: row; 
+    align-items: top; 
+    justify-content: space-around; 
+}
+
+#vis {
+    display: inline-block;
+    position: fixed;
+    top: 0px;
+    z-index: 1;
+    margin-left: 0;
+    height: 1000px;
+    width: 1000px;
+}
+
+#tooltip {
+    position: absolute;
+    border-radius: 3px;
+    display: none; 
+    color: black;
+    border: 1px solid black; 
+    background-color: white; 
+    padding: 6px;
+    font-size: 1.1em;
+    max-width: 400px;
+    z-index: 100;
+}
