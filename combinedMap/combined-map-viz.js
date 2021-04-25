@@ -12,7 +12,7 @@ Number of solar schools: https://www.thesolarfoundation.org/solar-schools/
 // let SCALES 
 // let LEGEND 
 
-let statePaths, dataset, largeMap, innerMap, pathGenerator;
+let statePaths, dataset, largeMap, innerMap, pathGenerator, legend;
 
 const uniqueLaws = ["Status unclear or unknown", "Apparently disallowed by state or otherwise restricted by legal barriers","Authorized by state or otherwise currently in use, at least in certain jurisdictions"]
   
@@ -110,9 +110,7 @@ const sortDataByCapacity = (data) => {
         }
     }
 
-function createScales() {
-    
-}; 
+// legends
     
 
 // drawing large svg canvas + margin convention 
@@ -141,6 +139,7 @@ d3.json('us_states.json').then( (states) => {
     */ 
 // all initial elements should be created in this function 
 const drawInitial = (statePaths) => {
+    
     // make canvas and join data 
     largeMap = d3.select("#vis").append("svg")
                     .attr("id", "map-main")
@@ -220,31 +219,6 @@ const drawInitial = (statePaths) => {
                         .attr("x", totalLegSpace/2)
                         .attr("y", -15); 
     
-    
-    statePaths.on("mouseover", mouseOver)
-              .on("mouseout", mouseOut)
-              
-    function mouseOver() {
-     d3.select(this).style("fill", "#4EB1E9")
-        statePaths.style("opacity", 0.7)
-        d3.select(this).style("opacity", 1)
-        const thisData = d3.select(this).data()[0]
-        const sortedData = sortDataBySchools(stateData)
-         d3.select('#tooltip')
-            .style('left', (d3.pointer(event)[0] + 330)+ 'px')
-            .style('top', (d3.pointer(event)[1]) + 'px')
-            .style('display', 'inline-block')
-            .html(`<strong>State: </strong> ${thisData.properties.NAME} 
-                <br> <strong>Solar Schools: </strong> ${thisData.properties.solarSchools} 
-                <br> <strong>School Ranking: </strong> ${sortedData.find(s => s.state === thisData.properties.NAME).schoolRank}`)
-    }
-    function mouseOut() {
-        d3.select("#tooltip")
-            .style('display', 'none')
-         statePaths.style("opacity", 1)
-        d3.select(this).style("fill", d=>lawColor(d.properties.thirdParty))
-    }
-    
     let maxSchools = d3.max(stateData, d=>d.solarSchools); 
     
     const rScale = d3.scaleSqrt()
@@ -259,7 +233,6 @@ const drawInitial = (statePaths) => {
         .style("opacity", 0)
         .attr("stroke", "white")
         .attr("stroke-width", 1)
-        .style("opacity", .8)
         .attr("r", d=>rScale(d.properties.solarSchools))
         .attr("cx", function(d){ return pathGenerator.centroid(d)[0];})
         .attr("cy", function(d){ return  pathGenerator.centroid(d)[1];}); 
@@ -270,16 +243,42 @@ const drawInitial = (statePaths) => {
 
 // hide all elements necessary for given chart type 
 function clean(chartType) {
+     innerMap.selectAll(".state-path").style("opacity", 1);
     if (chartType !== "schoolDots") {
         innerMap.selectAll(".school-centroid")
             .style("opacity", 0); 
+         statePaths.on("mouseover", mouseOver)
+              .on("mouseout", mouseOut)
+              
+    function mouseOver() {
+        d3.select('#tooltip')
+            .style('display', 'none')
     }
+    function mouseOut() {
+        d3.select("#tooltip")
+            .style('display', 'none')
+    }}
+
 }
 
 function drawLaws() {
     clean('justLaws')
     statePaths = innerMap.selectAll(".state-path")
     statePaths.style("fill", d=>lawColor(d.properties.thirdParty)); 
+    
+      statePaths.on("mouseover", mouseOver)
+              .on("mouseout", mouseOut)
+              
+    function mouseOver() {
+        d3.select('#tooltip')
+            .style('display', 'none')
+    }
+    function mouseOut() {
+        d3.select("#tooltip")
+            .style('display', 'none')
+    }
+    
+    
 }
 
 function drawSchools() {
@@ -287,7 +286,31 @@ function drawSchools() {
     statePaths = innerMap.selectAll(".state-path")
     statePaths.style("fill", d=>lawColor(d.properties.thirdParty))
     innerMap.selectAll(".school-centroid")
-                        .style("opacity", .9); 
+                        .style("opacity", .8); 
+    
+    statePaths.on("mouseover", mouseOver)
+              .on("mouseout", mouseOut)
+              
+    function mouseOver() {
+     d3.select(this).style("fill", "#4EB1E9")
+        statePaths.style("opacity", 0.7)
+        d3.select(this).style("opacity", 1)
+        const thisData = d3.select(this).data()[0]
+        const sortedData = sortDataBySchools(stateData)
+         d3.select('#tooltip')
+            .style('left', (d3.pointer(event)[0] + 330)+ 'px')
+            .style('top', (d3.pointer(event)[1] + outerHeight) + 'px')
+            .style('display', 'inline-block')
+            .html(`<strong>State: </strong> ${thisData.properties.NAME} 
+                <br> <strong>Solar Schools: </strong> ${thisData.properties.solarSchools} 
+                <br> <strong>School Ranking: </strong> ${sortedData.find(s => s.state === thisData.properties.NAME).schoolRank}`)
+    }
+    function mouseOut() {
+        d3.select("#tooltip")
+            .style('display', 'none')
+         statePaths.style("opacity", 1)
+        d3.select(this).style("fill", d=>lawColor(d.properties.thirdParty))
+    }
     
 }
 
@@ -297,6 +320,29 @@ function drawCapacity() {
     statePaths.style("fill", "#F6772D")
     statePaths.style("opacity", d => calcOpacity(d.properties.totalKW))
 
+     statePaths.on("mouseover", mouseOver)
+              .on("mouseout", mouseOut)
+              
+    function mouseOver() {
+        d3.select(this).style("fill", "#4C6B8B")
+        d3.select(this).style("opacity", 1)
+        const thisData = d3.select(this).data()[0]
+        const sortedData = sortDataByCapacity(stateData)
+        const ranking = sortedData.find(s => s.state === thisData.properties.NAME).capacityRank
+         d3.select('#tooltip')
+            .style('left', (d3.pointer(event)[0] + 330)+ 'px')
+            .style('top', (d3.pointer(event)[1] + 2*outerHeight) + 'px')
+            .style('display', 'inline-block')
+            .html(`<strong>State: </strong> ${thisData.properties.NAME} 
+                <br> <strong>Total Capacity: </strong> ${(thisData.properties.totalKW/1000).toFixed(2)} MW 
+                <br> <strong>Capacity Ranking: </strong> ${sortedData.find(s => s.state === thisData.properties.NAME).capacityRank}`)
+    }
+    function mouseOut() {
+         d3.select(this).style("fill", "#F6772D")
+         d3.select(this).style("opacity", d => calcOpacity(d.properties.totalKW))
+        d3.select("#tooltip")
+            .style('display', 'none')
+    }
     
 }
 
