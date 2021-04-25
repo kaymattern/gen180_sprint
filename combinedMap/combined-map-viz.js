@@ -14,7 +14,16 @@ Number of solar schools: https://www.thesolarfoundation.org/solar-schools/
 
 let statePaths, dataset, largeMap, innerMap, pathGenerator, legend;
 
+let legendLawLabel1, legendLawLabel2, legendLawLabel3; 
+
 const uniqueLaws = ["Status unclear or unknown", "Apparently disallowed by state or otherwise restricted by legal barriers","Authorized by state or otherwise currently in use, at least in certain jurisdictions"]
+
+let brokenLaw1 = ["Status unclear", "or unknown"]
+    
+let brokenLaw2 = ["Apparently", "disallowed by" ,"state or otherwise",  "restricted by", "legal barriers"]
+    
+let brokenLaw3= ["Authorized by state", "or otherwise currently", "in use, at least", "in certain jurisdictions"]
+    
   
 var size = 250;
 
@@ -114,7 +123,7 @@ const sortDataByCapacity = (data) => {
     
 
 // drawing large svg canvas + margin convention 
-const margin = {top:60, right:50, left:30, bottom:80}; 
+const margin = {top:60, right:170, left:10, bottom:80}; 
     
 const outerHeight = 900;
 const outerWidth = 1000;
@@ -182,43 +191,58 @@ const drawInitial = (statePaths) => {
         }
     }
     
-    statePaths.style("fill", d=>lawColor(d.properties.thirdParty)); 
+    legendG = largeMap.append("g")
+                        .attr("class", "lawLegend")
+    legendG.attr("transform", "translate("+
+                 (outerWidth - margin.right - margin.left - 40)+ "," + (outerHeight/4)+ ")"); 
     
-    const totalLegSpace = size*uniqueLaws.length + 5*uniqueLaws.length; 
-    const legendBottom = largeMap.append("g"); 
-    legendBottom.attr("transform", "translate("+(outerWidth/2 -  totalLegSpace/2)+","+(innerHeight + margin.top)+ ")"); 
-    
-    const legRects = legendBottom.selectAll(".legRects")
+       
+    const lawlegendRects = legendG.selectAll(".lawLegRect")
                         .data(uniqueLaws)
                         .join("rect")
-                        .attr("class", "legRects")
-                        .attr("width", size)
-                        .attr("height", 40)
-                        .attr("x", (d, i) => i*size)
+                        .attr("width", 40)
+                        .attr("height", 60)
+                        .attr("class", "lawLegRect")
+                        .attr("y", (d, i)=> i*100 + 25)
                         .style("fill", d=>lawColor(d))
-                        .style("border", "1px solid black"); 
+                        .style("border", "1px solid black")
+                        .attr("stroke", "black")
+                        .attr("stroke-width", 1)
+                        .style("opacity", 1); 
     
-    // http://bl.ocks.org/mundhradevang/1387786
-    const legLabels = legendBottom.selectAll(".legLabels")
-                        .data(uniqueLaws)
-                        .join("text")
-                        .attr("class", "legLabels")
-                        .attr("font-size", 10)
-                        .text(d => d)
-                        .style("max-length", size)
-                        .attr("x", (d, i) => i*size +5)
-                        .attr("y", 20)
-                        .attr("text-anchor", "left")
-                        .style("alignment-baseline", "middle"); 
-  
-    const legTitle = legendBottom.append("text")
-                        .attr("class", "legTitle")
-                        .attr("font-size", 20)
-                        .style("text-anchor", "middle")
-                        .text("Third party ownership laws")
-                        .attr("x", totalLegSpace/2)
-                        .attr("y", -15); 
+
+    legendLawLabel1 = legendG.selectAll(".lawLegLabel1")
+                            .data(brokenLaw1)
+                            .attr("class", "lawLegLabel1")
+                            .join("text")
+                            .text((d)=> d)
+                            .attr("x", 45)
+                            .attr("y", (d, i) => 47+ i*17)
+                            .style("opacity", 1);  
     
+      legendLawLabel2 = legendG.selectAll(".lawLegLabel2")
+                            .data(brokenLaw2)
+                            .attr("class", "lawLegLabel2")
+                            .join("text")
+                            .text((d)=> d)
+                            .attr("x", 45)
+                            .attr("y", (d, i) => 128+ i*17)
+                            .style("opacity", 1); 
+    
+    legendLawLabel3 = legendG.selectAll(".lawLegLabel3")
+                            .data(brokenLaw3)
+                            .attr("class", "lawLegLabel3")
+                            .join("text")
+                            .text((d)=> d)
+                            .attr("x", 45)
+                            .attr("y", (d, i) => 230+ i*17)
+                            .style("opacity", 1);   
+    
+    
+    statePaths.style("fill", d=>lawColor(d.properties.thirdParty)); 
+    
+    
+   
     let maxSchools = d3.max(stateData, d=>d.solarSchools); 
     
     const rScale = d3.scaleSqrt()
@@ -244,6 +268,7 @@ const drawInitial = (statePaths) => {
 // hide all elements necessary for given chart type 
 function clean(chartType) {
      innerMap.selectAll(".state-path").style("opacity", 1);
+     statePaths = innerMap.selectAll(".state-path")
     if (chartType !== "schoolDots") {
         innerMap.selectAll(".school-centroid")
             .style("opacity", 0); 
@@ -258,11 +283,22 @@ function clean(chartType) {
         d3.select("#tooltip")
             .style('display', 'none')
     }}
+    
+    if (chartType !== "justLaws") {
+        legendLawLabel1.style("opacity", 0); 
+        legendLawLabel2.style("opacity", 0);
+        legendLawLabel3.style("opacity", 0);
+        d3.selectAll(".lawLegRect").style("opacity", 0);
+    }
 
 }
 
 function drawLaws() {
     clean('justLaws')
+    legendLawLabel1.style("opacity", 1); 
+    legendLawLabel2.style("opacity", 1); 
+    legendLawLabel3.style("opacity", 1); 
+    d3.selectAll(".lawLegRect").style("opacity", 1);
     statePaths = innerMap.selectAll(".state-path")
     statePaths.style("fill", d=>lawColor(d.properties.thirdParty)); 
     

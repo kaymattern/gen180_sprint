@@ -1,1 +1,6 @@
-// css file for map viz 
+.lawLegLabels {
+    width: auto;
+    position: relative; 
+    display: inline-block;
+    width: 111px; 
+}

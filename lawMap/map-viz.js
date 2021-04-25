@@ -61,7 +61,7 @@ let stateData = [{state: 'Alabama', thirdParty: "Apparently disallowed by state 
                    {state: 'Wyoming', thirdParty: "Status unclear or unknown", solarSchools: 3, totalKW: 230}]
 
     
-const margin = {top:80, right:50, left:50, bottom:80}; 
+const margin = {top:80, right:150, left:20, bottom:80}; 
     
 const outerHeight = 800;
 const outerWidth = 1000;
@@ -113,7 +113,14 @@ d3.json('us_states.json').then( (states) => {
     }
     
 const drawLaws = (statePaths) => { 
+    
 
+    legendG = largeMap.append("g")
+                        .attr("class", "lawLegend")
+    legendG.attr("transform", "translate("+
+                 (outerWidth - margin.right - margin.left)+ "," +
+                (outerHeight/2)+ ")"); 
+    
     /*
     yellow: #F3F1A5
     orange: #F6772D
@@ -134,6 +141,50 @@ const drawLaws = (statePaths) => {
     
     
     const uniqueLaws = ["Status unclear or unknown", "Apparently disallowed by state or otherwise restricted by legal barriers","Authorized by state or otherwise currently in use, at least in certain jurisdictions"]
+    
+    let brokenLaw1 = ["Status unclear", "or unknown"]
+    
+    let brokenLaw2 = ["Apparently", "disallowed by" ,"state or otherwise",  "restricted by", "legal barriers"]
+    
+    let brokenLaw3= ["Authorized by state", "or otherwise currently", "in use, at least", "in certain jurisdictions"]
+    
+    
+    const lawlegendRects = legendG.selectAll(".lawLegRect")
+                        .data(uniqueLaws)
+                        .join("rect")
+                        .attr("width", 40)
+                        .attr("height", 60)
+                        .attr("class", "lawLegRect")
+                        .attr("y", (d, i)=> i*100 + 25)
+                        .style("fill", d=>lawColor(d))
+                        .style("border", "1px solid black")
+                        .attr("stroke", "black")
+                        .attr("stroke-width", 1); 
+    
+
+    const legendLawLabel1 = legendG.selectAll(".lawLegLabel")
+                            .data(brokenLaw1)
+                            .attr("id", "lawLegLabel1")
+                            .join("text")
+                            .text((d)=> d)
+                            .attr("x", 45)
+                            .attr("y", (d, i) => 47+ i*17);  
+    
+      const legendLawLabel2 = legendG.selectAll(".lawLegLabel")
+                            .data(brokenLaw2)
+                            .attr("id", "lawLegLabel2")
+                            .join("text")
+                            .text((d)=> d)
+                            .attr("x", 45)
+                            .attr("y", (d, i) => 128+ i*17); 
+    
+    const legendLawLabel3 = legendG.selectAll(".lawLegLabel")
+                            .data(brokenLaw3)
+                            .attr("id", "lawLegLabel3")
+                            .join("text")
+                            .text((d)=> d)
+                            .attr("x", 45)
+                            .attr("y", (d, i) => 230+ i*17);   
     
     var size = 250;
     const totalLegSpace = size*uniqueLaws.length + 5*uniqueLaws.length; 
