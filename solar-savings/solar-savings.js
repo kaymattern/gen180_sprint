@@ -4,12 +4,16 @@ const margin = {top:80, right:50, left:120, bottom:80};
     
 const outerHeight = 800;   // can change dimensions
 const outerWidth = 1000;
-    
-let tucsonData = [{type: "Teacher Salary", amount: 60477, est_quantity: 711},
-                  {type: "Laptops for 1,000 Students", amount: 300, est_quantity: 143},
+   
+/*I reordered it by est_quantity manually, was trying to use d3 sort function from stack overflow but it didn't work*/
+let tucsonData = [
+                  {type: "School Supplies for 75 Students", amount: 52200, est_quantity: 823},
+                  {type: "Teacher Salary", amount: 60477, est_quantity: 711},
                   {type: "Electric School Bus", amount: 230000, est_quantity: 186},
                   {type: "Books for 1,000 Students", amount: 250, est_quantity: 172},
-                  {type: "School Supplies for 75 Students", amount: 52200, est_quantity: 823}]
+                  {type: "Laptops for 1,000 Students", amount: 300, est_quantity: 143}
+               ]
+
 
 xAxisData = [{a: 100},
             {a: 200},
@@ -104,10 +108,11 @@ let quantIcon = innerSolar.selectAll()
    .attr("x", d=>d.est_quantity + 5);
 */
 
-/*Manually edited the icons in, since I couldn't figure out how to join with Tuscon Data*/
+/*Manually edited the icons in, since 
+I couldn't figure out how to join with Tuscon Data*/
 var g = largeSolar.append("g");
 var img = g.append("svg:image")
-   .attr("xlink:href", "http://cdn.onlinewebfonts.com/svg/img_353628.png")
+   .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_532723.png" )
    .attr("width", 50)
    .attr("height", 50)
    .attr("x", outerWidth - innerWidth-45)
@@ -115,7 +120,7 @@ var img = g.append("svg:image")
 
 var g2 = largeSolar.append("g");
 var img2 = g2.append("svg:image")
-   .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_20446.png")
+   .attr("xlink:href", "http://cdn.onlinewebfonts.com/svg/img_353628.png")
    .attr("width", 50)
    .attr("height", 50)
    .attr("x", outerWidth - innerWidth-45)
@@ -138,7 +143,7 @@ var img4 = g4.append("svg:image")
       .attr("y", outerHeight- innerHeight + 325);   
 var g5 = largeSolar.append("g");
 var img5 = g5.append("svg:image")
-      .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_532723.png")
+      .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_20446.png")
       .attr("width", 50)
       .attr("height", 50)
       .attr("x", outerWidth - innerWidth-45)
