@@ -14,9 +14,13 @@ Number of solar schools: https://www.thesolarfoundation.org/solar-schools/
 
 let statePaths, dataset, largeMap, innerMap, pathGenerator, legend;
 
-let legendLawLabel1, legendLawLabel2, legendLawLabel3; 
+let legendLawLabel1, legendLawLabel2, legendLawLabel3, legendCapLabel; 
 
 const uniqueLaws = ["Status unclear or unknown", "Apparently disallowed by state or otherwise restricted by legal barriers","Authorized by state or otherwise currently in use, at least in certain jurisdictions"]
+
+const capRangeNames = ["0-0.5 MW", "0.5-1.99 MW","2-4.99 MW", "5-19.99 MW", ">20 MW"]
+    
+const capRangeVals = [400, 1000, 3000, 6000, 21000]
 
 let brokenLaw1 = ["Status unclear", "or unknown"]
     
@@ -118,8 +122,6 @@ const sortDataByCapacity = (data) => {
             return 1;
         }
     }
-
-// legends
     
 
 // drawing large svg canvas + margin convention 
@@ -191,10 +193,16 @@ const drawInitial = (statePaths) => {
         }
     }
     
+// legends 
+    
     legendG = largeMap.append("g")
                         .attr("class", "lawLegend")
+    
+    capLegendG = largeMap.append("g").attr("class", "capLegend")
     legendG.attr("transform", "translate("+
                  (outerWidth - margin.right - margin.left - 40)+ "," + (outerHeight/4)+ ")"); 
+    capLegendG.attr("transform", "translate("+
+                 (outerWidth - margin.right - margin.left - 30)+ "," + (outerHeight/4)+ ")"); 
     
        
     const lawlegendRects = legendG.selectAll(".lawLegRect")
@@ -209,6 +217,29 @@ const drawInitial = (statePaths) => {
                         .attr("stroke", "black")
                         .attr("stroke-width", 1)
                         .style("opacity", 1); 
+    
+    const caplegendRects = capLegendG.selectAll(".capLegRect")
+                        .data(capRangeVals)
+                        .join("rect")
+                        .attr("width", 20)
+                        .attr("height", 20)
+                        .attr("class", "capLegRect")
+                        .attr("y", (d, i)=> i*40 + 25)
+                        .style("fill", "#F6772D")
+                        .style("opacity", d=>calcOpacity(d))
+                        .style("border", "1px solid black")
+                        .attr("stroke", "black")
+                        .attr("stroke-width", 1)
+                        .style("opacity", 0); 
+    
+    legendCapLabel = capLegendG.selectAll(".capLegLabel")
+                            .data(capRangeNames)
+                            .attr("class", "capLegLabel")
+                            .join("text")
+                            .text((d)=> d)
+                            .attr("x", 40)
+                            .attr("y", (d, i) => 40+ i*40)
+                            .style("opacity", 0); 
     
 
     legendLawLabel1 = legendG.selectAll(".lawLegLabel1")
@@ -289,6 +320,11 @@ function clean(chartType) {
         legendLawLabel2.style("opacity", 0);
         legendLawLabel3.style("opacity", 0);
         d3.selectAll(".lawLegRect").style("opacity", 0);
+    }
+    if (chartType !== "capMap") {
+        d3.selectAll(".capLegRect")
+                            .style("opacity", 0);
+        legendCapLabel.style("opacity", 0)
     }
 
 }
@@ -379,6 +415,11 @@ function drawCapacity() {
         d3.select("#tooltip")
             .style('display', 'none')
     }
+    
+     d3.selectAll(".capLegRect")
+                            .style("opacity", d=>calcOpacity(d)); 
+    
+    legendCapLabel.style("opacity", 1)
     
 }
 
