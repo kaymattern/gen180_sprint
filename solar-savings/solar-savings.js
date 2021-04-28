@@ -22,9 +22,9 @@ xAxisData = [{a: 100},
             {a: 500},
             {a: 600},
             {a: 700},
-            {a: 800},
-            {a: 900},
-            {a: 1000}]
+            {a: 800}]
+            //{a: 900},
+           // {a: 1000}]
 
 // tucsonData.map((d) => {
 //   d.amount = +d.amount;
@@ -55,14 +55,13 @@ innerSolar.attr("transform", "translate(" +margin.left+","+margin.top+")")
 
 // Select everything in est_quantity variable and put it in innerSolar
 let quantRects = innerSolar.selectAll(".est_quantity");
-console.log(quantRects)
 
 // Join tucsonData with quantrects to create rectangles
 quantRects = quantRects.data(tucsonData)
    .join("rect")
 
 var colors = ["#D9E100","#4EB1E9","#F6772D","#F3F1A5","pink"];
-// Specify attributews of the rectangles
+// Specify attributes of the rectangles
 quantRects = quantRects
    .attr("class", "est_quantity")
    .attr("x", 0) 
@@ -110,44 +109,44 @@ let quantIcon = innerSolar.selectAll()
 
 /*Manually edited the icons in, since 
 I couldn't figure out how to join with Tuscon Data*/
-var g = largeSolar.append("g");
+var g = innerSolar.append("g");
 var img = g.append("svg:image")
    .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_532723.png" )
    .attr("width", 50)
    .attr("height", 50)
-   .attr("x", outerWidth - innerWidth-45)
-   .attr("y", outerHeight- innerHeight -50);
+   .attr("x", outerWidth - innerWidth-150)
+   .attr("y", outerHeight- innerHeight - 131);
 
-var g2 = largeSolar.append("g");
+var g2 = innerSolar.append("g");
 var img2 = g2.append("svg:image")
    .attr("xlink:href", "http://cdn.onlinewebfonts.com/svg/img_353628.png")
    .attr("width", 50)
    .attr("height", 50)
-   .attr("x", outerWidth - innerWidth-45)
-   .attr("y", outerHeight- innerHeight + 75);
+   .attr("x", outerWidth - innerWidth-155)
+   .attr("y", outerHeight- innerHeight - 6);
 
-var g3 = largeSolar.append("g");
+var g3 = innerSolar.append("g");
 var img3 = g3.append("svg:image")
    .attr("xlink:href", "https://cdn0.iconfinder.com/data/icons/transportation-and-logistics/50/Transportation_and_Logistics-67-512.png")
    .attr("width", 50)
    .attr("height", 50)
-   .attr("x", outerWidth - innerWidth-45)
-   .attr("y", outerHeight- innerHeight + 200);
+   .attr("x", outerWidth - innerWidth-150)
+   .attr("y", outerHeight- innerHeight + 120);
 
-var g4 = largeSolar.append("g");
+var g4 = innerSolar.append("g");
 var img4 = g4.append("svg:image")
       .attr("xlink:href", "https://maxcdn.icons8.com/Share/icon/ios7/Files/open_book1600.png")
       .attr("width", 50)
       .attr("height", 50)
-      .attr("x", outerWidth - innerWidth-45)
-      .attr("y", outerHeight- innerHeight + 325);   
-var g5 = largeSolar.append("g");
+      .attr("x", outerWidth - innerWidth-150)
+      .attr("y", outerHeight- innerHeight + 242);   
+var g5 = innerSolar.append("g");
 var img5 = g5.append("svg:image")
       .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_20446.png")
       .attr("width", 50)
       .attr("height", 50)
-      .attr("x", outerWidth - innerWidth-45)
-      .attr("y", outerHeight- innerHeight + 450);  
+      .attr("x", outerWidth - innerWidth-145)
+      .attr("y", outerHeight- innerHeight + 370);  
 
 // Add x axis
 var x = d3.scaleBand()
@@ -162,20 +161,21 @@ innerSolar.append("g")
    .selectAll("text")
    .attr("transform", "translate(-10,0)rotate(-45)")
    .style("text-anchor", "left")
+   .style("fill", "white")
    ;
 
 /*Manually added line because I couldn't figure out how to put a y-axis with the categories*/
-const yAxisLine = outerWidth-innerWidth-55
-largeSolar.append("line")
+const yAxisLine = outerWidth-innerWidth-175
+innerSolar.append("line")
             .attr("x1", yAxisLine)
-            .attr("y1", innerHeight+50)
+            .attr("y1", innerHeight+5)
             .attr("x2", yAxisLine)
-            .attr("y2", 30)
+            .attr("y2", 5)
             .attr("stroke", "white")
             .attr("stroke-width","2")
 ;
 
-largeSolar.append("text")
+innerSolar.append("text")
    .attr("class", "x label")
     .attr("x", innerWidth/2 + 100)
     .attr("y", outerHeight - 20) 
