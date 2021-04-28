@@ -176,7 +176,7 @@ innerSolar.append("line")
 ;
 
 innerSolar.append("text")
-   .attr("class", "x label")
+    .attr("class", "x label")
     .attr("x", innerWidth/2 + 100)
     .attr("y", outerHeight - 20) 
     .text("Y-axis label")

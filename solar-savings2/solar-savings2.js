@@ -63,7 +63,7 @@ innerSolar.selectAll(".bar")
     .data(tucsonData)
     .enter().append("rect")
     .attr("class", "bar")
-    .attr("width", function(d) {return x(d.est_quantity); } )
+    .attr("width", 0)
     .attr("y", function(d) { return y(d.type); })
     .attr("height", y.bandwidth() - 20)
     .style("fill", function(d,i){return colors[i]})
@@ -75,3 +75,10 @@ innerSolar.append("g")
 innerSolar.append("g")
     .call(d3.axisLeft(y));
 
+innerSolar.selectAll(".bar")
+    .transition()
+    .duration(2000)
+    .attr("width", function(d) { return x(d.est_quantity); });
+
+
+  
