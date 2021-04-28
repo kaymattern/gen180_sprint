@@ -194,5 +194,5 @@ innerSolar.append("text")
 //     .attr("width", x.bandwidth())
 //     .attr("height", function(d) { return innerHeight - y(d.est_quantity); })
 //     .attr("fill", "#F3F1A5")
- 
- 
+
+
