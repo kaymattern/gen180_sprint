@@ -36,8 +36,8 @@ var color = d3.scaleOrdinal()
 var pie = d3.pie()
     .value(function(d) {return d.amount; });
 
-var arc = g.selectAll("arc")
-                 .data(pie(data))  
+var arc = innerPay.selectAll("arc")
+                 .data(pie(payData))  
                  .enter();
 
       var path = d3.arc()
