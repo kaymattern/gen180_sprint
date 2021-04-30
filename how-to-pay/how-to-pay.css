@@ -5,7 +5,7 @@ body {
 #sections {
     position: relative; 
     display: inline-block; 
-    width: 800px; 
+    width: 700px; 
     top: 60px; 
     z-index: 90; 
     margin-right: 20px; 
@@ -32,5 +32,5 @@ body {
     z-index: 1;
     margin-left: 0;
     height: 600px;
-    width: 600px;
+    width: 700px;
 }
