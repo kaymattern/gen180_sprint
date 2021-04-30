@@ -104,6 +104,11 @@ const capBLabel = innerGrowth1.selectAll("capBLabel")
                     .attr("y", d=>caprScale(d.cap) - 10)
                     .text(d=> d.cap); 
 
+const capsTitle = innerGrowth1.append("text")
+                    .text("Growth in Installed Solar Capacity (MW)")
+                    .style("text-anchor", "middle")
+                    .attr("transform", "translate("+ innerWidth/2 +",-40)");
+
 capRects.style("opacity", 0)
     .transition().delay(function(d, i) {return i * 800})
     .style("opacity", 1)
@@ -118,6 +123,11 @@ const schoolLeg = innerGrowth2.append("g")
             .selectAll("text")
             .attr("transform", "translate(-10,0)rotate(-45)")
             .style("text-anchor", "end")
+
+const schoolTitle = innerGrowth2.append("text")
+                    .text("Growth in Number of Solar Schools")
+                    .style("text-anchor", "middle")
+                    .attr("transform", "translate("+ innerWidth/2 +",-40)");
 
 const schoolBLabel = innerGrowth2.selectAll("schoolBLabel")
                     .data(schoolsGrowth)

@@ -1,1 +1,36 @@
-// css file for how to pay vis
+body {
+    overflow-x: hidden; 
+}
+
+#sections {
+    position: relative; 
+    display: inline-block; 
+    width: 500px; 
+    top: 60px; 
+    z-index: 90; 
+    margin-right: 20px; 
+}
+
+.step {
+    margin-bottom: 100px; 
+    height: 700px; 
+    text-align: justify; 
+}
+
+#graphic {
+    margin: auto; 
+    width: 1500px; 
+    flex-direction: row; 
+    align-items: top; 
+    justify-content: space-around; 
+}
+
+#vis {
+    display: inline-block;
+    position: fixed;
+    top: 0px;
+    z-index: 1;
+    margin-left: 0;
+    height: 1000px;
+    width: 1000px;
+}
