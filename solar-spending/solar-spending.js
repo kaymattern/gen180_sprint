@@ -1,6 +1,6 @@
 // Solar Spending Visualization
 // School districts in the US spend $6 billion on energy/year
-// Approx. 13,551 school districts in US -> 442,772 spent on energy/year
+// Approx. 13,551 school districts in US -> $442,772 spent per school district on energy/year
 // Visualize this spending as savings if you switch to solar/what you can get with this money
 
 const margin = {top:80, right:50, left:120, bottom:80}; 
