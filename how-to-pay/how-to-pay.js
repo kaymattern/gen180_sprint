@@ -13,50 +13,14 @@ const innerWidth = outerWidth - margin.left - margin.right;
     
 let largePay, innerPay, arc, radius, pie, payArcs, howPayPie; 
 
-let innerSize, sizeRange, howPaySizePie; 
+let largeSize, innerSize, sizeRange, paySizeScale, rangeLeg, sizeLeg; 
+
+let size1Rects, size2Rects, size3Rects, size4Rects, size5Rects, size6Rects; 
 
 
 /* join data to innerSolar, which is placed inside the larger 
    svg according to the margins (which you can change)
 */
-
-sizeRange = [4, 14, 48, 199, 399, 600]; 
-
-let payData = [{finType: 'Direct Ownership - Bonds/Loan/Cash/Other', amount: 14, color: "#d3d3d3"},
-               {finType: 'Direct Ownership - Grants and Donations', amount: 7, color: "#f3f1a5"},
-               {finType: 'Third-Party Ownership', amount: 79, color: "#4c6b8b"}]
-
-let payBySizeData1  = [
-      {"title": "0-4.99 kW", "name": "Direct Ownership - Bonds/Loan/Cash/Other", "value": 0, color: "#d3d3d3"},
-      {"title": "0-4.99 kW", "name": "Direct Ownership - Grant and Donations", "value": 98, color: "#f3f1a5"},
-      {"title": "0-4.99 kW", "name": "Third-Party Ownership", "value": 2, color: "#4c6b8b"} ]
-     
-let payBySizeData2 = [
-      { "title": "5-14.99 kW", "name": "Direct Ownership - Bonds/Loan/Cash/Other", "value": 1, color: "#d3d3d3"},
-      { "title": "5-14.99 kW", "name": "Direct Ownership - Grant and Donations", "value": 81, color: "#f3f1a5"},
-      { "title": "5-14.99 kW", "name": "Third-Party Ownership", "value": 17, color: "#4c6b8b"} ]
-     
-let payBySizeData3 =  [
-      {"title": "15-49.00 kW", "name": "Direct Ownership - Bonds/Loan/Cash/Other", "value": 5, color: "#d3d3d3"},
-      {"title": "15-49.00 kW", "name": "Direct Ownership - Grant and Donations", "value": 38, color: "#f3f1a5"},
-      {"title": "15-49.00 kW", "name": "Third-Party Ownership", "value": 57, color: "#4c6b8b"} ]
-
-let payBySizeData4 =  [
-      {"title": "50-199.99 kW", "name": "Direct Ownership - Bonds/Loan/Cash/Other", "value": 14, color: "#d3d3d3"},
-      {"title": "50-199.99 kW", "name": "Direct Ownership - Grant and Donations", "value": 12, color: "#f3f1a5"},
-      {"title": "50-199.99 kW", "name": "Third-Party Ownership", "value": 74, color: "#4c6b8b"} ]
-     
-let payBySizeData5 = [
-      {"title": "200-399.99 kW", "name": "Direct Ownership - Bonds/Loan/Cash/Other", "value": 13, color: "#d3d3d3"},
-      {"title": "200-399.99 kW", "name": "Direct Ownership - Grant and Donations", "value": 9, color: "#f3f1a5"},
-      {"title": "200-399.99 kW", "name": "Third-Party Ownership", "value": 78, color: "#4c6b8b"} ]
-     
-let payBySizeData6 = [
-      {"title": "400+ kW", "name": "Direct Ownership - Bonds/Loan/Cash/Other", "value": 3, color: "#d3d3d3"},
-      {"title": "400+ kW", "name": "Direct Ownership - Grant and Donations", "value": 17, color: "#f3f1a5"},
-      {"title": "400+ kW", "name": "Third-Party Ownership", "value": 80, color: "#4c6b8b"} ]
-
-let sizesData = [payBySizeData1, payBySizeData2, payBySizeData3, payBySizeData4, payBySizeData5, payBySizeData6]; 
 
 
 const pieWidth = 300
@@ -115,61 +79,6 @@ const drawPieInitial = () => {
     
     innerSize = largePay.append("g"); 
     innerSize.attr("transform", "translate(" +margin.left-10 +","+margin.top+")"); 
-
-    
-    function drawSizePies(dataset, ind) {
-        const sizeSizeScale = d3.scaleLinear()
-                .domain([0, d3.max(sizeRange)])
-                .range([0, 200]);
-        
-      
-        const sizeHeight = sizeSizeScale(sizeRange[ind])
-        const sizeWidth = sizeSizeScale(sizeRange[ind])
-        const sizeRadius =  Math.min(sizeWidth, sizeHeight) / 2 * 0.8;
-        
-        sizeArc = d3.arc()
-            .innerRadius(0)
-            .outerRadius(Math.min(sizeWidth, sizeHeight) / 2 - 1)
-        
-           
-        sizePie = d3.pie()
-            .sort(null)
-            .value(d => d.value)
-    
-        sizeArcs = sizePie(dataset)
-
-
-        innerSize.append('g').attr("stroke", "white")
-                        .selectAll("path")
-                            .data(sizeArcs)
-                            .join("path")
-                            .attr("fill", d => d.data.color)
-                            .attr("d", arc)
-                            .append("title").text(d=> `${d.data.name}: ${d.data.value.toLocaleString()}`)
-                            .attr("transform", "translate("+(innerWidth/6)*ind + ","+ innerHeight/2+")");
-    
-     innerSize.append("g")
-         .attr("text-anchor", "middle")
-        .selectAll("text")
-        .data(sizeArcs)
-        .join("text")
-            .attr("transform", d => `translate(${d3.arc().innerRadius(sizeRadius).outerRadius(sizeRadius).centroid(d)})`)
-        .call(text => text.append("tspan")
-              .attr("font-weight", "bold")
-                .attr("y", "-.8em")
-          .text(d => d.data.name))
-        .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
-              .attr("x", 5)
-            .attr("y", ".4em")
-            .attr("fill-opacity", 0.7)
-            .text(d => d.data.value.toLocaleString() + " %"));
-        
-    }
-    
-    for (i=0; i < sizesData.length; i++) {
-        drawSizePies(sizesData[i], i); 
-        console.log(i)
-    }
     
 }
 
@@ -181,10 +90,6 @@ function clean(chartType) {
                 .duration(2000)
             .style("opacity", 0)
     }
-    
-    if (chartType !== "payBySizePie") {
-        
-    }
 }
 
 function drawHowPay() {
@@ -194,17 +99,15 @@ function drawHowPay() {
             .style("opacity", 1)
 }
 
-function drawPayBySize() {
+function undrawHowPay() {
     clean("payBySizePie")
-    
 }
-
 
 // scrolling functionality 
 
 let activationFunctions = [
     drawHowPay, 
-    drawPayBySize 
+    undrawHowPay
 ]
    
     // scroller code 

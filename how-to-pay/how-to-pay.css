@@ -17,6 +17,12 @@ body {
     text-align: justify; 
 }
 
+#secondStep {
+    margin-bottom: 100px; 
+    height: 10px; 
+    text-align: justify; 
+}
+
 #graphic {
     margin: auto; 
     width: 1500px; 
