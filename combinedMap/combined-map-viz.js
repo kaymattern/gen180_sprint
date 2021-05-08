@@ -79,7 +79,7 @@ let stateData = [{state: 'Alabama', thirdParty: "Apparently disallowed by state 
                    {state: 'Vermont', thirdParty: "Authorized by state or otherwise currently in use, at least in certain jurisdictions", solarSchools: 40, totalKW: 4317},
                    {state: 'Virginia', thirdParty: "Authorized by state or otherwise currently in use, at least in certain jurisdictions", solarSchools: 81, totalKW: 20214},
                    {state: 'Washington', thirdParty: "Status unclear or unknown", solarSchools: 99, totalKW: 3540},
-                   {state: 'West Virginia', thirdParty: "Apparently disallowed by state or otherwise restricted by legal barriers", solarSchools: 11, totalKW: 853},
+                   {state: 'West Virginia', thirdParty: "Authorized by state or otherwise currently in use, at least in certain jurisdictions", solarSchools: 11, totalKW: 853},
                    {state: 'Wisconsin', thirdParty: "Status unclear or unknown", solarSchools: 129, totalKW: 4827},
                    {state: 'Wyoming', thirdParty: "Status unclear or unknown", solarSchools: 3, totalKW: 230}]
 
@@ -107,6 +107,15 @@ const sortDataByCapacity = (data) => {
             return "#F3F1A5"; 
         } else {return "#F6772D"}
     }
+ 
+ const lawOpac = (lawStatus) => {
+     if (lawStatus == "Status unclear or unknown") {
+            return 0.3; 
+        }
+        if (lawStatus == "Authorized by state or otherwise currently in use, at least in certain jurisdictions") {
+            return 1; 
+        } else {return .6}  
+ }
  
  const calcOpacity = (totalKW) => {
         const totalMW = totalKW / 1000;
@@ -171,8 +180,8 @@ const drawInitial = (statePaths) => {
         .attr("class", "state-path")
         .attr("d", pathGenerator);
     
-    statePaths.attr("stroke", "black")
-    statePaths.attr("stroke-width", 1)
+    statePaths.attr("stroke", "white")
+    statePaths.attr("stroke-width", 2)
     
     
     // data join with array
@@ -212,11 +221,11 @@ const drawInitial = (statePaths) => {
                         .attr("height", 60)
                         .attr("class", "lawLegRect")
                         .attr("y", (d, i)=> i*100 + 25)
-                        .style("fill", d=>lawColor(d))
+                        .style("fill", "#F6772D")
+                        .style("opacity", d=>lawOpac(d))
                         .style("border", "1px solid black")
                         .attr("stroke", "black")
-                        .attr("stroke-width", 1)
-                        .style("opacity", 1); 
+                        .attr("stroke-width", 1); 
     
     const caplegendRects = capLegendG.selectAll(".capLegRect")
                         .data(capRangeVals)
@@ -270,8 +279,8 @@ const drawInitial = (statePaths) => {
                             .style("opacity", 1);   
     
     
-    statePaths.style("fill", d=>lawColor(d.properties.thirdParty)); 
-    
+    statePaths.style("fill", "#F6772D")
+    statePaths.style("opacity", d=>lawOpac(d.properties.thirdParty)); 
     
    
     let maxSchools = d3.max(stateData, d=>d.solarSchools); 
@@ -334,9 +343,10 @@ function drawLaws() {
     legendLawLabel1.style("opacity", 1); 
     legendLawLabel2.style("opacity", 1); 
     legendLawLabel3.style("opacity", 1); 
-    d3.selectAll(".lawLegRect").style("opacity", 1);
+    d3.selectAll(".lawLegRect").style("opacity", d => lawOpac(d));
     statePaths = innerMap.selectAll(".state-path")
-    statePaths.style("fill", d=>lawColor(d.properties.thirdParty)); 
+    statePaths.style("fill", "#F6772D")
+    statePaths.style("opacity", d=>lawOpac(d.properties.thirdParty)); 
     
       statePaths.on("mouseover", mouseOver)
               .on("mouseout", mouseOut)
@@ -356,7 +366,8 @@ function drawLaws() {
 function drawSchools() {
     clean('schoolDots')
     statePaths = innerMap.selectAll(".state-path")
-    statePaths.style("fill", d=>lawColor(d.properties.thirdParty))
+    statePaths.style("fill", "#F6772D")
+    statePaths.style("opacity", d=>lawOpac(d.properties.thirdParty)); 
     innerMap.selectAll(".school-centroid")
                         .style("opacity", .8); 
     
@@ -365,13 +376,12 @@ function drawSchools() {
               
     function mouseOver() {
      d3.select(this).style("fill", "#4EB1E9")
-        statePaths.style("opacity", 0.7)
         d3.select(this).style("opacity", 1)
         const thisData = d3.select(this).data()[0]
         const sortedData = sortDataBySchools(stateData)
          d3.select('#tooltip')
             .style('left', (d3.pointer(event)[0] + 330)+ 'px')
-            .style('top', (d3.pointer(event)[1] + outerHeight) + 'px')
+            .style('top', (d3.pointer(event)[1] + 2*outerHeight) + 'px')
             .style('display', 'inline-block')
             .html(`<strong>State: </strong> ${thisData.properties.NAME} 
                 <br> <strong>Solar Schools: </strong> ${thisData.properties.solarSchools} 
@@ -380,8 +390,8 @@ function drawSchools() {
     function mouseOut() {
         d3.select("#tooltip")
             .style('display', 'none')
-         statePaths.style("opacity", 1)
-        d3.select(this).style("fill", d=>lawColor(d.properties.thirdParty))
+        d3.select(this).style("fill", "#F6772D")
+        d3.select(this).style("opacity", d => lawOpac(d.properties.thirdParty))
     }
     
 }
@@ -403,7 +413,7 @@ function drawCapacity() {
         const ranking = sortedData.find(s => s.state === thisData.properties.NAME).capacityRank
          d3.select('#tooltip')
             .style('left', (d3.pointer(event)[0] + 330)+ 'px')
-            .style('top', (d3.pointer(event)[1] + 2*outerHeight) + 'px')
+            .style('top', (d3.pointer(event)[1] + outerHeight) + 'px')
             .style('display', 'inline-block')
             .html(`<strong>State: </strong> ${thisData.properties.NAME} 
                 <br> <strong>Total Capacity: </strong> ${(thisData.properties.totalKW/1000).toFixed(2)} MW 
@@ -423,16 +433,11 @@ function drawCapacity() {
     
 }
 
-function drawFinal() {
-    clean('finalDash')
-    
-}
 
 let activationFunctions = [
     drawLaws, 
-    drawSchools, 
     drawCapacity, 
-    drawFinal 
+    drawSchools 
 ]
    
     // scroller code 
