@@ -16,17 +16,21 @@ let statePaths, dataset, largeMap, innerMap, pathGenerator, legend;
 
 let legendLawLabel1, legendLawLabel2, legendLawLabel3, legendCapLabel; 
 
+let legendLawCapLabel1, legendLawCapLabel2, legendLawCapLabel3;
+
+let thirdPartyTitle, capTitle, solarSchoolsTitle; 
+
 const uniqueLaws = ["Status unclear or unknown", "Apparently disallowed by state or otherwise restricted by legal barriers","Authorized by state or otherwise currently in use, at least in certain jurisdictions"]
 
 const capRangeNames = ["0-0.5 MW", "0.5-1.99 MW","2-4.99 MW", "5-19.99 MW", ">20 MW"]
     
 const capRangeVals = [400, 1000, 3000, 6000, 21000]
 
-let brokenLaw1 = ["Status unclear", "or unknown"]
+let brokenLaw1 = ["Status unclear or", "unknown"]
     
-let brokenLaw2 = ["Apparently", "disallowed by" ,"state or otherwise",  "restricted by", "legal barriers"]
+let brokenLaw2 = ["Apparently disallowed", "by state or otherwise",  "restricted by legal", " barriers"]
     
-let brokenLaw3= ["Authorized by state", "or otherwise currently", "in use, at least", "in certain jurisdictions"]
+let brokenLaw3= ["Authorized by state", "or otherwise currently", "in use, at least in", "certain jurisdictions"]
     
   
 var size = 250;
@@ -101,11 +105,11 @@ const sortDataByCapacity = (data) => {
 
  const lawColor = (lawStatus) => {
         if (lawStatus == "Status unclear or unknown") {
-            return "white"; 
+            return "#4EB1E9"; 
         }
         if (lawStatus == "Authorized by state or otherwise currently in use, at least in certain jurisdictions") {
-            return "#F3F1A5"; 
-        } else {return "#F6772D"}
+            return "#F6772D"; 
+        } else {return "#4C6B8B"}
     }
  
  const lawOpac = (lawStatus) => {
@@ -134,7 +138,7 @@ const sortDataByCapacity = (data) => {
     
 
 // drawing large svg canvas + margin convention 
-const margin = {top:60, right:170, left:10, bottom:80}; 
+const margin = {top:60, right:100, left:0, bottom:80}; 
     
 const outerHeight = 900;
 const outerWidth = 1000;
@@ -146,6 +150,7 @@ const innerWidth = outerWidth - margin.left - margin.right;
 
 d3.json('us_states.json').then( (states) => {
     dataset = states; 
+    // draw depending on what section you're in (for refresh)
     setTimeout(drawInitial(statePaths), 100)
 })
 
@@ -204,51 +209,85 @@ const drawInitial = (statePaths) => {
     
 // legends 
     
-    legendG = largeMap.append("g")
+    legendG = innerMap.append("g")
                         .attr("class", "lawLegend")
     
-    capLegendG = largeMap.append("g").attr("class", "capLegend")
+    legCapLawG = innerMap.append("g").attr("class", "capLawLegend")
+    legCapLawG.attr("transform", "translate("+
+                 (innerWidth/2 - 230)+ "," + (innerHeight - 295)+ ")"); 
+    
+
     legendG.attr("transform", "translate("+
-                 (outerWidth - margin.right - margin.left - 40)+ "," + (outerHeight/4)+ ")"); 
-    capLegendG.attr("transform", "translate("+
-                 (outerWidth - margin.right - margin.left - 30)+ "," + (outerHeight/4)+ ")"); 
+                 (innerWidth/2 - 230)+ "," + (innerHeight - 295)+ ")"); 
     
        
     const lawlegendRects = legendG.selectAll(".lawLegRect")
                         .data(uniqueLaws)
                         .join("rect")
-                        .attr("width", 40)
-                        .attr("height", 60)
+                        .attr("width", 170)
+                        .attr("height", 40)
                         .attr("class", "lawLegRect")
-                        .attr("y", (d, i)=> i*100 + 25)
-                        .style("fill", "#F6772D")
-                        .style("opacity", d=>lawOpac(d))
+                        .attr("x", (d, i)=> i*190 + 25)
+                        .style("fill", d => lawColor(d))
                         .style("border", "1px solid black")
                         .attr("stroke", "black")
                         .attr("stroke-width", 1); 
     
-    const caplegendRects = capLegendG.selectAll(".capLegRect")
+    const lawCapRects1 = legCapLawG.selectAll(".lawCapLegRect1")
                         .data(capRangeVals)
                         .join("rect")
-                        .attr("width", 20)
-                        .attr("height", 20)
-                        .attr("class", "capLegRect")
-                        .attr("y", (d, i)=> i*40 + 25)
-                        .style("fill", "#F6772D")
+                        .attr("width", 170)
+                        .attr("height", 12)
+                        .attr("class", "lawCapLegRect1")
+                        .attr("x", 25)
+                        .attr("y", (d, i)=> i*15 + 1)
+                        .style("fill", d => lawColor("Status unclear or unknown"))
                         .style("opacity", d=>calcOpacity(d))
                         .style("border", "1px solid black")
                         .attr("stroke", "black")
                         .attr("stroke-width", 1)
                         .style("opacity", 0); 
     
-    legendCapLabel = capLegendG.selectAll(".capLegLabel")
+    const lawCapRects2 = legCapLawG.selectAll(".lawCapLegRect2")
+                        .data(capRangeVals)
+                        .join("rect")
+                        .attr("width", 170)
+                        .attr("height", 12)
+                        .attr("class", "lawCapLegRect2")
+                        .attr("x", 215)
+                        .attr("y", (d, i)=> i*15 + 1)
+                        .style("fill", d => lawColor("chicken"))
+                        .style("opacity", d=>calcOpacity(d))
+                        .style("border", "1px solid black")
+                        .attr("stroke", "black")
+                        .attr("stroke-width", 1)
+                        .style("opacity", 0); 
+    
+    const lawCapRects3 = legCapLawG.selectAll(".lawCapLegRect3")
+                        .data(capRangeVals)
+                        .join("rect")
+                        .attr("width", 170)
+                        .attr("height", 12)
+                        .attr("class", "lawCapLegRect3")
+                        .attr("x", 405)
+                        .attr("y", (d, i)=> i*15 + 1)
+                        .style("fill", d => lawColor("Authorized by state or otherwise currently in use, at least in certain jurisdictions"))
+                        .style("opacity", d=>calcOpacity(d))
+                        .style("border", "1px solid black")
+                        .attr("stroke", "black")
+                        .attr("stroke-width", 1)
+                        .style("opacity", 0); 
+    
+    
+    legendCapLabel = legCapLawG.selectAll(".capLegLabel")
                             .data(capRangeNames)
                             .attr("class", "capLegLabel")
                             .join("text")
                             .text((d)=> d)
-                            .attr("x", 40)
-                            .attr("y", (d, i) => 40+ i*40)
+                            .attr("x", -67)
+                            .attr("y", (d, i) => 13+ i*15)
                             .style("opacity", 0); 
+    
     
 
     legendLawLabel1 = legendG.selectAll(".lawLegLabel1")
@@ -256,8 +295,8 @@ const drawInitial = (statePaths) => {
                             .attr("class", "lawLegLabel1")
                             .join("text")
                             .text((d)=> d)
-                            .attr("x", 45)
-                            .attr("y", (d, i) => 47+ i*17)
+                            .attr("x", 30)
+                            .attr("y", (d, i) => 60 + i*17)
                             .style("opacity", 1);  
     
       legendLawLabel2 = legendG.selectAll(".lawLegLabel2")
@@ -265,8 +304,8 @@ const drawInitial = (statePaths) => {
                             .attr("class", "lawLegLabel2")
                             .join("text")
                             .text((d)=> d)
-                            .attr("x", 45)
-                            .attr("y", (d, i) => 128+ i*17)
+                            .attr("x", 220)
+                            .attr("y", (d, i) => 60 + i*17)
                             .style("opacity", 1); 
     
     legendLawLabel3 = legendG.selectAll(".lawLegLabel3")
@@ -274,20 +313,73 @@ const drawInitial = (statePaths) => {
                             .attr("class", "lawLegLabel3")
                             .join("text")
                             .text((d)=> d)
-                            .attr("x", 45)
-                            .attr("y", (d, i) => 230+ i*17)
-                            .style("opacity", 1);   
+                            .attr("x", 420)
+                            .attr("y", (d, i) => 60 + i*17)
+                            .style("opacity", 1);  
     
+    legendLawCapLabel1 = legCapLawG.selectAll(".lawLegCapLabel1")
+                            .data(brokenLaw1)
+                            .attr("class", "lawLegLabel1")
+                            .join("text")
+                            .text((d)=> d)
+                            .attr("x", 30)
+                            .attr("y", (d, i) => 90 + i*17)
+                            .style("opacity", 0);  
     
-    statePaths.style("fill", "#F6772D")
-    statePaths.style("opacity", d=>lawOpac(d.properties.thirdParty)); 
+      legendLawCapLabel2 = legCapLawG.selectAll(".lawLegCapLabel2")
+                            .data(brokenLaw2)
+                            .attr("class", "lawLegLabel2")
+                            .join("text")
+                            .text((d)=> d)
+                            .attr("x", 220)
+                            .attr("y", (d, i) => 90 + i*17)
+                            .style("opacity", 0); 
+    
+    legendLawCapLabel3 = legCapLawG.selectAll(".lawLegCapLabel3")
+                            .data(brokenLaw3)
+                            .attr("class", "lawLegLabel3")
+                            .join("text")
+                            .text((d)=> d)
+                            .attr("x", 420)
+                            .attr("y", (d, i) => 90 + i*17)
+                            .style("opacity", 0);  
+    
+     thirdPartyTitle = innerMap.append("text")
+        .text("Third-Party Solar Power Purchase Agreement Policies")
+        .style("text-anchor", "middle")
+        .attr("transform", `translate(${innerWidth/2}, ${margin.top/3})`)
+        .attr("dy", "1em")
+        .attr("class", "mapTitle")
+        .style("fill", "black")
+        .style("opacity", 1); 
+    
+    capTitle = innerMap.append("text")
+        .text("Third-Party Solar Power Purchase Agreement Policies and Total Solar Capacity")
+        .style("text-anchor", "middle")
+        .attr("transform", `translate(${innerWidth/2}, ${margin.top/3})`)
+        .attr("dy", "1em")
+        .attr("class", "mapTitle")
+        .style("fill", "black")
+        .style("opacity", 0); 
+    
+    solarSchoolsTitle = innerMap.append("text")
+        .text("Third-Party Solar Power Purchase Agreement Policies, Total Solar Capacity, and Total Solar Schools")
+        .style("text-anchor", "middle")
+        .attr("transform", `translate(${innerWidth/2}, ${margin.top/3})`)
+        .attr("dy", "1em")
+        .attr("class", "mapTitle")
+        .style("fill", "black")
+        .style("opacity", 0); 
+    
+    statePaths.style("fill", d => lawColor(d.properties.thirdParty))
+    statePaths.style("opacity", 1); 
     
    
     let maxSchools = d3.max(stateData, d=>d.solarSchools); 
     
     const rScale = d3.scaleSqrt()
                     .domain([0, maxSchools])
-                    .range([0, 20]); 
+                    .range([0, 30]); 
 
     
      innerMap.selectAll(".school-centroid").data(dataset.features)
@@ -301,6 +393,16 @@ const drawInitial = (statePaths) => {
         .attr("cx", function(d){ return pathGenerator.centroid(d)[0];})
         .attr("cy", function(d){ return  pathGenerator.centroid(d)[1];}); 
     
+    innerMap.selectAll(".school-count").data(dataset.features)
+        .join("text")
+        .attr("class", "school-count")
+        .text(d => d.properties.solarSchools)
+        .style("font-weight", 800)
+        .style("font-size", 11)
+        .style("opacity", 0)
+        .attr("x", function(d){ return pathGenerator.centroid(d)[0] - 12;})
+        .attr("y", function(d){ return  pathGenerator.centroid(d)[1] - 5;}); 
+    
     
     
     }
@@ -310,7 +412,10 @@ function clean(chartType) {
      innerMap.selectAll(".state-path").style("opacity", 1);
      statePaths = innerMap.selectAll(".state-path")
     if (chartType !== "schoolDots") {
+        solarSchoolsTitle.style("opacity", 0)
         innerMap.selectAll(".school-centroid")
+            .style("opacity", 0); 
+        innerMap.selectAll(".school-count")
             .style("opacity", 0); 
          statePaths.on("mouseover", mouseOver)
               .on("mouseout", mouseOut)
@@ -325,28 +430,38 @@ function clean(chartType) {
     }}
     
     if (chartType !== "justLaws") {
+        thirdPartyTitle.style("opacity", 0)
         legendLawLabel1.style("opacity", 0); 
         legendLawLabel2.style("opacity", 0);
         legendLawLabel3.style("opacity", 0);
         d3.selectAll(".lawLegRect").style("opacity", 0);
     }
     if (chartType !== "capMap") {
-        d3.selectAll(".capLegRect")
-                            .style("opacity", 0);
+        capTitle.style("opacity", 0)
+        
+    }
+    if (chartType === "justLaws") {
+        d3.selectAll(".lawCapLegRect1").style("opacity", 0)
+        d3.selectAll(".lawCapLegRect2").style("opacity", 0)
+        d3.selectAll(".lawCapLegRect3").style("opacity", 0)
         legendCapLabel.style("opacity", 0)
+        legendLawCapLabel1.style("opacity", 0); 
+        legendLawCapLabel2.style("opacity", 0);
+        legendLawCapLabel3.style("opacity", 0);
     }
 
 }
 
 function drawLaws() {
     clean('justLaws')
+    thirdPartyTitle.style("opacity", 1)
     legendLawLabel1.style("opacity", 1); 
     legendLawLabel2.style("opacity", 1); 
     legendLawLabel3.style("opacity", 1); 
-    d3.selectAll(".lawLegRect").style("opacity", d => lawOpac(d));
+    d3.selectAll(".lawLegRect").style("opacity", 1);
     statePaths = innerMap.selectAll(".state-path")
-    statePaths.style("fill", "#F6772D")
-    statePaths.style("opacity", d=>lawOpac(d.properties.thirdParty)); 
+    statePaths.style("fill", d => lawColor(d.properties.thirdParty))
+    statePaths.style("opacity", 1); 
     
       statePaths.on("mouseover", mouseOver)
               .on("mouseout", mouseOut)
@@ -366,16 +481,21 @@ function drawLaws() {
 function drawSchools() {
     clean('schoolDots')
     statePaths = innerMap.selectAll(".state-path")
-    statePaths.style("fill", "#F6772D")
-    statePaths.style("opacity", d=>lawOpac(d.properties.thirdParty)); 
+    statePaths.style("fill", d => lawColor(d.properties.thirdParty))
+    statePaths.style("opacity", d=>calcOpacity(d.properties.totalKW)); 
     innerMap.selectAll(".school-centroid")
                         .style("opacity", .8); 
+    innerMap.selectAll(".school-count")
+            .style("opacity", 1); 
+    solarSchoolsTitle.style("opacity", 1)
+
     
     statePaths.on("mouseover", mouseOver)
               .on("mouseout", mouseOut)
               
     function mouseOver() {
-     d3.select(this).style("fill", "#4EB1E9")
+     d3.select(this).style("fill", "#F3F1A5")
+        statePaths.style("opacity", .1)
         d3.select(this).style("opacity", 1)
         const thisData = d3.select(this).data()[0]
         const sortedData = sortDataBySchools(stateData)
@@ -390,23 +510,35 @@ function drawSchools() {
     function mouseOut() {
         d3.select("#tooltip")
             .style('display', 'none')
-        d3.select(this).style("fill", "#F6772D")
-        d3.select(this).style("opacity", d => lawOpac(d.properties.thirdParty))
+        statePaths.style("opacity", d=> calcOpacity(d.properties.totalKW))
+        d3.select(this).style("fill", d => lawColor(d.properties.thirdParty))
+        d3.select(this).style("opacity", d => calcOpacity(d.properties.totalKW))
     }
-    
+       d3.selectAll(".lawCapLegRect1").style("opacity", d=>calcOpacity(d))
+    d3.selectAll(".lawCapLegRect2").style("opacity", d=>calcOpacity(d))
+    d3.selectAll(".lawCapLegRect3").style("opacity", d=>calcOpacity(d))
+      legendCapLabel.style("opacity", 1)
+    legendLawCapLabel1.style("opacity", 1); 
+        legendLawCapLabel2.style("opacity", 1);
+        legendLawCapLabel3.style("opacity", 1);
 }
 
 function drawCapacity() {
     clean('capMap')
     statePaths = innerMap.selectAll(".state-path")
-    statePaths.style("fill", "#F6772D")
+     statePaths.style("fill", d => lawColor(d.properties.thirdParty))
     statePaths.style("opacity", d => calcOpacity(d.properties.totalKW))
-
+    d3.selectAll(".lawCapLegRect1").style("opacity", d=>calcOpacity(d))
+    d3.selectAll(".lawCapLegRect2").style("opacity", d=>calcOpacity(d))
+    d3.selectAll(".lawCapLegRect3").style("opacity", d=>calcOpacity(d))
+    capTitle.style("opacity", 1)
+    
      statePaths.on("mouseover", mouseOver)
               .on("mouseout", mouseOut)
               
     function mouseOver() {
-        d3.select(this).style("fill", "#4C6B8B")
+        d3.select(this).style("fill", "#F3F1A5")
+        statePaths.style("opacity", .1)
         d3.select(this).style("opacity", 1)
         const thisData = d3.select(this).data()[0]
         const sortedData = sortDataByCapacity(stateData)
@@ -420,16 +552,18 @@ function drawCapacity() {
                 <br> <strong>Capacity Ranking: </strong> ${sortedData.find(s => s.state === thisData.properties.NAME).capacityRank}`)
     }
     function mouseOut() {
-         d3.select(this).style("fill", "#F6772D")
-         d3.select(this).style("opacity", d => calcOpacity(d.properties.totalKW))
+         d3.select(this).style("fill", d => lawColor(d.properties.thirdParty))
+        d3.select(this).style("opacity", d => calcOpacity(d.properties.totalKW))
+        statePaths.style("opacity", d=> calcOpacity(d.properties.totalKW))
         d3.select("#tooltip")
             .style('display', 'none')
     }
     
-     d3.selectAll(".capLegRect")
-                            .style("opacity", d=>calcOpacity(d)); 
     
     legendCapLabel.style("opacity", 1)
+     legendLawCapLabel1.style("opacity", 1); 
+        legendLawCapLabel2.style("opacity", 1);
+        legendLawCapLabel3.style("opacity", 1);
     
 }
 
