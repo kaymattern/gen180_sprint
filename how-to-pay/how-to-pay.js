@@ -22,6 +22,7 @@ let size1Rects, size2Rects, size3Rects, size4Rects, size5Rects, size6Rects;
    svg according to the margins (which you can change)
 */
 
+let payData = [{fintype: "", amount: }];
 
 const pieWidth = 300
 const pieHeight = 300

@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
+
+                
+/* Top title section */
 
 #title {
     font-family: 'DM Sans', sans-serif;
@@ -21,7 +25,7 @@
 }
 
 .topSpace {
-    height: 80px;
+    height: 90px;
 }
 
 #introDiv {
@@ -30,4 +34,60 @@
     margin-right: 0px; 
     padding-left: 0px; 
     padding-right: 0px; 
+}
+
+/* Explaining PPAs */
+
+#topPPA {
+    font-size: 30px; 
+    font-family: 'DM Sans', sans-serif; 
+    text-align: center;
+    color: #4EB1E9; 
+} 
+
+.break1 {
+    height: 60px; 
+}
+
+#PPAexplain {
+    text-align: center; 
+    font-family: 'Source Serif Pro', serif; 
+    font-size: 25px; 
+}
+
+#whyPPA {
+    text-align: center; 
+    font-size: 30px; 
+    font-weight: 400; 
+    font-family: 'DM Sans', sans-serif; 
+    color: #F6772D; 
+}
+
+#ppaAdv {
+
+}
+
+#ppaDef {
+     color: #4C6B8B;
+    font-family: 'Source Serif Pro', serif;   
+}
+
+/* PPA Graphs */ 
+
+#thirdPartySize1 {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-around; 
+}
+
+#lawPie {
+    border: 2px black solid; 
+}
+
+#propStat {
+     color: #4C6B8B;
+    font-family: 'DM Sans', sans-serif; 
+    font-size: 25px; 
+    vertical-align: center; 
+    
 }
