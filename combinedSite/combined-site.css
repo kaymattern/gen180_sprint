@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap');
+
+#title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 45px;
+    font-weight: 500; 
+    color: #F6772D; 
+}
+
+#preTitle {
+    font-weight: 400; 
+    font-family: 'DM Sans', sans-serif; 
+    color: #4EB1E9; 
+}
+
+#subtitle {
+    font-weight: 400; 
+    font-family: 'DM Sans', sans-serif; 
+    font-size: 26px; 
+    color: #4C6B8B;
+}
+
+.topSpace {
+    height: 80px;
+}
+
+#introDiv {
+    background-color: #F3F1A5; 
+    margin-left: 0px; 
+    margin-right: 0px; 
+    padding-left: 0px; 
+    padding-right: 0px; 
+}
