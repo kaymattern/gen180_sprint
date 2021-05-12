@@ -59,6 +59,8 @@ var suppliesImg = supplies.append("svg:image")
    .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_532723.png" )
    .attr("width", 80)
    .attr("height", 80)
+   .attr("class","suppliesLabel")
+
 var suppliesLabel = supplies.append("text")
                             .text("School Supplies")
                             .attr("class", "tusconCatLabel")
@@ -70,6 +72,7 @@ var salImg = salaries.append("svg:image")
    .attr("xlink:href", "http://cdn.onlinewebfonts.com/svg/img_353628.png")
    .attr("width", 80)
    .attr("height", 80)
+   .attr("class","salLabel")
 
 var salLabel = salaries.append("text")
                             .text("Teacher Salaries")
@@ -82,6 +85,7 @@ var busImg = buses.append("svg:image")
    .attr("xlink:href", "https://cdn0.iconfinder.com/data/icons/transportation-and-logistics/50/Transportation_and_Logistics-67-512.png")
    .attr("width", 80)
    .attr("height", 80)
+   .attr("class","busLabel")
 
 var busLabel = buses.append("text")
                             .text("School Buses")
@@ -94,6 +98,7 @@ var booksImg = textbooks.append("svg:image")
       .attr("xlink:href", "https://maxcdn.icons8.com/Share/icon/ios7/Files/open_book1600.png")
       .attr("width", 80)
       .attr("height", 80)
+      .attr("class","bookLabel")
 
 var booksLabel = textbooks.append("text")
                             .text("Textbooks")
@@ -106,6 +111,7 @@ var laptopImg = laptops.append("svg:image")
       .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_20446.png")
       .attr("width", 80)
       .attr("height", 80)
+      .attr("class","laptopLabel")
 
 var laptopLabel = laptops.append("text")
                             .text("Laptops")
@@ -119,13 +125,80 @@ suppliesImg.on("mouseover", mouseOver(24))
 
 let tucsonText = innerSolar.append("text")
     .attr("class", "tucsonTicker")
-    .attr("x", innerWidth/2 - 55)
+    .attr("x", outerWidth/4)
     .attr("y", innerHeight/1.2)
     .style("font-size", "128px")
     .style("font-family", "Reader")
     .style("fill", "#4EB1E9")
     .text("0");
 
+//Manually added an event for each icon that changes color and value of the bottom number when you hover over it
+//I put the function for the interpolator for each event
+d3.selectAll(".suppliesLabel")
+.on("mouseover",function(){
+   d3.selectAll(".tucsonTicker")
+   .style("fill", "yellow")
+   .transition().tween("text",function(){
+      var selection = d3.select(this);
+      var start = 0;
+      var end = 52200;
+      var interpolator = d3.interpolateNumber(start,end)
+      return function(t) { selection.text(Math.round(interpolator(t)));
+   }; })
+   .duration(5000);
+})
+d3.selectAll(".busLabel")
+.on("mouseover",function(){
+   d3.selectAll(".tucsonTicker")
+   .style("fill", "blue")
+   .transition().tween("text",function(){
+      var selection = d3.select(this);
+      var start = 0;
+      var end = 230000;
+      var interpolator = d3.interpolateNumber(start,end)
+      return function(t) { selection.text(Math.round(interpolator(t)));
+   }; })
+   .duration(5000);
+})
+d3.selectAll(".bookLabel")
+.on("mouseover",function(){
+   d3.selectAll(".tucsonTicker")
+   .style("fill", "green")
+   .transition().tween("text",function(){
+      var selection = d3.select(this);
+      var start = 0;
+      var end = 250;
+      var interpolator = d3.interpolateNumber(start,end)
+      return function(t) { selection.text(Math.round(interpolator(t)));
+   }; })
+   .duration(5000);
+})
+d3.selectAll(".salLabel")
+.on("mouseover",function(){
+   d3.selectAll(".tucsonTicker")
+   .style("fill", "red")
+   .transition().tween("text",function(){
+      var selection = d3.select(this);
+      var start = 0;
+      var end = 60477;
+      var interpolator = d3.interpolateNumber(start,end)
+      return function(t) { selection.text(Math.round(interpolator(t)));
+   }; })
+   .duration(5000);
+})
+d3.selectAll(".laptopLabel")
+.on("mouseover",function(){
+   d3.selectAll(".tucsonTicker")
+   .style("fill", "pink")
+   .transition().tween("text",function(){
+      var selection = d3.select(this);
+      var start = 0;
+      var end = 300;
+      var interpolator = d3.interpolateNumber(start,end)
+      return function(t) { selection.text(Math.round(interpolator(t)));
+   }; })
+   .duration(5000);
+})
 
 // on mouseover, transition from zero to amount
  function mouseOver(totalAmt) {
@@ -141,7 +214,7 @@ let tucsonText = innerSolar.append("text")
     }
 
     function mouseOut() {
-        
+   
     }
 
 
