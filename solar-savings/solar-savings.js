@@ -41,7 +41,7 @@ const largeSolar = d3.select("body").append("svg")
                     .attr("height", outerHeight)
                     .attr("width", outerWidth)
                     .style("border", "1px solid black")
-                    .style("background-color","#4C6B8B")
+                    .style("background-color","white")
                     ;
 
 const innerSolar = largeSolar.append("g"); 
@@ -52,7 +52,7 @@ innerSolar.attr("transform", "translate(" +margin.left+","+margin.top+")")
 /* join data to innerSolar, which is placed inside the larger 
    svg according to the margins (which you can change)
 */
-
+/*
 // Select everything in est_quantity variable and put it in innerSolar
 let quantRects = innerSolar.selectAll(".est_quantity");
 
@@ -72,19 +72,21 @@ quantRects = quantRects
    
 // Made the width dependent on value in est_quantity
 quantRects = quantRects.attr("width", (d) => d.est_quantity)
-
+*/
 // Add text to the viz
+/*
 let quantText = innerSolar.selectAll()
    .data(tucsonData)
    .join("text")
-   .text(d => d.type /*+ ': ' + d.est_quantity*/)
+   .text(d => d.type /*+ ': ' + d.est_quantity)
    .attr("y", (d,i) => i*125+18)
    .attr("x", d=>0)
    .style("fill","white")
    .style("font-weight","1000")
    .style("font-family", "Reader")
    .style("text-anchor", "left");
-
+*/
+/*
 let quantText2 = innerSolar.selectAll()
    .data(tucsonData)
    .join("text")
@@ -95,7 +97,7 @@ let quantText2 = innerSolar.selectAll()
    .style("font-weight","1000")
    .style("font-family", "Reader")
    .style("text-anchor", "right");
- 
+*/
 /*Tried to add icons with join
 let quantIcon = innerSolar.selectAll()
 .data(tusconData)
@@ -109,46 +111,80 @@ let quantIcon = innerSolar.selectAll()
 
 /*Manually edited the icons in, since 
 I couldn't figure out how to join with Tuscon Data*/
+
 var g = innerSolar.append("g");
 var img = g.append("svg:image")
-   .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_532723.png" )
-   .attr("width", 50)
-   .attr("height", 50)
-   .attr("x", outerWidth - innerWidth-150)
+   .attr("xlink:href", "https://cdn0.iconfinder.com/data/icons/business-office-3/256/681119-Office_Supplies-512.png" )
+   .attr("width", 100)
+   .attr("height", 100)
+   .attr("x", outerWidth - innerWidth - 250)
    .attr("y", outerHeight- innerHeight - 131);
 
 var g2 = innerSolar.append("g");
 var img2 = g2.append("svg:image")
-   .attr("xlink:href", "http://cdn.onlinewebfonts.com/svg/img_353628.png")
-   .attr("width", 50)
-   .attr("height", 50)
-   .attr("x", outerWidth - innerWidth-155)
-   .attr("y", outerHeight- innerHeight - 6);
+   .attr("xlink:href", "https://st2.depositphotos.com/2586633/10219/v/950/depositphotos_102194092-stock-illustration-books-vector-illustrator-stack-of.jpg")
+   .attr("width", 100)
+   .attr("height", 100)
+   .attr("x", outerWidth - innerWidth - 50)
+   .attr("y", outerHeight- innerHeight - 131);
 
 var g3 = innerSolar.append("g");
 var img3 = g3.append("svg:image")
-   .attr("xlink:href", "https://cdn0.iconfinder.com/data/icons/transportation-and-logistics/50/Transportation_and_Logistics-67-512.png")
-   .attr("width", 50)
-   .attr("height", 50)
-   .attr("x", outerWidth - innerWidth-150)
-   .attr("y", outerHeight- innerHeight + 120);
+   .attr("xlink:href", "https://image.flaticon.com/icons/png/512/183/183756.png")
+   .attr("width", 100)
+   .attr("height", 100)
+   .attr("x", outerWidth - innerWidth + 150)
+   .attr("y", outerHeight- innerHeight - 131);
 
 var g4 = innerSolar.append("g");
 var img4 = g4.append("svg:image")
-      .attr("xlink:href", "https://maxcdn.icons8.com/Share/icon/ios7/Files/open_book1600.png")
-      .attr("width", 50)
-      .attr("height", 50)
-      .attr("x", outerWidth - innerWidth-150)
-      .attr("y", outerHeight- innerHeight + 242);   
+      .attr("xlink:href", "http://www.newdesignfile.com/postpic/2009/11/dollar-sign-icon_322780.jpg")
+      .attr("width", 100)
+      .attr("height", 100)
+      .attr("x", outerWidth - innerWidth + 350)
+      .attr("y", outerHeight- innerHeight - 131);   
 var g5 = innerSolar.append("g");
 var img5 = g5.append("svg:image")
-      .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_20446.png")
-      .attr("width", 50)
-      .attr("height", 50)
-      .attr("x", outerWidth - innerWidth-145)
-      .attr("y", outerHeight- innerHeight + 370);  
+      .attr("xlink:href", "https://static.vecteezy.com/system/resources/previews/000/355/523/original/vector-laptop-icon.jpg")
+      .attr("width", 100)
+      .attr("height", 100)
+      .attr("x", outerWidth - innerWidth + 600)
+      .attr("y", outerHeight- innerHeight -131);  
+//How do I join these to d3? I couldn't figure out how b/c I needed to do this for the tooltip
+
+largeSolar.append("text")
+    .attr("id", "number")
+    .attr("x", outerWidth/4)
+    .attr("y", outerHeight - outerHeight/4) 
+    .attr("font-size","150px")
+    .text("100000")
+    .style("font-family","Reader")
+    .style("font-weight", "1000");
+
+largeSolar.select("number")
+.transition()
+.duration(1000)
+.style("color","blue");
+
+largeSolar.selectAll("svg:image").on("mouseover", function() {
+   d3.select(this).style("opacity", 1)
+      tooltip.style("opacity", 1)
+  
+      }).on("mouseout", function() {
+          tooltip.style("opacity", 0)
+      }).on("mousemove", function(event) {
+          tooltip.style("left", d3.pointer(event)[0] + "px")
+          tooltip.style("top", d3.pointer(event)[1] + "px")
+      })
+largeSolar.append("line")
+    .attr("x1", outerWidth/4)
+    .attr("y1", outerHeight - outerHeight/4)
+    .attr("x2", outerWidth - outerWidth/4)
+    .attr("y2", outerHeight - outerHeight/4)
+    .attr("stroke-width","2");
 
 // Add x axis
+/*
 var x = d3.scaleBand()
   .range([ 0, innerWidth ])
   .domain(xAxisData.map(function(d) { return d.a; }))
@@ -163,8 +199,9 @@ innerSolar.append("g")
    .style("text-anchor", "left")
    .style("fill", "white")
    ;
-
+*/
 /*Manually added line because I couldn't figure out how to put a y-axis with the categories*/
+/*
 const yAxisLine = outerWidth-innerWidth-175
 innerSolar.append("line")
             .attr("x1", yAxisLine)
@@ -183,7 +220,7 @@ innerSolar.append("text")
     .style("font-family","Reader")
     .style("fill","white")
     .style("font-weight", "1000");
-
+*/
 // Trying to add bars in a diff way... 
 //innerSolar.selectAll("mybar")
 //   .data(tucsonData)
