@@ -34,39 +34,39 @@ salaries = innerSolar.append("g")
 buses = innerSolar.append("g")
 textbooks = innerSolar.append("g")
 laptops = innerSolar.append("g")
-supplies = innerSolar.append("g")
+//supplies = innerSolar.append("g")
 
 var title = innerSolar.append("text")
-                        .text("Tuscon Savings")
+                        .text("Tuscon Savings in One Year: $1.1 Million")
                          .style("text-anchor", "middle")
                         .attr("transform", `translate(${innerWidth/2}, ${margin.top/8})`)
                         .attr("dy", "1em")
                         .attr("class", "tucsonTitle")
-                        .style("fill", "#F3F1A5")
+                        .style("fill", "#D9E100")
                         .attr('font-weight', 800)
                         .attr('font-size', 32)
                         .attr('font-family', 'Verdana');
 
 let increment = innerWidth/5;
                 
-salaries.attr("transform", "translate(" + 0*increment + "," + innerHeight/6 + ")");
-buses.attr("transform", "translate(" + 1*increment + "," + innerHeight/6 + ")");
-textbooks.attr("transform", "translate(" + 2*increment + "," + innerHeight/6 + ")");
-laptops.attr("transform", "translate(" + 3*increment + "," + innerHeight/6 + ")");
-supplies.attr("transform", "translate(" + 4*increment + "," + innerHeight/6 + ")");
+salaries.attr("transform", "translate(" + .25*increment + "," + innerHeight/6 + ")");
+buses.attr("transform", "translate(" + 1.5*increment + "," + innerHeight/6 + ")");
+textbooks.attr("transform", "translate(" + 2.75*increment + "," + innerHeight/6 + ")");
+laptops.attr("transform", "translate(" + 4*increment + "," + innerHeight/6 + ")");
+// supplies.attr("transform", "translate(" + 4*increment + "," + innerHeight/6 + ")");
 
-var suppliesImg = supplies.append("svg:image")
-   .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_532723.png" )
-   .attr("width", 80)
-   .attr("height", 80)
-   .attr("class","suppliesLabel")
+// var suppliesImg = supplies.append("svg:image")
+//    .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_532723.png" )
+//    .attr("width", 80)
+//    .attr("height", 80)
+//    .attr("class","suppliesLabel")
 
-var suppliesLabel = supplies.append("text")
-                            .text("School Supplies")
-                            .attr("class", "tusconCatLabel")
-                            .attr("y", 120)
-                            .style("text-anchor", "middle")
-                            .attr("x", 40)
+// var suppliesLabel = supplies.append("text")
+//                             .text("School Supplies")
+//                             .attr("class", "tusconCatLabel")
+//                             .attr("y", 120)
+//                             .style("text-anchor", "middle")
+//                             .attr("x", 40)
 
 var salImg = salaries.append("svg:image")
    .attr("xlink:href", "http://cdn.onlinewebfonts.com/svg/img_353628.png")
@@ -79,6 +79,8 @@ var salLabel = salaries.append("text")
                             .attr("class", "tusconCatLabel")
                             .attr("y", 120)
                             .style("text-anchor", "middle")
+                            .style("font-family", "Reader")
+                            .style("font-size", "18px")
                             .attr("x", 40)
 
 var busImg = buses.append("svg:image")
@@ -88,10 +90,12 @@ var busImg = buses.append("svg:image")
    .attr("class","busLabel")
 
 var busLabel = buses.append("text")
-                            .text("School Buses")
+                            .text("Electric School Buses")
                             .attr("class", "tusconCatLabel")
                             .attr("y", 120)
                             .style("text-anchor", "middle")
+                            .style("font-family", "Reader")
+                            .style("font-size", "18px")
                             .attr("x", 40)
 
 var booksImg = textbooks.append("svg:image")
@@ -105,6 +109,8 @@ var booksLabel = textbooks.append("text")
                             .attr("class", "tusconCatLabel")
                             .attr("y", 120)
                             .style("text-anchor", "middle")
+                            .style("font-family", "Reader")
+                            .style("font-size", "18px")
                             .attr("x", 40)
 
 var laptopImg = laptops.append("svg:image")
@@ -118,10 +124,12 @@ var laptopLabel = laptops.append("text")
                             .attr("class", "tusconCatLabel")
                             .attr("y", 120)
                             .style("text-anchor", "middle")
+                            .style("font-family", "Reader")
+                            .style("font-size", "18px")
                             .attr("x", 40)
 
-suppliesImg.on("mouseover", mouseOver(24))
-              .on("mouseout", mouseOut)
+// suppliesImg.on("mouseover", mouseOver(24))
+//               .on("mouseout", mouseOut)
 
 let tucsonText = innerSolar.append("text")
     .attr("class", "tucsonTicker")
@@ -129,45 +137,46 @@ let tucsonText = innerSolar.append("text")
     .attr("y", innerHeight/1.2)
     .style("font-size", "128px")
     .style("font-family", "Reader")
+    .style("text-anchor", "center")
     .style("fill", "#4EB1E9")
     .text("0");
 
 //Manually added an event for each icon that changes color and value of the bottom number when you hover over it
 //I put the function for the interpolator for each event
-d3.selectAll(".suppliesLabel")
-.on("mouseover",function(){
-   d3.selectAll(".tucsonTicker")
-   .style("fill", "yellow")
-   .transition().tween("text",function(){
-      var selection = d3.select(this);
-      var start = 0;
-      var end = 52200;
-      var interpolator = d3.interpolateNumber(start,end)
-      return function(t) { selection.text(Math.round(interpolator(t)));
-   }; })
-   .duration(5000);
-})
+// d3.selectAll(".suppliesLabel")
+// .on("mouseover",function(){
+//    d3.selectAll(".tucsonTicker")
+//    .style("fill", "yellow")
+//    .transition().tween("text",function(){
+//       var selection = d3.select(this);
+//       var start = 0;
+//       var end = 52200;
+//       var interpolator = d3.interpolateNumber(start,end)
+//       return function(t) { selection.text(Math.round(interpolator(t)));
+//    }; })
+//    .duration(5000);
+// })
 d3.selectAll(".busLabel")
 .on("mouseover",function(){
    d3.selectAll(".tucsonTicker")
-   .style("fill", "blue")
+   .style("fill", "#4EB1E9")
    .transition().tween("text",function(){
       var selection = d3.select(this);
       var start = 0;
-      var end = 230000;
+      var end = 3;
       var interpolator = d3.interpolateNumber(start,end)
       return function(t) { selection.text(Math.round(interpolator(t)));
    }; })
-   .duration(5000);
+   .duration(1000);
 })
 d3.selectAll(".bookLabel")
 .on("mouseover",function(){
    d3.selectAll(".tucsonTicker")
-   .style("fill", "green")
+   .style("fill", "#F6772D")
    .transition().tween("text",function(){
       var selection = d3.select(this);
       var start = 0;
-      var end = 250;
+      var end = 11000;
       var interpolator = d3.interpolateNumber(start,end)
       return function(t) { selection.text(Math.round(interpolator(t)));
    }; })
@@ -176,15 +185,15 @@ d3.selectAll(".bookLabel")
 d3.selectAll(".salLabel")
 .on("mouseover",function(){
    d3.selectAll(".tucsonTicker")
-   .style("fill", "red")
+   .style("fill", "#D9E100")
    .transition().tween("text",function(){
       var selection = d3.select(this);
       var start = 0;
-      var end = 60477;
+      var end = 24;
       var interpolator = d3.interpolateNumber(start,end)
       return function(t) { selection.text(Math.round(interpolator(t)));
    }; })
-   .duration(5000);
+   .duration(1000);
 })
 d3.selectAll(".laptopLabel")
 .on("mouseover",function(){
@@ -193,7 +202,7 @@ d3.selectAll(".laptopLabel")
    .transition().tween("text",function(){
       var selection = d3.select(this);
       var start = 0;
-      var end = 300;
+      var end = 3143;
       var interpolator = d3.interpolateNumber(start,end)
       return function(t) { selection.text(Math.round(interpolator(t)));
    }; })
