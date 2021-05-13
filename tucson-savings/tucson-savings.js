@@ -36,10 +36,10 @@ textbooks = innerSolar.append("g")
 laptops = innerSolar.append("g")
 //supplies = innerSolar.append("g")
 
-var title = innerSolar.append("text")
+var tucsonTitle = innerSolar.append("text")
                         .text("Tuscon Savings in One Year: $1.1 Million")
                          .style("text-anchor", "middle")
-                        .attr("transform", `translate(${innerWidth/2}, ${margin.top/8})`)
+                        .attr("transform", `translate(${innerWidth/2}, ${margin.top/10})`)
                         .attr("dy", "1em")
                         .attr("class", "tucsonTitle")
                         .style("fill", "#D9E100")
@@ -47,12 +47,23 @@ var title = innerSolar.append("text")
                         .attr('font-size', 32)
                         .attr('font-family', 'Verdana');
 
+var tucsonSubTitle = innerSolar.append("text")
+                        .text("What could these savings be used for?")
+                         .style("text-anchor", "middle")
+                        .attr("transform", `translate(${innerWidth/2}, ${margin.top})`)
+                        .attr("dy", "1em")
+                        .attr("class", "tucsonSubTitle")
+                        .style("fill", "#4C6B8B")
+                        .attr('font-weight', 500)
+                        .attr('font-size', 28)
+                        .attr('font-family', 'Verdana');
+
 let increment = innerWidth/5;
                 
-salaries.attr("transform", "translate(" + .25*increment + "," + innerHeight/6 + ")");
-buses.attr("transform", "translate(" + 1.5*increment + "," + innerHeight/6 + ")");
-textbooks.attr("transform", "translate(" + 2.75*increment + "," + innerHeight/6 + ")");
-laptops.attr("transform", "translate(" + 4*increment + "," + innerHeight/6 + ")");
+salaries.attr("transform", "translate(" + .25*increment + "," + innerHeight/4.5 + ")");
+buses.attr("transform", "translate(" + 1.5*increment + "," + innerHeight/4.5 + ")");
+textbooks.attr("transform", "translate(" + 2.75*increment + "," + innerHeight/4.5 + ")");
+laptops.attr("transform", "translate(" + 4*increment + "," + innerHeight/4.5 + ")");
 // supplies.attr("transform", "translate(" + 4*increment + "," + innerHeight/6 + ")");
 
 // var suppliesImg = supplies.append("svg:image")
@@ -133,29 +144,37 @@ var laptopLabel = laptops.append("text")
 
 let tucsonText = innerSolar.append("text")
     .attr("class", "tucsonTicker")
-    .attr("x", outerWidth/4)
+    .attr("x", innerWidth/2)
     .attr("y", innerHeight/1.2)
     .style("font-size", "128px")
     .style("font-family", "Reader")
-    .style("text-anchor", "center")
+    .style("text-anchor", "middle")
     .style("fill", "#4EB1E9")
     .text("0");
 
-//Manually added an event for each icon that changes color and value of the bottom number when you hover over it
-//I put the function for the interpolator for each event
-// d3.selectAll(".suppliesLabel")
-// .on("mouseover",function(){
-//    d3.selectAll(".tucsonTicker")
-//    .style("fill", "yellow")
-//    .transition().tween("text",function(){
-//       var selection = d3.select(this);
-//       var start = 0;
-//       var end = 52200;
-//       var interpolator = d3.interpolateNumber(start,end)
-//       return function(t) { selection.text(Math.round(interpolator(t)));
-//    }; })
-//    .duration(5000);
-// })
+let amountLabel = innerSolar.append("text")
+                    .attr("class", "tucsonAmtLabel")
+                    .attr("x", innerWidth/2)
+                    .attr("y", innerHeight/1.05)
+                    .attr('font-weight', 500)
+                    .attr('font-size', 28)
+                    .attr('font-family', 'Verdana')
+                    .text("amount")
+                    .style("text-anchor", "middle")
+                    .style("opacity", 0); 
+
+let amountValLabel = innerSolar.append("text")
+                    .attr("class", "tucsonValAmtLabel")
+                    .attr("x", innerWidth/2)
+                    .attr("y", innerHeight + 8)
+                    .attr('font-weight', 500)
+                    .attr('font-size', 16)
+                    .attr('font-family', 'Verdana')
+                    .text("amount val")
+                    .style("text-anchor", "middle")
+                    .style("opacity", 0); 
+
+
 d3.selectAll(".busLabel")
 .on("mouseover",function(){
    d3.selectAll(".tucsonTicker")
@@ -168,6 +187,13 @@ d3.selectAll(".busLabel")
       return function(t) { selection.text(Math.round(interpolator(t)));
    }; })
    .duration(1000);
+     d3.selectAll(".tucsonAmtLabel")
+        .style("opacity", 1)
+        .text("Electric School Buses")
+    
+    d3.selectAll(".tucsonValAmtLabel")
+        .style("opacity", 1)
+        .text("Costing $350,000 each")
 })
 d3.selectAll(".bookLabel")
 .on("mouseover",function(){
@@ -181,6 +207,12 @@ d3.selectAll(".bookLabel")
       return function(t) { selection.text(Math.round(interpolator(t)));
    }; })
    .duration(5000);
+    d3.selectAll(".tucsonAmtLabel")
+        .style("opacity", 1)
+        .text("Textbooks")
+    d3.selectAll(".tucsonValAmtLabel")
+        .style("opacity", 1)
+        .text("Costing $100 each")
 })
 d3.selectAll(".salLabel")
 .on("mouseover",function(){
@@ -194,6 +226,12 @@ d3.selectAll(".salLabel")
       return function(t) { selection.text(Math.round(interpolator(t)));
    }; })
    .duration(1000);
+    d3.selectAll(".tucsonAmtLabel")
+        .style("opacity", 1)
+        .text("Teacher Salaries")
+    d3.selectAll(".tucsonValAmtLabel")
+        .style("opacity", 1)
+        .text("Costing $45,000 each")
 })
 d3.selectAll(".laptopLabel")
 .on("mouseover",function(){
@@ -207,23 +245,13 @@ d3.selectAll(".laptopLabel")
       return function(t) { selection.text(Math.round(interpolator(t)));
    }; })
    .duration(5000);
+    d3.selectAll(".tucsonAmtLabel")
+        .style("opacity", 1)
+        .text("Laptops")
+     d3.selectAll(".tucsonValAmtLabel")
+        .style("opacity", 1)
+        .text("Costing $350 each")
 })
 
-// on mouseover, transition from zero to amount
- function mouseOver(totalAmt) {
-     console.log(d3.selectAll(".tucsonTicker"));
-     d3.select(".tucsonTicker").transition().tween("text", function() {
-     var selection = d3.select(this); 
-     var start = 0; 
-     var end = totalAmt;  
-     var interpolator = d3.interpolateNumber(start,end); 
-     return function(t) { selection.text(Math.round(interpolator(t))); };  // return value     
-  })
-  .duration(5000);  
-    }
-
-    function mouseOut() {
-   
-    }
 
 

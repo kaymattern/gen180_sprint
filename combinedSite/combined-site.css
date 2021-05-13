@@ -88,6 +88,18 @@
      color: #4C6B8B;
     font-family: 'DM Sans', sans-serif; 
     font-size: 25px; 
-    vertical-align: center; 
+    position: relative; 
+    top: 50%;
+    transform: translateY(-50%); 
+    margin-top: 0px; 
+    
+}
+
+#fundProp {
+    max-width: 100%; 
+    height: auto;
+    width: auto/9; 
+    margin-right: -150px;
+    padding-left: 0px; 
     
 }
