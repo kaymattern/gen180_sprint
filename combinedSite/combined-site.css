@@ -78,6 +78,7 @@
     display: flex; 
     align-items: center; 
     justify-content: space-around; 
+    margin-bottom: 0px;
 }
 
 #lawPie {
@@ -102,4 +103,38 @@
     margin-right: -150px;
     padding-left: 0px; 
     
+}
+
+#fundSizeViz {
+    display: inline-block; 
+    position: relative; 
+    width: 100%; 
+    padding-bottom: 100%; 
+    vertical-align: top; 
+    overflow: auto;  
+}
+
+#fundBySize {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;    
+}
+
+#fund-size-main {
+    display: inline-block; 
+    position: absolute; 
+    top 0px; 
+    left: 0; 
+    margin-top: -50px; 
+    padding-top: -80; 
+}
+#fundSizeStat {
+    margin-top: -50px; 
+      color: #4C6B8B;
+    font-family: 'DM Sans', sans-serif; 
+    font-size: 25px; 
+    position: relative; 
+    top: 50%;
+    transform: translateY(-50%); 
+    margin-top: 0px; 
 }

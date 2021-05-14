@@ -2,7 +2,7 @@
 
 const margin = {top:80, right:50, left:50, bottom:100}; 
     
-const outerHeight = 600;   // can change dimensions
+const outerHeight = 600;  
 const outerWidth = 800;
 
 let sizesData = [{
@@ -91,7 +91,7 @@ y = d3.scaleLinear()
 
 const fundSizeColors = (type) => {
     if (type ===  "Direct Ownership - Bonds/Loan/Cash/Other") {
-        return "f6772d"; 
+        return "#f6772d"; 
         }
     if (type ===  'Direct Ownership - Grants and Donations') {
         return "#f3f1a5"; 
@@ -156,15 +156,15 @@ innerFundLeg.selectAll(".innerFundLegRect")
                     .data(categories)
                         .join("rect")
                         .attr("width", 160)
-                        .attr("height", 40)
+                        .attr("height", 50)
                         .attr("class", "innerFundLegRect")
                         .attr("x", (d, i)=> i*180 + 35)
                         .style("fill", d=> fundSizeColors(d))
                         .style("border", "1px solid black")
                         .attr("stroke", "white")
                         .attr("stroke-width", 1);
-let categoriesPrim =  ['Third-Party Ownership', 'Direct Ownership - ', 
-                     "Direct Ownership - "
+let categoriesPrim =  ['Third-Party Ownership', 'Direct Ownership ', 
+                     "Direct Ownership"
                  ]
 let categoriesSub =  ['', 'Grants and Donations', 
                      "Bonds/Loan/Cash/Other"
@@ -194,7 +194,7 @@ innerFundLeg.selectAll(".innerFundLegLabelSub")
                         .style("font-size", "10px")
                         .style("font-family", "Verdana"); 
 
-innerFundLeg.attr("transform", "translate(" +(innerWidth/2 - 3*(180+40)/2)+","+(innerHeight-15)+")"); 
+innerFundLeg.attr("transform", "translate(" +(innerWidth/2 - 3*(180+40)/2)+","+(innerHeight-30)+")"); 
 
 
 
