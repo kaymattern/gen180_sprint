@@ -182,7 +182,8 @@ let amountValLabel = innerSolar.append("text")
 d3.selectAll(".busLabel")
 .on("mouseover",function(){
    d3.selectAll(".tucsonTicker")
-   .style("fill", "#4EB1E9")
+   .style("fill", "#4C6B8B")
+   .style("font-family", "Courier New")
    .transition().tween("text",function(){
       var selection = d3.select(this);
       var start = 0;
@@ -193,15 +194,20 @@ d3.selectAll(".busLabel")
    .duration(1000);
      d3.selectAll(".tucsonAmtLabel")
         .style("opacity", 1)
+        .style("font-family", "Verdana")
+        .style("fill", "#4C6B8B")
         .text("Electric School Buses")
     
     d3.selectAll(".tucsonValAmtLabel")
         .style("opacity", 1)
+        .style("fill", "#4C6B8B")
+        .style("font-family", "Courier New")
         .text("COSTING $350,000 EACH")
 })
 d3.selectAll(".bookLabel")
 .on("mouseover",function(){
    d3.selectAll(".tucsonTicker")
+   .style("font-family", "Courier New")
    .style("fill", "#D9E100")
    .transition().tween("text",function(){
       var selection = d3.select(this);
@@ -213,9 +219,13 @@ d3.selectAll(".bookLabel")
    .duration(5000);
     d3.selectAll(".tucsonAmtLabel")
         .style("opacity", 1)
+        .style("font-family", "Verdana")
+        .style("fill", "#D9E100")
         .text("Textbooks")
     d3.selectAll(".tucsonValAmtLabel")
         .style("opacity", 1)
+        .style("fill", "#D9E100")
+        .style("font-family", "Courier New")
         .text("COSTING $100 EACH")
 })
 d3.selectAll(".salLabel")
@@ -245,7 +255,8 @@ d3.selectAll(".salLabel")
 d3.selectAll(".laptopLabel")
 .on("mouseover",function(){
    d3.selectAll(".tucsonTicker")
-   .style("fill", "pink")
+   .style("fill", "#4EB1E9")
+   .style("font-family", "Courier New")
    .transition().tween("text",function(){
       var selection = d3.select(this);
       var start = 0;
@@ -256,9 +267,13 @@ d3.selectAll(".laptopLabel")
    .duration(5000);
     d3.selectAll(".tucsonAmtLabel")
         .style("opacity", 1)
+        .style("font-family", "Verdana")
+        .style("fill", "#4EB1E9")
         .text("Laptops")
      d3.selectAll(".tucsonValAmtLabel")
         .style("opacity", 1)
+        .style("font-family", "Courier New")
+        .style("fill", "#4EB1E9")
         .text("COSTING $350 EACH")
 })
 
