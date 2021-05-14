@@ -91,7 +91,7 @@ y = d3.scaleLinear()
 
 const fundSizeColors = (type) => {
     if (type ===  "Direct Ownership - Bonds/Loan/Cash/Other") {
-        return "#d3d3d3"; 
+        return "f6772d"; 
         }
     if (type ===  'Direct Ownership - Grants and Donations') {
         return "#f3f1a5"; 
@@ -103,12 +103,14 @@ const fundSizeColors = (type) => {
 
 xAxis = g => g
     .attr("transform", `translate(0,${innerHeight - margin.bottom})`)
-    .call(d3.axisBottom(x).tickSizeOuter(0))
+    .style("font-family", "Verdana")
+    .call(d3.axisBottom(x).tickSize(0))
     .call(g => g.selectAll(".domain").remove())
 
 yAxis = g => g
     .attr("transform", `translate(${margin.left},0)`)
-    .call(d3.axisLeft(y).ticks(null, "s"))
+    .style("font-family", "Verdana")
+    .call(d3.axisLeft(y).ticks(null, "s").tickSize(0))
     .call(g => g.selectAll(".domain").remove())
 
 formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en")
@@ -126,7 +128,7 @@ innerFundSize.selectAll("fundGroups")
                     .attr("width", x.bandwidth())
                     .style("border", "1px solid white")
                     .attr("stroke", "white")
-                    .attr("stroke-width", 1)
+                    .attr("stroke-width", 0)
                 .append("title")
                     .text(d=> `${d.data.title} ${d.key}${formatValue(d.data[d.key])}`);
 
@@ -144,8 +146,11 @@ innerFundSize.append("text")
                 .attr("id", "fundSizeTitle")
                 .attr("text-anchor", "middle")
                 .attr("transform", `translate(${innerWidth/2 - 25},10)`)
-                .text("School System Size Distribution By Financing Type")
-                .style("fill", "black")
+                .text("School System Size Distribution by Financing Type")
+                .style("fill", "4C6B8B")
+                .style("font-family", "Verdana")
+                .style("stroke", "4C6B8B")
+                .style("font-size", "18px")
 
 innerFundLeg.selectAll(".innerFundLegRect")
                     .data(categories)
@@ -156,7 +161,7 @@ innerFundLeg.selectAll(".innerFundLegRect")
                         .attr("x", (d, i)=> i*180 + 35)
                         .style("fill", d=> fundSizeColors(d))
                         .style("border", "1px solid black")
-                        .attr("stroke", "black")
+                        .attr("stroke", "white")
                         .attr("stroke-width", 1);
 let categoriesPrim =  ['Third-Party Ownership', 'Direct Ownership - ', 
                      "Direct Ownership - "
@@ -173,8 +178,9 @@ innerFundLeg.selectAll(".innerFundLegLabel")
                         .attr("x", (d, i)=> i*180 + 45)
                         .attr("y", 15)
                         .style('fill', 'white')
-                        .attr("stroke", "black")
-                        .style("font-size", "12px"); 
+                        .attr("stroke", "white")
+                        .style("font-size", "12px")
+                        .style("font-family", "Verdana"); 
 
 innerFundLeg.selectAll(".innerFundLegLabelSub")
                         .data(categoriesSub)
@@ -184,8 +190,9 @@ innerFundLeg.selectAll(".innerFundLegLabelSub")
                         .attr("x", (d, i)=> i*180 + 45)
                         .attr("y", 30)
                         .style('fill', 'white')
-                        .attr("stroke", "black")
-                        .style("font-size", "10px"); 
+                        .attr("stroke", "white")
+                        .style("font-size", "10px")
+                        .style("font-family", "Verdana"); 
 
 innerFundLeg.attr("transform", "translate(" +(innerWidth/2 - 3*(180+40)/2)+","+(innerHeight-15)+")"); 
 
