@@ -254,13 +254,24 @@
     left: 0%; */
 }
 
-#tusconViz {
-    width: 95vw;
-    padding-left: 20px; 
-    padding-right: 20px; 
-    overflow-wrap: normal; 
-  /*  height: 400px;
-    margin-bottom: 20px; 
+#tucsonViz {
+    width: 99vw;
+    display: flex;   
+    justify-content: space-around;
+    align-items: center; 
+    background-color: #4EB1E9; 
+     padding-left: 0px;
+    padding-right: 0px;
+    padding: 0px; 
+}
+
+#attachTucson {
+    display: inline-block; 
     position: relative; 
-    left: 0%; */
+    width: 100%; 
+    padding-bottom: 0%; 
+    vertical-align: top; 
+    margin: auto; 
+    max-height: 600px; 
+    width: auto; 
 }
