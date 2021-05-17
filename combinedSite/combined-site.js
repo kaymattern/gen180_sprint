@@ -390,8 +390,7 @@ const drawInitial = (statePaths) => {
     largeMap = d3.select("#vis").append("svg")
                     .attr("id", "map-main")
                     .attr("height", outerHeight)
-                    .attr("width", outerWidth)
-                    .style("border", "1px solid black");
+                    .attr("width", outerWidth);
 
     innerMap = largeMap.append("g"); 
     innerMap.attr("transform", "translate(" +margin.left+","+margin.top+")"); 
@@ -452,7 +451,8 @@ const drawInitial = (statePaths) => {
                         .style("fill", d => lawColor(d))
                         .style("border", "1px solid black")
                         .attr("stroke", "black")
-                        .attr("stroke-width", 1); 
+                        .attr("stroke-width", 1)
+                        .style("opacity", 0); 
     
     const lawCapRects1 = legCapLawG.selectAll(".lawCapLegRect1")
                         .data(capRangeVals)
@@ -518,7 +518,7 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 30)
                             .attr("y", (d, i) => 60 + i*17)
-                            .style("opacity", 1);  
+                            .style("opacity", 0);  
     
       legendLawLabel2 = legendG.selectAll(".lawLegLabel2")
                             .data(brokenLaw2)
@@ -527,7 +527,7 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 220)
                             .attr("y", (d, i) => 60 + i*17)
-                            .style("opacity", 1); 
+                            .style("opacity", 0); 
     
     legendLawLabel3 = legendG.selectAll(".lawLegLabel3")
                             .data(brokenLaw3)
@@ -536,7 +536,7 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 420)
                             .attr("y", (d, i) => 60 + i*17)
-                            .style("opacity", 1);  
+                            .style("opacity", 0);  
     
     legendLawCapLabel1 = legCapLawG.selectAll(".lawLegCapLabel1")
                             .data(brokenLaw1)
@@ -572,7 +572,7 @@ const drawInitial = (statePaths) => {
         .attr("dy", "1em")
         .attr("class", "mapTitle")
         .style("fill", "black")
-        .style("opacity", 1); 
+        .style("opacity", 0); 
     
     capTitle = innerMap.append("text")
         .text("Third-Party Solar Power Purchase Agreement Policies and Total Solar Capacity")
@@ -624,7 +624,7 @@ const drawInitial = (statePaths) => {
         .attr("x", function(d){ return pathGenerator.centroid(d)[0] - 12;})
         .attr("y", function(d){ return  pathGenerator.centroid(d)[1] - 5;}); 
     
-    
+    statePaths.style("opacity", 0)
     
     }
 
@@ -722,7 +722,7 @@ function drawSchools() {
         const sortedData = sortDataBySchools(stateData)
          d3.select('#tooltip')
             .style('left', (d3.pointer(event)[0] + 330)+ 'px')
-            .style('top', (d3.pointer(event)[1] + 2*outerHeight) + 'px')
+            .style('top', (d3.pointer(event)[1] + 5*outerHeight) + 'px')
             .style('display', 'inline-block')
             .html(`<strong>State: </strong> ${thisData.properties.NAME} 
                 <br> <strong>Solar Schools: </strong> ${thisData.properties.solarSchools} 
@@ -766,7 +766,7 @@ function drawCapacity() {
         const ranking = sortedData.find(s => s.state === thisData.properties.NAME).capacityRank
          d3.select('#tooltip')
             .style('left', (d3.pointer(event)[0] + 330)+ 'px')
-            .style('top', (d3.pointer(event)[1] + outerHeight) + 'px')
+            .style('top', (d3.pointer(event)[1] + 4*outerHeight) + 'px')
             .style('display', 'inline-block')
             .html(`<strong>State: </strong> ${thisData.properties.NAME} 
                 <br> <strong>Total Capacity: </strong> ${(thisData.properties.totalKW/1000).toFixed(2)} MW 
@@ -788,8 +788,32 @@ function drawCapacity() {
     
 }
 
+function drawNone() {
+    statePaths = innerMap.selectAll(".state-path")
+    statePaths.style("opacity", 0)
+    thirdPartyTitle.style("opacity", 0)
+    statePaths.on("mouseover", mouseOver)
+              .on("mouseout", mouseOut)
+              
+    function mouseOver() {
+        d3.select('#tooltip')
+            .style('display', 'none')
+    }
+    function mouseOut() {
+        d3.select("#tooltip")
+            .style('display', 'none')
+    }
+     legendLawLabel1.style("opacity", 0); 
+    legendLawLabel2.style("opacity", 0); 
+    legendLawLabel3.style("opacity", 0); 
+    d3.selectAll(".lawLegRect").style("opacity", 0);
+    
+}
+
 
 let activationFunctions = [
+    drawNone, 
+    drawNone, drawNone,
     drawLaws, 
     drawCapacity, 
     drawSchools 
