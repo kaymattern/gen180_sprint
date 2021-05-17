@@ -722,7 +722,7 @@ function drawSchools() {
         const sortedData = sortDataBySchools(stateData)
          d3.select('#tooltip')
             .style('left', (d3.pointer(event)[0] + 330)+ 'px')
-            .style('top', (d3.pointer(event)[1] + 5*outerHeight) + 'px')
+            .style('top', (d3.pointer(event)[1] + 4*outerHeight + 225) + 'px')
             .style('display', 'inline-block')
             .html(`<strong>State: </strong> ${thisData.properties.NAME} 
                 <br> <strong>Solar Schools: </strong> ${thisData.properties.solarSchools} 
@@ -766,7 +766,7 @@ function drawCapacity() {
         const ranking = sortedData.find(s => s.state === thisData.properties.NAME).capacityRank
          d3.select('#tooltip')
             .style('left', (d3.pointer(event)[0] + 330)+ 'px')
-            .style('top', (d3.pointer(event)[1] + 4*outerHeight) + 'px')
+            .style('top', (d3.pointer(event)[1] + 3*outerHeight + 225) + 'px')
             .style('display', 'inline-block')
             .html(`<strong>State: </strong> ${thisData.properties.NAME} 
                 <br> <strong>Total Capacity: </strong> ${(thisData.properties.totalKW/1000).toFixed(2)} MW 
@@ -807,6 +807,18 @@ function drawNone() {
     legendLawLabel2.style("opacity", 0); 
     legendLawLabel3.style("opacity", 0); 
     d3.selectAll(".lawLegRect").style("opacity", 0);
+     legendCapLabel.style("opacity", 0)
+    legendLawCapLabel1.style("opacity", 0); 
+        legendLawCapLabel2.style("opacity", 0);
+        legendLawCapLabel3.style("opacity", 0);
+    innerMap.selectAll(".school-count")
+            .style("opacity", 0); 
+    solarSchoolsTitle.style("opacity", 0)
+    innerMap.selectAll(".school-centroid")
+                        .style("opacity", 0); 
+     d3.selectAll(".lawCapLegRect1").style("opacity", 0)
+    d3.selectAll(".lawCapLegRect2").style("opacity", 0)
+    d3.selectAll(".lawCapLegRect3").style("opacity", 0)
     
 }
 
@@ -816,7 +828,7 @@ let activationFunctions = [
     drawNone, drawNone,
     drawLaws, 
     drawCapacity, 
-    drawSchools 
+    drawSchools, drawNone 
 ]
    
     // scroller code 
@@ -897,7 +909,7 @@ let lastIndex, activeIndex = 0
 scroll.on('active', function(index){
     d3.selectAll('.step')
         .transition().duration(500)
-        .style('opacity', function (d, i) {return i === index ? 1 : 0.1;});
+        .style('opacity', function (d, i) {return i === index ? 1 : 1;});
     
     activeIndex = index
     let sign = (activeIndex - lastIndex) < 0 ? -1 : 1; 

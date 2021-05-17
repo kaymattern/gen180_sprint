@@ -61,8 +61,8 @@ var tucsonSubTitle = innerSolar.append("text")
 let increment = innerWidth/5;
                 
 salaries.attr("transform", "translate(" + .25*increment + "," + innerHeight/4.5 + ")");
-buses.attr("transform", "translate(" + 1.5*increment + "," + innerHeight/4.5 + ")");
-textbooks.attr("transform", "translate(" + 2.75*increment + "," + innerHeight/4.5 + ")");
+buses.attr("transform", "translate(" + 2.75*increment + "," + innerHeight/4.5 + ")");
+textbooks.attr("transform", "translate(" + 1.5*increment + "," + innerHeight/4.5 + ")");
 laptops.attr("transform", "translate(" + 4*increment + "," + innerHeight/4.5 + ")");
 // supplies.attr("transform", "translate(" + 4*increment + "," + innerHeight/6 + ")");
 
