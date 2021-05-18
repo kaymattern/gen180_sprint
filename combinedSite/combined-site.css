@@ -243,8 +243,19 @@
  overflow: auto; */
 }
 
+#topTucson {
+    width: 95vw;
+    color: #F6772D;
+    font-family: 'DM Sans', sans-serif; 
+    font-size: 30px; 
+    text-align: center;
+}
+
 #tusconExplain {
     width: 95vw;
+    color: #4C6B8B;
+    font-family: 'DM Sans', sans-serif; 
+    font-size: 20px; 
     padding-left: 20px; 
     padding-right: 20px; 
     overflow-wrap: normal; 
@@ -274,4 +285,24 @@
     margin: auto; 
     max-height: 600px; 
     width: auto; 
+}
+
+#topCTA {
+    width: 95vw;
+    color: #F6772D;
+    font-family: 'DM Sans', sans-serif; 
+    font-size: 50px; 
+    text-align: center;
+    font-weight: 400; 
+}
+
+#CTA {
+    width: 95vw;
+    color: #4C6B8B;
+    font-family: 'DM Sans', sans-serif; 
+    font-size: 35px; 
+    padding-left: 20px; 
+    padding-right: 20px; 
+    overflow-wrap: normal; 
+    text-align: center;
 }
