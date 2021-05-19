@@ -864,12 +864,13 @@ let activationFunctions = [
             if (i === 0 ){
                 startPos = top;
             }
+            top = startPos + 730*i; 
             sectionPositions.push(top - startPos)
         });
     }
 
     function position() {
-        let pos = window.pageYOffset - 300 - containerStart;
+        let pos = window.pageYOffset - 500 - containerStart;
         let sectionIndex = d3.bisect(sectionPositions, pos);
         sectionIndex = Math.min(sections.size()-1, sectionIndex);
     
@@ -885,7 +886,7 @@ let activationFunctions = [
     }
 
     scroll.container = function(value) {
-        if (arguments.legth === 0){
+        if (arguments.length === 0){
             return container
         } 
         container = value 

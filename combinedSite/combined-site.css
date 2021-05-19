@@ -46,7 +46,7 @@
 } 
 
 .break1 {
-    height: 60px; 
+    height: 40px; 
 }
 
 #PPAexplain {
@@ -122,6 +122,7 @@
     align-items: center; 
     justify-content: space-between;   
     margin-top: -170px; 
+    margin-bottom: 100px; 
 }
 
 #fund-size-main {
@@ -206,7 +207,7 @@
     padding-right: 20px; 
     color: white; 
    /* padding-top: 200px; */
-    margin-bottom: 0px; 
+    margin-bottom: 20px; 
      display: table-cell; 
     vertical-align: middle; 
 }
@@ -236,13 +237,12 @@
 
 
 #noThird {
-    width: 100vw;
     padding-left: 20px; 
     padding-right: 20px; 
     margin-bottom: 0px;
-    padding-top: 0px; 
+    padding-top: 100px; 
     padding-bottom: 0px; 
-    height: 200px; 
+    height: 300px; 
 }
 
 #topTucson {
