@@ -1,25 +1,66 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
 
+@font-face {
+    font-family: 'Reader Medium';
+    src: url('fonts/.eot'), url('fonts/Reader/reader-medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Reader Regular';
+    src: url('fonts/.eot'), url('fonts/Reader/reader-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tiempos Regular';
+    src: url('fonts/.eot'), url('fonts/Tiempos/TiemposText-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+@font-face {
+    font-family: 'Apercu Mono Medium';
+    src: url('fonts/.eot'), url('fonts/Apercu_Mono/apercu-mono-medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Apercu Mono Regular';
+    src: url('fonts/.eot'), url('fonts/Apercu_Mono/apercu-mono-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Apercu Mono Light';
+    src: url('fonts/.eot'), url('fonts/Apercu_Mono/apercu-mono-light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
                 
 /* Top title section */
 
 #title {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Reader Medium';
     font-size: 45px;
     font-weight: 500; 
     color: #F6772D; 
 }
 
 #preTitle {
-    font-weight: 400; 
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Regular';
     color: #4EB1E9; 
 }
 
 #subtitle {
-    font-weight: 400; 
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Medium'; 
     font-size: 26px; 
     color: #4C6B8B;
 }
@@ -40,7 +81,7 @@
 
 #topPPA {
     font-size: 30px; 
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Regular'; 
     text-align: center;
     color: #4EB1E9; 
 } 
@@ -51,7 +92,7 @@
 
 #PPAexplain {
     text-align: center; 
-    font-family: 'Source Serif Pro', serif; 
+    font-family: 'Tiempos Regular'; 
     font-size: 25px; 
     padding-left: 20px; 
     padding-right: 20px; 
@@ -61,7 +102,7 @@
     text-align: center; 
     font-size: 30px; 
     font-weight: 400; 
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Medium'; 
     color: #F6772D; 
 }
 
@@ -71,7 +112,7 @@
 
 #ppaDef {
      color: #4C6B8B;
-    font-family: 'Source Serif Pro', serif;   
+    font-family: 'Tiempos Regular';   
 }
 
 /* PPA Graphs */ 
@@ -90,7 +131,7 @@
 #propStat {
     padding-left: 10px; 
      color: #4C6B8B;
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Medium'; 
     font-size: 25px; 
     position: relative; 
     top: 50%;
@@ -139,7 +180,7 @@
     padding-left: 20px; 
     margin-top: -100px; 
     color: #4C6B8B;
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Medium'; 
     font-size: 25px; 
     position: relative; 
     top: 50%;
@@ -202,7 +243,7 @@
 #step1 {
     background-color: #D9E100; 
     padding-left: 20px; 
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Medium'; 
     font-size: 25px; 
     padding-right: 20px; 
     color: white; 
@@ -214,7 +255,7 @@
 
 #step2 {
     color: #4C6B8B;
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Medium'; 
     font-size: 25px;   
     padding-left: 20px; 
    /* padding-top: 450px; */
@@ -223,7 +264,7 @@
 
 #step3 {
     color: #4C6B8B;
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Medium'; 
     font-size: 25px; 
     padding-left: 20px; 
    /* padding-top: 450px;*/ 
@@ -243,12 +284,13 @@
     padding-top: 100px; 
     padding-bottom: 0px; 
     height: 300px; 
+    font-family: 'Reader Regular'; 
 }
 
 #topTucson {
     width: 95vw;
     color: #F6772D;
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Medium'; 
     font-size: 30px; 
     text-align: center;
 }
@@ -256,7 +298,7 @@
 #tusconExplain {
     width: 95vw;
     color: #4C6B8B;
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Regular'; 
     font-size: 20px; 
     padding-left: 30px; 
     padding-right: 30px;
@@ -294,7 +336,7 @@
 #topCTA {
     width: 95vw;
     color: #F6772D;
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Medium'; 
     font-size: 50px; 
     text-align: center;
     font-weight: 400; 
@@ -303,7 +345,7 @@
 #CTA {
     width: 95vw;
     color: #4C6B8B;
-    font-family: 'DM Sans', sans-serif; 
+    font-family: 'Reader Medium'; 
     font-size: 35px; 
     padding-left: 20px; 
     padding-right: 20px; 

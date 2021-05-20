@@ -119,7 +119,7 @@ function drawFundBar() {
 
     xAxis = g => g
         .attr("transform", `translate(0,${innerHeight - margin.bottom})`)
-        .style("font-family", "Verdana")
+        .style("font-family", "Reader Medium")
         .style("font-size", "3px")
         .attr("stroke-width", 0)
         .call(d3.axisBottom(x).tickSize(0))
@@ -127,7 +127,7 @@ function drawFundBar() {
 
     yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
-        .style("font-family", "Verdana")
+        .style("font-family", "Reader Medium")
         .style("font-size", "6px")
         .attr("stroke-width", 0)
         .call(d3.axisLeft(y).ticks(null, "s").tickSize(0))
@@ -168,9 +168,9 @@ function drawFundBar() {
                 .attr("transform", `translate(${innerWidth/2 -10},25)`)
                 .text("School System Size Distribution by Financing Type")
                 .style("fill", "#4C6B8B")
-                .style("font-family", "Verdana")
+                .style("font-family", "Reader Medium")
                 .style("stroke", "#4C6B8B")
-                .style("font-size", "12px")
+                .style("font-size", "10px")
 
     innerFundLeg.selectAll(".innerFundLegRect")
                     .data(categories)
@@ -213,7 +213,7 @@ function drawFundBar() {
                         .style('fill', (d,i)=> legFill(d, i))
                         .attr("stroke-width", 0)
                         .style("font-size", "6px")
-                        .style("font-family", "Verdana"); 
+                        .style("font-family", "Reader Medium"); 
 
     innerFundLeg.selectAll(".innerFundLegLabelSub")
                         .data(categoriesSub)
@@ -224,8 +224,8 @@ function drawFundBar() {
                         .attr("y", 17)
                         .style('fill', (d,i)=> legFill(d, i))
                         .attr("stroke-width", 0)
-                        .style("font-size", "5px")
-                        .style("font-family", "Verdana"); 
+                        .style("font-size", "6px")
+                        .style("font-family", "Reader Regular"); 
 
     innerFundLeg.attr("transform", "translate(" +(innerWidth/2 - 3*(105+40)/2)+","+(innerHeight-40)+")"); 
 
@@ -507,6 +507,8 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", -67)
                             .attr("y", (d, i) => 13+ i*15)
+                             .style('font-size', '12px')
+                            .style('font-family', 'Apercu Mono Regular')
                             .style("opacity", 0); 
     
     
@@ -518,6 +520,8 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 30)
                             .attr("y", (d, i) => 60 + i*17)
+                            .style('font-family', 'Apercu Mono Regular')
+                             .style('font-size', '12px')
                             .style("opacity", 0);  
     
       legendLawLabel2 = legendG.selectAll(".lawLegLabel2")
@@ -527,6 +531,8 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 220)
                             .attr("y", (d, i) => 60 + i*17)
+                            .style('font-family', 'Apercu Mono Regular')
+                             .style('font-size', '12px')
                             .style("opacity", 0); 
     
     legendLawLabel3 = legendG.selectAll(".lawLegLabel3")
@@ -536,6 +542,8 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 420)
                             .attr("y", (d, i) => 60 + i*17)
+                            .style('font-family', 'Apercu Mono Regular')
+                             .style('font-size', '12px')
                             .style("opacity", 0);  
     
     legendLawCapLabel1 = legCapLawG.selectAll(".lawLegCapLabel1")
@@ -545,6 +553,8 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 30)
                             .attr("y", (d, i) => 90 + i*17)
+                            .style('font-family', 'Apercu Mono Regular')
+                             .style('font-size', '12px')
                             .style("opacity", 0);  
     
       legendLawCapLabel2 = legCapLawG.selectAll(".lawLegCapLabel2")
@@ -554,6 +564,8 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 220)
                             .attr("y", (d, i) => 90 + i*17)
+                            .style('font-family', 'Apercu Mono Regular')
+                            .style('font-size', '12px')
                             .style("opacity", 0); 
     
     legendLawCapLabel3 = legCapLawG.selectAll(".lawLegCapLabel3")
@@ -563,6 +575,8 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 420)
                             .attr("y", (d, i) => 90 + i*17)
+                            .style('font-family', 'Apercu Mono Regular')
+                            .style('font-size', '12px')
                             .style("opacity", 0);  
     
      thirdPartyTitle = innerMap.append("text")
@@ -572,6 +586,7 @@ const drawInitial = (statePaths) => {
         .attr("dy", "1em")
         .attr("class", "mapTitle")
         .style("fill", "black")
+        .style('font-family', 'Reader Medium')
         .style("opacity", 0); 
     
     capTitle = innerMap.append("text")
@@ -581,6 +596,7 @@ const drawInitial = (statePaths) => {
         .attr("dy", "1em")
         .attr("class", "mapTitle")
         .style("fill", "black")
+        .style('font-family', 'Reader Medium')
         .style("opacity", 0); 
     
     solarSchoolsTitle = innerMap.append("text")
@@ -589,6 +605,7 @@ const drawInitial = (statePaths) => {
         .attr("transform", `translate(${innerWidth/2}, ${margin.top/3})`)
         .attr("dy", "1em")
         .attr("class", "mapTitle")
+        .style('font-family', 'Reader Medium')
         .style("fill", "black")
         .style("opacity", 0); 
     
@@ -620,9 +637,10 @@ const drawInitial = (statePaths) => {
         .text(d => d.properties.solarSchools)
         .style("font-weight", 800)
         .style("font-size", 11)
+        .style('font-family', 'Reader Regular')
         .style("opacity", 0)
         .attr("x", function(d){ return pathGenerator.centroid(d)[0] - 12;})
-        .attr("y", function(d){ return  pathGenerator.centroid(d)[1] - 5;}); 
+        .attr("y", function(d){ return  pathGenerator.centroid(d)[1] - 7;}); 
     
     statePaths.style("opacity", 0)
     
@@ -724,6 +742,7 @@ function drawSchools() {
             .style('left', (d3.pointer(event)[0] + 330)+ 'px')
             .style('top', (d3.pointer(event)[1] + 4*outerHeight + 225) + 'px')
             .style('display', 'inline-block')
+             .style('font-family', 'Apercu Mono Regular')
             .html(`<strong>State: </strong> ${thisData.properties.NAME} 
                 <br> <strong>Solar Schools: </strong> ${thisData.properties.solarSchools} 
                 <br> <strong>School Ranking: </strong> ${sortedData.find(s => s.state === thisData.properties.NAME).schoolRank}`)
@@ -768,6 +787,7 @@ function drawCapacity() {
             .style('left', (d3.pointer(event)[0] + 330)+ 'px')
             .style('top', (d3.pointer(event)[1] + 3*outerHeight + 225) + 'px')
             .style('display', 'inline-block')
+             .style('font-family', 'Apercu Mono Regular')
             .html(`<strong>State: </strong> ${thisData.properties.NAME} 
                 <br> <strong>Total Capacity: </strong> ${(thisData.properties.totalKW/1000).toFixed(2)} MW 
                 <br> <strong>Capacity Ranking: </strong> ${sortedData.find(s => s.state === thisData.properties.NAME).capacityRank}`)
@@ -967,15 +987,24 @@ laptops = innerSolar.append("g")
 //supplies = innerSolar.append("g")
 
 var tucsonTitle = innerSolar.append("text")
-                        .text("Tuscon Savings in One Year: $1.1 Million")
+                        .text("Tuscon Savings in One Year:")
                          .style("text-anchor", "middle")
-                        .attr("transform", `translate(${innerWidth/2}, ${margin.top/10})`)
+                        .attr("transform", `translate(${innerWidth/3 + 20}, ${margin.top/10})`)
                         .attr("dy", "1em")
                         .attr("class", "tucsonTitle")
                         .style("fill", "#4C6B8B")
-                        .attr('font-weight', 800)
-                        .attr('font-size', 32)
-                        .attr('font-family', 'Verdana');
+                        .attr('font-size', 28)
+                        .attr('font-family', 'Reader Medium');
+    
+var tucsonTitle2 = innerSolar.append("text")
+                        .text("$1.1 MILLION")
+                         .style("text-anchor", "middle")
+                        .attr("transform", `translate(${3*(innerWidth/4) + 30}, ${margin.top/10})`)
+                        .attr("dy", "1em")
+                        .attr("class", "tucsonTitle")
+                        .style("fill", "#F6772D")
+                        .attr('font-size', 28)
+                        .attr('font-family', 'Apercu Mono Medium');
 
 var tucsonSubTitle = innerSolar.append("text")
                         .text("What could these savings be used for?")
@@ -984,9 +1013,8 @@ var tucsonSubTitle = innerSolar.append("text")
                         .attr("dy", "1em")
                         .attr("class", "tucsonSubTitle")
                         .style("fill", "#4C6B8B")
-                        .attr('font-weight', 500)
                         .attr('font-size', 28)
-                        .attr('font-family', 'Verdana');
+                        .attr('font-family', 'Reader Medium');
 
 let increment = innerWidth/5;
                 
@@ -994,23 +1022,10 @@ salaries.attr("transform", "translate(" + .25*increment + "," + innerHeight/4.5 
 buses.attr("transform", "translate(" + 2.75*increment + "," + innerHeight/4.5 + ")");
 textbooks.attr("transform", "translate(" + 1.5*increment + "," + innerHeight/4.5 + ")");
 laptops.attr("transform", "translate(" + 4*increment + "," + innerHeight/4.5 + ")");
-// supplies.attr("transform", "translate(" + 4*increment + "," + innerHeight/6 + ")");
 
-// var suppliesImg = supplies.append("svg:image")
-//    .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_532723.png" )
-//    .attr("width", 80)
-//    .attr("height", 80)
-//    .attr("class","suppliesLabel")
-
-// var suppliesLabel = supplies.append("text")
-//                             .text("School Supplies")
-//                             .attr("class", "tusconCatLabel")
-//                             .attr("y", 120)
-//                             .style("text-anchor", "middle")
-//                             .attr("x", 40)
 
 var salImg = salaries.append("svg:image")
-   .attr("xlink:href", "http://cdn.onlinewebfonts.com/svg/img_353628.png")
+    .attr('xlink:href', 'TeacheSalaries.svg')
    .attr("width", 80)
    .attr("height", 80)
    .attr("class","salLabel")
@@ -1020,13 +1035,13 @@ var salLabel = salaries.append("text")
                             .attr("class", "tusconCatLabel")
                             .attr("y", 120)
                             .style("text-anchor", "middle")
-                            .style("font-family", "Verdana")
+                            .style("font-family", "Reader Regular")
                             .style("font-size", "18px")
                             .style("fill", "#F6772D")
                             .attr("x", 40)
 
 var busImg = buses.append("svg:image")
-   .attr("xlink:href", "https://cdn0.iconfinder.com/data/icons/transportation-and-logistics/50/Transportation_and_Logistics-67-512.png")
+   .attr('xlink:href', 'ElectricBuses.svg')
    .attr("width", 80)
    .attr("height", 80)
    .attr("class","busLabel")
@@ -1036,13 +1051,13 @@ var busLabel = buses.append("text")
                             .attr("class", "tusconCatLabel")
                             .attr("y", 120)
                             .style("text-anchor", "middle")
-                            .style("font-family", "Verdana")
+                            .style("font-family", "Reader Regular")
                             .style("font-size", "18px")
                             .style("fill", "#4C6B8B")
                             .attr("x", 40)
 
 var booksImg = textbooks.append("svg:image")
-      .attr("xlink:href", "https://maxcdn.icons8.com/Share/icon/ios7/Files/open_book1600.png")
+      .attr("xlink:href", "Textbooks.svg")
       .attr("width", 80)
       .attr("height", 80)
       .attr("class","bookLabel")
@@ -1052,13 +1067,13 @@ var booksLabel = textbooks.append("text")
                             .attr("class", "tusconCatLabel")
                             .attr("y", 120)
                             .style("text-anchor", "middle")
-                            .style("font-family", "Verdana")
+                            .style("font-family", "Reader Regular")
                             .style("font-size", "18px")
                             .style("fill", "#D9E100")
                             .attr("x", 40)
 
 var laptopImg = laptops.append("svg:image")
-      .attr("xlink:href", "https://cdn.onlinewebfonts.com/svg/img_20446.png")
+      .attr("xlink:href", "Laptops.svg")
       .attr("width", 80)
       .attr("height", 80)
       .attr("class","laptopLabel")
@@ -1068,32 +1083,28 @@ var laptopLabel = laptops.append("text")
                             .attr("class", "tusconCatLabel")
                             .attr("y", 120)
                             .style("text-anchor", "middle")
-                            .style("font-family", "Verdana")
+                            .style("font-family", "Reader Regular")
                             .style("font-size", "18px")
                             .style("fill", "#4EB1E9")
                             .attr("x", 40)
 
-// suppliesImg.on("mouseover", mouseOver(24))
-//               .on("mouseout", mouseOut)
 
 let tucsonText = innerSolar.append("text")
     .attr("class", "tucsonTicker")
     .attr("x", innerWidth/2)
     .attr("y", innerHeight/1.2)
-    .style("font-size", "128px")
-    .style("font-family", "Reader")
+    .style("font-size", "120px")
+    .style("font-family", 'Apercu Mono Regular')
     .style("text-anchor", "middle")
     .style("fill", "#4EB1E9")
-    .text("0")
-    .style("font-family", "Courier New");
+    .text("0");
 
 let amountLabel = innerSolar.append("text")
                     .attr("class", "tucsonAmtLabel")
                     .attr("x", innerWidth/2)
                     .attr("y", innerHeight/1.05)
-                    .attr('font-weight', 500)
-                    .attr('font-size', 28)
-                    .attr('font-family', 'Verdana')
+                    .attr('font-size', 30)
+                    .attr('font-family', 'Apercu Mono Light')
                     .text("amount")
                     .style("text-anchor", "middle")
                     .style("opacity", 0); 
@@ -1102,9 +1113,8 @@ let amountValLabel = innerSolar.append("text")
                     .attr("class", "tucsonValAmtLabel")
                     .attr("x", innerWidth/2)
                     .attr("y", innerHeight + 8)
-                    .attr('font-weight', 500)
-                    .attr('font-size', 16)
-                    .attr('font-family', 'Verdana')
+                    .attr('font-size', 20)
+                    .attr('font-family', 'Reader Medium')
                     .text("amount val")
                     .style("text-anchor", "middle")
                     .style("opacity", 0); 
@@ -1114,7 +1124,7 @@ d3.selectAll(".busLabel")
 .on("mouseover",function(){
    d3.selectAll(".tucsonTicker")
    .style("fill", "#4C6B8B")
-   .style("font-family", "Courier New")
+   .style("font-family", "Apercu Mono Regular")
    .transition().tween("text",function(){
       var selection = d3.select(this);
       var start = 0;
@@ -1125,20 +1135,20 @@ d3.selectAll(".busLabel")
    .duration(1000);
      d3.selectAll(".tucsonAmtLabel")
         .style("opacity", 1)
-        .style("font-family", "Verdana")
+        .style("font-family", "Reader Medium")
         .style("fill", "#4C6B8B")
         .text("Electric School Buses")
     
     d3.selectAll(".tucsonValAmtLabel")
         .style("opacity", 1)
         .style("fill", "#4C6B8B")
-        .style("font-family", "Courier New")
+        .style("font-family", "Apercu Mono Light")
         .text("COSTING $350,000 EACH")
 })
 d3.selectAll(".bookLabel")
 .on("mouseover",function(){
    d3.selectAll(".tucsonTicker")
-   .style("font-family", "Courier New")
+   .style("font-family", "Apercu Mono Regular")
    .style("fill", "#D9E100")
    .transition().tween("text",function(){
       var selection = d3.select(this);
@@ -1150,20 +1160,20 @@ d3.selectAll(".bookLabel")
    .duration(5000);
     d3.selectAll(".tucsonAmtLabel")
         .style("opacity", 1)
-        .style("font-family", "Verdana")
+        .style("font-family", "Reader Medium")
         .style("fill", "#D9E100")
         .text("Textbooks")
     d3.selectAll(".tucsonValAmtLabel")
         .style("opacity", 1)
         .style("fill", "#D9E100")
-        .style("font-family", "Courier New")
+        .style("font-family", "Apercu Mono Light")
         .text("COSTING $100 EACH")
 })
 d3.selectAll(".salLabel")
 .on("mouseover",function(){
    d3.selectAll(".tucsonTicker")
    .style("fill", "#F6772D")
-   .style("font-family", "Courier New")
+   .style("font-family", "Apercu Mono Regular")
    .transition().tween("text",function(){
       var selection = d3.select(this);
       var start = 0;
@@ -1174,12 +1184,12 @@ d3.selectAll(".salLabel")
    .duration(1000);
     d3.selectAll(".tucsonAmtLabel")
         .style("opacity", 1)
-        .style("font-family", "Verdana")
+        .style("font-family", "Reader Medium")
         .style("fill", "#F6772D")
         .text("Teacher Salaries")
     d3.selectAll(".tucsonValAmtLabel")
         .style("opacity", 1)
-        .style("font-family", "Courier New")
+        .style("font-family", "Apercu Mono Light")
         .style("fill", "#F6772D")
         .text("COSTING $45,000 EACH")
 })
@@ -1187,7 +1197,7 @@ d3.selectAll(".laptopLabel")
 .on("mouseover",function(){
    d3.selectAll(".tucsonTicker")
    .style("fill", "#4EB1E9")
-   .style("font-family", "Courier New")
+   .style("font-family", "Apercu Mono Regular")
    .transition().tween("text",function(){
       var selection = d3.select(this);
       var start = 0;
@@ -1198,12 +1208,12 @@ d3.selectAll(".laptopLabel")
    .duration(5000);
     d3.selectAll(".tucsonAmtLabel")
         .style("opacity", 1)
-        .style("font-family", "Verdana")
+        .style("font-family", "Reader Medium")
         .style("fill", "#4EB1E9")
         .text("Laptops")
      d3.selectAll(".tucsonValAmtLabel")
         .style("opacity", 1)
-        .style("font-family", "Courier New")
+        .style("font-family", "Apercu Mono Light")
         .style("fill", "#4EB1E9")
         .text("COSTING $350 EACH")
 })
