@@ -129,7 +129,9 @@
 }
 
 #propStat {
-    padding-left: 10px; 
+    padding-left: 20px;
+    padding-right: 20px; 
+    max-width: 550px; 
      color: #4C6B8B;
     font-family: 'Reader Medium'; 
     font-size: 25px; 
@@ -143,10 +145,10 @@
 #fundProp {
     max-width: 100%; 
     height: auto;
-    width: auto/9; 
-    margin-right: -150px;
+    width: auto/9.5; 
+    margin-right: -10px;
     padding-left: 0px; 
-    
+    padding-right: 20px; 
 }
 
 #fundSizeViz {
@@ -162,7 +164,7 @@
     display: flex; 
     align-items: center; 
     justify-content: space-between;   
-    margin-top: -170px; 
+    margin-top: 0px; 
     margin-bottom: 100px; 
 }
 
@@ -173,18 +175,16 @@
     left: 0; 
     margin-top: -50px; 
     margin-bottom: -50px; 
-    padding-top: -150px;
+    padding-top: -0px;
     padding-bottom: -150px;
 }
 #fundSizeStat {
     padding-left: 20px; 
-    margin-top: -100px; 
+    margin-top: -50px; 
     color: #4C6B8B;
     font-family: 'Reader Medium'; 
     font-size: 25px; 
-    position: relative; 
-    top: 50%;
-    transform: translateY(-50%); 
+    position: relative;  
     margin-top: 0px; 
     max-width: 500px; 
     height: auto; 
