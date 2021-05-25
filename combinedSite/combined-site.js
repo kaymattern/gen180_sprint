@@ -1,6 +1,7 @@
 // make draw functions for all the visualizations 
 
-// function to resize on window size change
+// function to resize on window size change 
+// used for the stacked bar chart 
 function responsivefy(svg) {
   const container = d3.select(svg.node().parentNode),
       width = parseInt(svg.style('width'), 10),
@@ -51,6 +52,7 @@ $(document).scroll((e) => {
 
 // bar chart: funding type by project size 
 function drawFundBar() {
+    // funding percentages by size data array 
     let sizesData = [{
                  "title": "0-4.99 kW",
                 'Direct Ownership - Grants and Donations': 98, 
@@ -95,7 +97,9 @@ function drawFundBar() {
                  }, ["title", 'Direct Ownership - Grants and Donations', 
                      "Direct Ownership - Bonds/Loan/Cash/Other",'Third-Party Ownership'
                  ]]; 
-
+    
+    
+    // svg margin convention + size 
     const margin = {top:50, right:50, left:50, bottom:60}; 
     const outerHeight = 300;  
     const outerWidth = 400;
@@ -116,12 +120,13 @@ function drawFundBar() {
     const innerFundSize = largeFundSize.append("g"); 
     innerFundSize.attr("transform", "translate(" +margin.left+","+margin.top+")"); 
 
-
+    // stack bars 
     series = d3.stack()
         .keys(sizesData[6].slice(1))
     (sizesData)
         .map(d => (d.forEach(v => v.key = d.key), d))
-
+    
+    // axis scales 
     x = d3.scaleBand()
         .domain(sizesData.map(d => d.title))
         .range([margin.left, innerWidth - margin.right])
@@ -130,7 +135,8 @@ function drawFundBar() {
     y = d3.scaleLinear()
         .domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
         .rangeRound([innerHeight - margin.bottom, margin.top])
-
+    
+    // function to color stacked bar segments 
     const fundSizeColors = (type) => {
         if (type ===  "Direct Ownership - Bonds/Loan/Cash/Other") {
             return "#f6772d"; 
@@ -142,7 +148,8 @@ function drawFundBar() {
             return  "#4c6b8b"; 
         }
     }
-
+    
+    // create axes 
     xAxis = g => g
         .attr("transform", `translate(0,${innerHeight - margin.bottom})`)
         .style("font-family", "Reader Medium")
@@ -160,7 +167,8 @@ function drawFundBar() {
         .call(g => g.selectAll(".domain").remove())
 
     formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en")
-
+    
+    // join rectangles 
     innerFundSize.selectAll("fundGroups")
                 .data(series)
                 .join("g")
@@ -184,7 +192,7 @@ function drawFundBar() {
     innerFundSize.append("g")
         .call(yAxis);
 
-
+    // addlegends and titles 
     const innerFundLeg = innerFundSize.append("g");
 
 
@@ -257,8 +265,11 @@ function drawFundBar() {
 
 };
 
+// run draw stacked bar graph function 
 drawFundBar();
 
+
+// initialize variables + data for map viz 
 let statePaths, dataset, largeMap, innerMap, pathGenerator, legend;
 
 let legendLawLabel1, legendLawLabel2, legendLawLabel3, legendCapLabel; 
@@ -282,6 +293,7 @@ let brokenLaw3= ["Authorized by state", "or otherwise currently", "in use, at le
   
 var size = 250;
 
+// state law, third party, solar schools, + capacity data 
 let stateData = [{state: 'Alabama', thirdParty: "Apparently disallowed by state or otherwise restricted by legal barriers", solarSchools: 1, totalKW: 18},
                    {state: 'Alaska', thirdParty: "Status unclear or unknown", solarSchools: 3, totalKW: 13},
                    {state: 'Arizona', thirdParty: "Authorized by state or otherwise currently in use, at least in certain jurisdictions", solarSchools: 398, totalKW: 125187},
@@ -401,15 +413,7 @@ d3.json('us_states.json').then( (states) => {
     setTimeout(drawInitial(statePaths), 100)
 })
 
-    
-// different draw functions 
- /*
-    yellow: #F3F1A5
-    orange: #F6772D
-    light blue: #4EB1E9
-    dark blue: #4C6B8B
-    */ 
-// all initial elements should be created in this function 
+// draw initial: draw all elements, use other section functions to hide + show 
 const drawInitial = (statePaths) => {
     
     // make canvas and join data 
@@ -453,7 +457,7 @@ const drawInitial = (statePaths) => {
         }
     }
     
-// legends 
+// legends
     
     legendG = innerMap.append("g")
                         .attr("class", "lawLegend")
