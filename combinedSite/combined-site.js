@@ -23,6 +23,32 @@ function responsivefy(svg) {
   }
 }
 
+$(document).scroll((e) => {
+  // How much the user has scrolled
+  let percentScrolled = window.scrollY / window.innerHeight + .75;
+    
+  let minWidth = 75;
+  let maxWidth = 300;
+  // How wide the image should be
+  let width = percentScrolled   * (maxWidth - minWidth) + minWidth;
+
+  let minHeight = 75;
+  let maxHeight = 200;
+  // How tall the image should be
+  let height =percentScrolled * (maxHeight - minHeight) + minHeight;
+
+  // The starting position
+  let originalPosition = [100, 100];
+
+  // Update width and height
+  $("#fundProp").css("width", width + "px");
+  $(".fundProp").css("height", height + "px");
+
+  // Move the image so the center stays the same
+  $(".fundProp").css("left", originalPosition[0] - (width - minWidth) / 2 + "px");
+  $(".fundProp").css("top", originalPosition[1] - (height - minHeight) / 2 + "px");
+});
+
 // bar chart: funding type by project size 
 function drawFundBar() {
     let sizesData = [{
@@ -740,7 +766,7 @@ function drawSchools() {
         const sortedData = sortDataBySchools(stateData)
          d3.select('#tooltip')
             .style('left', (d3.pointer(event)[0] + 330)+ 'px')
-            .style('top', (d3.pointer(event)[1] + 4*outerHeight + 225) + 'px')
+            .style('top', (d3.pointer(event)[1] + 4*outerHeight + 300) + 'px')
             .style('display', 'inline-block')
              .style('font-family', 'Apercu Mono Regular')
             .html(`<strong>State: </strong> ${thisData.properties.NAME} 
@@ -785,7 +811,7 @@ function drawCapacity() {
         const ranking = sortedData.find(s => s.state === thisData.properties.NAME).capacityRank
          d3.select('#tooltip')
             .style('left', (d3.pointer(event)[0] + 330)+ 'px')
-            .style('top', (d3.pointer(event)[1] + 3*outerHeight + 225) + 'px')
+            .style('top', (d3.pointer(event)[1] + 3*outerHeight + 300) + 'px')
             .style('display', 'inline-block')
              .style('font-family', 'Apercu Mono Regular')
             .html(`<strong>State: </strong> ${thisData.properties.NAME} 
@@ -884,13 +910,13 @@ let activationFunctions = [
             if (i === 0 ){
                 startPos = top;
             }
-            top = startPos + 730*i; 
+            top = startPos + 775*i + 170; 
             sectionPositions.push(top - startPos)
         });
     }
 
     function position() {
-        let pos = window.pageYOffset - 500 - containerStart;
+        let pos = window.pageYOffset - 475 - containerStart;
         let sectionIndex = d3.bisect(sectionPositions, pos);
         sectionIndex = Math.min(sections.size()-1, sectionIndex);
     
@@ -929,7 +955,7 @@ let lastIndex, activeIndex = 0
 
 scroll.on('active', function(index){
     d3.selectAll('.step')
-        .transition().duration(500)
+        .transition().duration(1000)
         .style('opacity', function (d, i) {return i === index ? 1 : 1;});
     
     activeIndex = index
@@ -958,7 +984,7 @@ const outerWidth = 800;
 let tucsonData = [{type: "Teacher Salary", amount: 45000, quantity: 24},
                   {type: "Electric School Bus", amount: 350000, quantity: 3},
                   {type: "Textbooks", amount: 100, quantity: 11000},
-                  {type: "Laptops", amount: 350, quantity: 3143}
+                  {type: "Computers", amount: 350, quantity: 3143}
                ]
 
 
@@ -989,39 +1015,39 @@ laptops = innerSolar.append("g")
 var tucsonTitle = innerSolar.append("text")
                         .text("Tuscon Savings in One Year:")
                          .style("text-anchor", "middle")
-                        .attr("transform", `translate(${innerWidth/3 + 20}, ${margin.top/10})`)
+                        .attr("transform", `translate(${innerWidth/3}, ${margin.top/10})`)
                         .attr("dy", "1em")
                         .attr("class", "tucsonTitle")
                         .style("fill", "#4C6B8B")
-                        .attr('font-size', 28)
+                        .attr('font-size', 36)
                         .attr('font-family', 'Reader Medium');
     
 var tucsonTitle2 = innerSolar.append("text")
                         .text("$1.1 MILLION")
                          .style("text-anchor", "middle")
-                        .attr("transform", `translate(${3*(innerWidth/4) + 30}, ${margin.top/10})`)
+                        .attr("transform", `translate(${3*(innerWidth/4) + 75}, ${margin.top/5})`)
                         .attr("dy", "1em")
                         .attr("class", "tucsonTitle")
                         .style("fill", "#F6772D")
-                        .attr('font-size', 28)
+                        .attr('font-size', 30)
                         .attr('font-family', 'Apercu Mono Medium');
 
 var tucsonSubTitle = innerSolar.append("text")
-                        .text("What could these savings be used for?")
+                        .text("Hover on each icon to see what these savings be used for?")
                          .style("text-anchor", "middle")
                         .attr("transform", `translate(${innerWidth/2}, ${margin.top})`)
                         .attr("dy", "1em")
                         .attr("class", "tucsonSubTitle")
                         .style("fill", "#4C6B8B")
-                        .attr('font-size', 28)
+                        .attr('font-size', 24)
                         .attr('font-family', 'Reader Medium');
 
 let increment = innerWidth/5;
                 
-salaries.attr("transform", "translate(" + .25*increment + "," + innerHeight/4.5 + ")");
-buses.attr("transform", "translate(" + 2.75*increment + "," + innerHeight/4.5 + ")");
-textbooks.attr("transform", "translate(" + 1.5*increment + "," + innerHeight/4.5 + ")");
-laptops.attr("transform", "translate(" + 4*increment + "," + innerHeight/4.5 + ")");
+buses.attr("transform", "translate(" + .25*increment + "," + innerHeight/4.5 + ")");
+laptops.attr("transform", "translate(" + 2.8*increment + "," + innerHeight/4.5 + ")");
+salaries.attr("transform", "translate(" + 1.65*increment + "," + innerHeight/4.5 + ")");
+textbooks.attr("transform", "translate(" + 4*increment + "," + innerHeight/4.5 + ")");
 
 
 var salImg = salaries.append("svg:image")
@@ -1079,7 +1105,7 @@ var laptopImg = laptops.append("svg:image")
       .attr("class","laptopLabel")
 
 var laptopLabel = laptops.append("text")
-                            .text("Laptops")
+                            .text("Computers")
                             .attr("class", "tusconCatLabel")
                             .attr("y", 120)
                             .style("text-anchor", "middle")
@@ -1130,7 +1156,7 @@ d3.selectAll(".busLabel")
       var start = 0;
       var end = 3;
       var interpolator = d3.interpolateNumber(start,end)
-      return function(t) { selection.text(Math.round(interpolator(t)));
+      return function(t) { selection.text(Math.round(interpolator(t)).toLocaleString());
    }; })
    .duration(1000);
      d3.selectAll(".tucsonAmtLabel")
@@ -1155,9 +1181,9 @@ d3.selectAll(".bookLabel")
       var start = 0;
       var end = 11000;
       var interpolator = d3.interpolateNumber(start,end)
-      return function(t) { selection.text(Math.round(interpolator(t)));
+      return function(t) { selection.text(Math.round(interpolator(t)).toLocaleString());
    }; })
-   .duration(5000);
+   .duration(2000);
     d3.selectAll(".tucsonAmtLabel")
         .style("opacity", 1)
         .style("font-family", "Reader Medium")
@@ -1203,14 +1229,14 @@ d3.selectAll(".laptopLabel")
       var start = 0;
       var end = 3143;
       var interpolator = d3.interpolateNumber(start,end)
-      return function(t) { selection.text(Math.round(interpolator(t)));
+      return function(t) { selection.text(Math.round(interpolator(t)).toLocaleString());
    }; })
-   .duration(5000);
+   .duration(2000);
     d3.selectAll(".tucsonAmtLabel")
         .style("opacity", 1)
         .style("font-family", "Reader Medium")
         .style("fill", "#4EB1E9")
-        .text("Laptops")
+        .text("Computers")
      d3.selectAll(".tucsonValAmtLabel")
         .style("opacity", 1)
         .style("font-family", "Apercu Mono Light")
