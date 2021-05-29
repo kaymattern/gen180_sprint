@@ -59,13 +59,13 @@
     position: relative; 
     display: inline-block; 
     width: 500px; 
-    top: 70px; 
+    top: 60px; 
     z-index: 90; 
     margin-right: 20px; 
 }
 
 .step {
-    margin-bottom: 30px; 
+    margin-bottom: 100px; 
     height: 700px; 
     text-align: justify; 
      display: flex;
@@ -211,9 +211,8 @@
     </main>
 	<footer></footer>
 	<script src="https://d3js.org/d3.v6.min.js"></script>
-    <script>
-    // initialize variables + data for map viz 
-let statePaths, dataset, largeMap, innerMap, pathGenerator, legend;
+    <script> 
+    let statePaths, dataset, largeMap, innerMap, pathGenerator, legend;
 
 let legendLawLabel1, legendLawLabel2, legendLawLabel3, legendCapLabel; 
 
@@ -236,7 +235,6 @@ let brokenLaw3= ["Authorized by state", "or otherwise currently", "in use, at le
   
 var size = 250;
 
-// state law, third party, solar schools, + capacity data 
 let stateData = [{state: 'Alabama', thirdParty: "Apparently disallowed by state or otherwise restricted by legal barriers", solarSchools: 1, totalKW: 18},
                    {state: 'Alaska', thirdParty: "Status unclear or unknown", solarSchools: 3, totalKW: 13},
                    {state: 'Arizona', thirdParty: "Authorized by state or otherwise currently in use, at least in certain jurisdictions", solarSchools: 398, totalKW: 125187},
@@ -356,7 +354,15 @@ d3.json('us_states.json').then( (states) => {
     setTimeout(drawInitial(statePaths), 100)
 })
 
-// draw initial: draw all elements, use other section functions to hide + show 
+    
+// different draw functions 
+ /*
+    yellow: #F3F1A5
+    orange: #F6772D
+    light blue: #4EB1E9
+    dark blue: #4C6B8B
+    */ 
+// all initial elements should be created in this function 
 const drawInitial = (statePaths) => {
     
     // make canvas and join data 
@@ -400,7 +406,7 @@ const drawInitial = (statePaths) => {
         }
     }
     
-// legends
+// legends 
     
     legendG = innerMap.append("g")
                         .attr("class", "lawLegend")
@@ -424,8 +430,7 @@ const drawInitial = (statePaths) => {
                         .style("fill", d => lawColor(d))
                         .style("border", "1px solid black")
                         .attr("stroke", "black")
-                        .attr("stroke-width", 1)
-                        .style("opacity", 0); 
+                        .attr("stroke-width", 1); 
     
     const lawCapRects1 = legCapLawG.selectAll(".lawCapLegRect1")
                         .data(capRangeVals)
@@ -480,7 +485,7 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", -67)
                             .attr("y", (d, i) => 13+ i*15)
-                             .style('font-size', '12px')
+                            .style('font-size', '12px')
                             .style('font-family', 'Apercu Mono Regular')
                             .style("opacity", 0); 
     
@@ -493,9 +498,9 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 30)
                             .attr("y", (d, i) => 60 + i*17)
-                            .style('font-family', 'Apercu Mono Regular')
+                             .style('font-family', 'Apercu Mono Regular')
                              .style('font-size', '12px')
-                            .style("opacity", 0);  
+                            .style("opacity", 1);  
     
       legendLawLabel2 = legendG.selectAll(".lawLegLabel2")
                             .data(brokenLaw2)
@@ -504,9 +509,9 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 220)
                             .attr("y", (d, i) => 60 + i*17)
-                            .style('font-family', 'Apercu Mono Regular')
+                             .style('font-family', 'Apercu Mono Regular')
                              .style('font-size', '12px')
-                            .style("opacity", 0); 
+                            .style("opacity", 1); 
     
     legendLawLabel3 = legendG.selectAll(".lawLegLabel3")
                             .data(brokenLaw3)
@@ -515,9 +520,9 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 420)
                             .attr("y", (d, i) => 60 + i*17)
-                            .style('font-family', 'Apercu Mono Regular')
+                             .style('font-family', 'Apercu Mono Regular')
                              .style('font-size', '12px')
-                            .style("opacity", 0);  
+                            .style("opacity", 1);  
     
     legendLawCapLabel1 = legCapLawG.selectAll(".lawLegCapLabel1")
                             .data(brokenLaw1)
@@ -526,7 +531,7 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 30)
                             .attr("y", (d, i) => 90 + i*17)
-                            .style('font-family', 'Apercu Mono Regular')
+                             .style('font-family', 'Apercu Mono Regular')
                              .style('font-size', '12px')
                             .style("opacity", 0);  
     
@@ -537,8 +542,8 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 220)
                             .attr("y", (d, i) => 90 + i*17)
-                            .style('font-family', 'Apercu Mono Regular')
-                            .style('font-size', '12px')
+                             .style('font-family', 'Apercu Mono Regular')
+                             .style('font-size', '12px')
                             .style("opacity", 0); 
     
     legendLawCapLabel3 = legCapLawG.selectAll(".lawLegCapLabel3")
@@ -548,8 +553,8 @@ const drawInitial = (statePaths) => {
                             .text((d)=> d)
                             .attr("x", 420)
                             .attr("y", (d, i) => 90 + i*17)
-                            .style('font-family', 'Apercu Mono Regular')
-                            .style('font-size', '12px')
+                             .style('font-family', 'Apercu Mono Regular')
+                             .style('font-size', '12px')
                             .style("opacity", 0);  
     
      thirdPartyTitle = innerMap.append("text")
@@ -560,7 +565,7 @@ const drawInitial = (statePaths) => {
         .attr("class", "mapTitle")
         .style("fill", "black")
         .style('font-family', 'Reader Medium')
-        .style("opacity", 0); 
+        .style("opacity", 1); 
     
     capTitle = innerMap.append("text")
         .text("Third-Party Solar Power Purchase Agreement Policies and Total Solar Capacity")
@@ -569,7 +574,7 @@ const drawInitial = (statePaths) => {
         .attr("dy", "1em")
         .attr("class", "mapTitle")
         .style("fill", "black")
-        .style('font-family', 'Reader Medium')
+         .style('font-family', 'Reader Medium')
         .style("opacity", 0); 
     
     solarSchoolsTitle = innerMap.append("text")
@@ -578,7 +583,7 @@ const drawInitial = (statePaths) => {
         .attr("transform", `translate(${innerWidth/2}, ${margin.top/3})`)
         .attr("dy", "1em")
         .attr("class", "mapTitle")
-        .style('font-family', 'Reader Medium')
+         .style('font-family', 'Reader Medium')
         .style("fill", "black")
         .style("opacity", 0); 
     
@@ -610,12 +615,11 @@ const drawInitial = (statePaths) => {
         .text(d => d.properties.solarSchools)
         .style("font-weight", 800)
         .style("font-size", 11)
-        .style('font-family', 'Reader Regular')
         .style("opacity", 0)
         .attr("x", function(d){ return pathGenerator.centroid(d)[0] - 12;})
-        .attr("y", function(d){ return  pathGenerator.centroid(d)[1] - 7;}); 
+        .attr("y", function(d){ return  pathGenerator.centroid(d)[1] - 5;}); 
     
-    statePaths.style("opacity", 0)
+    
     
     }
 
@@ -698,7 +702,8 @@ function drawSchools() {
     innerMap.selectAll(".school-centroid")
                         .style("opacity", .8); 
     innerMap.selectAll(".school-count")
-            .style("opacity", 1); 
+            .style("opacity", 1)
+            .style('font-family', 'Apercu Mono Regular'); 
     solarSchoolsTitle.style("opacity", 1)
 
     
@@ -713,9 +718,9 @@ function drawSchools() {
         const sortedData = sortDataBySchools(stateData)
          d3.select('#tooltip')
             .style('left', (d3.pointer(event)[0] + 330)+ 'px')
-            .style('top', (d3.pointer(event)[1] + 4*outerHeight + 300) + 'px')
+            .style('top', (d3.pointer(event)[1] + 2*outerHeight - 300) + 'px')
             .style('display', 'inline-block')
-             .style('font-family', 'Apercu Mono Regular')
+            .style('font-family', 'Apercu Mono Regular')
             .html(`<strong>State: </strong> ${thisData.properties.NAME} 
                 <br> <strong>Solar Schools: </strong> ${thisData.properties.solarSchools} 
                 <br> <strong>School Ranking: </strong> ${sortedData.find(s => s.state === thisData.properties.NAME).schoolRank}`)
@@ -758,9 +763,9 @@ function drawCapacity() {
         const ranking = sortedData.find(s => s.state === thisData.properties.NAME).capacityRank
          d3.select('#tooltip')
             .style('left', (d3.pointer(event)[0] + 330)+ 'px')
-            .style('top', (d3.pointer(event)[1] + 3*outerHeight + 300) + 'px')
+            .style('top', (d3.pointer(event)[1] + outerHeight - 100) + 'px')
             .style('display', 'inline-block')
-             .style('font-family', 'Apercu Mono Regular')
+            .style('font-family', 'Apercu Mono Regular')
             .html(`<strong>State: </strong> ${thisData.properties.NAME} 
                 <br> <strong>Total Capacity: </strong> ${(thisData.properties.totalKW/1000).toFixed(2)} MW 
                 <br> <strong>Capacity Ranking: </strong> ${sortedData.find(s => s.state === thisData.properties.NAME).capacityRank}`)
@@ -781,45 +786,11 @@ function drawCapacity() {
     
 }
 
-function drawNone() {
-    statePaths = innerMap.selectAll(".state-path")
-    statePaths.style("opacity", 0)
-    thirdPartyTitle.style("opacity", 0)
-    statePaths.on("mouseover", mouseOver)
-              .on("mouseout", mouseOut)
-              
-    function mouseOver() {
-        d3.select('#tooltip')
-            .style('display', 'none')
-    }
-    function mouseOut() {
-        d3.select("#tooltip")
-            .style('display', 'none')
-    }
-     legendLawLabel1.style("opacity", 0); 
-    legendLawLabel2.style("opacity", 0); 
-    legendLawLabel3.style("opacity", 0); 
-    d3.selectAll(".lawLegRect").style("opacity", 0);
-     legendCapLabel.style("opacity", 0)
-    legendLawCapLabel1.style("opacity", 0); 
-        legendLawCapLabel2.style("opacity", 0);
-        legendLawCapLabel3.style("opacity", 0);
-    innerMap.selectAll(".school-count")
-            .style("opacity", 0); 
-    solarSchoolsTitle.style("opacity", 0)
-    innerMap.selectAll(".school-centroid")
-                        .style("opacity", 0); 
-     d3.selectAll(".lawCapLegRect1").style("opacity", 0)
-    d3.selectAll(".lawCapLegRect2").style("opacity", 0)
-    d3.selectAll(".lawCapLegRect3").style("opacity", 0)
-    
-}
-
 
 let activationFunctions = [
     drawLaws, 
     drawCapacity, 
-    drawSchools
+    drawSchools 
 ]
    
     // scroller code 
@@ -918,7 +889,6 @@ scroll.on('progress', function(index, progress){
     }
 })
     </script>
-    
 </body>
 
 </html>

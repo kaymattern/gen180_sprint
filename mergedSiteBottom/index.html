@@ -74,11 +74,7 @@
     padding-top: 0px; 
     overflow-wrap: normal; 
     margin: 0px; 
-    height: 400px; 
-  /*  height: 400px;
-    margin-bottom: 20px; 
-    position: relative; 
-    left: 0%; */
+    padding-bottom: 100px; 
 }
 
 #tucsonViz {
@@ -88,6 +84,7 @@
     align-items: center; 
     background-color: #4EB1E9; 
     padding: 0px; 
+    border: 4px #4EB1E9 solid; 
 }
 
 #attachTucson {
@@ -135,9 +132,9 @@
                 <p id=topTucson>Success Story in Tucson, Arizona</p>
                   The solar project at the Tucson Unified School District (TUSD) delivers solar energy to 80 schools and reduces carbon dioxide emissions by 38.7 million pounds per year. TUSD paid nothing upfront for the system (financed entirely by third-party power purchase agreements), and it projects energy cost savings of up to $43 million over 20 years.
         </div>
-            
-        <div id="attachTucson"></div>
-        <div>
+        <div id="tucsonViz">
+        <div id="attachTucson"></div></div>
+        <div id="CTA">
                 <p id=topCTA>Are you ready to get started and see these benefits?</p>
                 <p>Here's our <a href="https://generation180.org/brighter-future-2020-download/">how-to-guide</a>!<p> 
         </div>
@@ -260,7 +257,7 @@ var tucsonTitle2 = innerSolar.append("text")
                         .attr('font-family', 'Apercu Mono Medium');
 
 var tucsonSubTitle = innerSolar.append("text")
-                        .text("Hover on each icon to see what these savings be used for?")
+                        .text("Hover on each icon to see what these savings be used for")
                          .style("text-anchor", "middle")
                         .attr("transform", `translate(${innerWidth/2}, ${margin.top})`)
                         .attr("dy", "1em")
