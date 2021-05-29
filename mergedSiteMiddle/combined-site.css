@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
+
+@font-face {
+    font-family: 'Reader Medium';
+    src: url('fonts/.eot'), url('fonts/Reader/reader-medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Reader Regular';
+    src: url('fonts/.eot'), url('fonts/Reader/reader-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tiempos Regular';
+    src: url('fonts/.eot'), url('fonts/Tiempos/TiemposText-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+@font-face {
+    font-family: 'Apercu Mono Medium';
+    src: url('fonts/.eot'), url('fonts/Apercu_Mono/apercu-mono-medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Apercu Mono Regular';
+    src: url('fonts/.eot'), url('fonts/Apercu_Mono/apercu-mono-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Apercu Mono Light';
+    src: url('fonts/.eot'), url('fonts/Apercu_Mono/apercu-mono-light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+                
+/* Top title section */
+
+#title {
+    font-family: 'Reader Medium';
+    font-size: 45px;
+    font-weight: 500; 
+    color: #F6772D; 
+}
+
+#preTitle {
+    font-family: 'Reader Regular';
+    color: #4EB1E9; 
+}
+
+#subtitle {
+    font-family: 'Reader Medium'; 
+    font-size: 26px; 
+    color: #4C6B8B;
+}
+
+.topSpace {
+    height: 90px;
+}
+
+#introDiv {
+    background-color: #F3F1A5; 
+    margin-left: 0px; 
+    margin-right: 0px; 
+    padding-left: 0px; 
+    padding-right: 0px; 
+}
+
+/* Explaining PPAs */
+
+#topPPA {
+    font-size: 30px; 
+    font-family: 'Reader Regular'; 
+    text-align: center;
+    color: #4EB1E9; 
+} 
+
+.break1 {
+    height: 40px; 
+}
+
+#PPAexplain {
+    text-align: center; 
+    font-family: 'Tiempos Regular'; 
+    font-size: 25px; 
+    padding-left: 20px; 
+    padding-right: 20px; 
+}
+
+#whyPPA {
+    text-align: center; 
+    font-size: 30px; 
+    font-weight: 400; 
+    font-family: 'Reader Medium'; 
+    color: #F6772D; 
+}
+
+#ppaAdv {
+
+}
+
+#ppaDef {
+     color: #4C6B8B;
+    font-family: 'Tiempos Regular';   
+}
+
+/* PPA Graphs */ 
+
+#thirdPartySize1 {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-around; 
+    margin-bottom: 0px;
+}
+
+#lawPie {
+    border: 2px black solid; 
+}
+
+#propStat {
+    padding-left: 20px;
+    padding-right: 20px; 
+    max-width: 550px; 
+     color: #4C6B8B;
+    font-family: 'Reader Medium'; 
+    font-size: 25px; 
+    position: relative; 
+    margin-top: 0px; 
+    
+}
+
+#fundProp {
+    /*
+    height: auto;
+    width: auto/9.5; 
+    */
+    margin-right: -10px;
+    padding-left: 0px; 
+    padding-right: 20px; 
+}
+
+#fundSizeViz {
+    display: inline-block; 
+    position: relative; 
+    width: 100%; 
+    padding-bottom: 35%; 
+    vertical-align: top; 
+    overflow: hidden;  
+}
+
+#fundBySize {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;   
+    margin-top: 0px; 
+    margin-bottom: 50px; 
+}
+
+#fund-size-main {
+    display: inline-block; 
+    position: absolute; 
+    top 0px; 
+    left: 0; 
+    margin-top: -50px; 
+    margin-bottom: -50px; 
+    padding-top: -0px;
+    padding-bottom: -150px;
+}
+#fundSizeStat {
+    padding-left: 20px; 
+    margin-top: -50px; 
+    color: #4C6B8B;
+    font-family: 'Reader Medium'; 
+    font-size: 25px; 
+    position: relative;  
+    margin-top: 0px; 
+    max-width: 500px; 
+    height: auto; 
+}
+
+#sections {
+    position: relative; 
+    display: inline-block; 
+    width: 500px; 
+    top: 70px; 
+    z-index: 90; 
+    margin-right: 20px; 
+}
+
+.step {
+    margin-bottom: 30px; 
+    height: 700px; 
+    text-align: justify; 
+     display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+#graphic {
+    margin: auto; 
+    width: 1500px; 
+    flex-direction: row; 
+    align-items: top; 
+    justify-content: space-around; 
+}
+
+#vis {
+    display: inline-block;
+    position: fixed;
+    top: 0px;
+    z-index: 1;
+    margin-left: 0;
+    height: 1000px;
+    width: 1000px;
+}
+
+#tooltip {
+    position: absolute;
+    border-radius: 3px;
+    display: none; 
+    color: black;
+    border: 1px solid black; 
+    background-color: white; 
+    padding: 6px;
+    font-size: 1.1em;
+    max-width: 400px;
+    z-index: 100;
+}
+
+#step1 {
+    background-color: #D9E100; 
+    padding-left: 20px; 
+    font-family: 'Reader Medium'; 
+    font-size: 25px; 
+    padding-right: 20px; 
+    color: white; 
+   /* padding-top: 200px; */
+    margin-bottom: 20px; 
+     display: table-cell; 
+    vertical-align: middle; 
+}
+
+#step2 {
+    color: #4C6B8B;
+    font-family: 'Reader Medium'; 
+    font-size: 25px;   
+    padding-left: 20px; 
+   /* padding-top: 450px; */
+    margin-bottom: 0px; 
+}
+
+#step3 {
+    color: #4C6B8B;
+    font-family: 'Reader Medium'; 
+    font-size: 25px; 
+    padding-left: 20px; 
+   /* padding-top: 450px;*/ 
+    margin-bottom: 0px; 
+}
+
+.stepText {
+    /*margin-top: 450px;*/
+     vertical-align: middle; 
+}
+
+
+#noThird {
+    padding-left: 20px; 
+    padding-right: 20px; 
+    margin-bottom: 0px;
+    padding-top: 100px; 
+    padding-bottom: 0px; 
+    height: 300px; 
+    font-family: 'Reader Regular'; 
+}
+
+#topTucson {
+    width: 95vw;
+    color: #F6772D;
+    font-family: 'Reader Medium'; 
+    font-size: 30px; 
+    text-align: center;
+}
+
+#tusconExplain {
+    width: 95vw;
+    color: #4C6B8B;
+    font-family: 'Reader Regular'; 
+    font-size: 20px; 
+    padding-left: 30px; 
+    padding-right: 30px;
+    padding-bottom: 0px; 
+    padding-top: 0px; 
+    overflow-wrap: normal; 
+    margin: 0px; 
+    height: 400px; 
+  /*  height: 400px;
+    margin-bottom: 20px; 
+    position: relative; 
+    left: 0%; */
+}
+
+#tucsonViz {
+    width: 99vw;
+    display: flex;   
+    justify-content: space-around;
+    align-items: center; 
+    background-color: #4EB1E9; 
+    padding: 0px; 
+}
+
+#attachTucson {
+    display: inline-block; 
+    position: relative; 
+    width: 100%; 
+    padding-bottom: 0%; 
+    vertical-align: top; 
+    margin: auto; 
+    max-height: 600px; 
+    width: auto; 
+}
+
+#topCTA {
+    width: 95vw;
+    color: #F6772D;
+    font-family: 'Reader Medium'; 
+    font-size: 50px; 
+    text-align: center;
+    font-weight: 400; 
+}
+
+#CTA {
+    width: 95vw;
+    color: #4C6B8B;
+    font-family: 'Reader Medium'; 
+    font-size: 35px; 
+    padding-left: 20px; 
+    padding-right: 20px; 
+    overflow-wrap: normal; 
+    text-align: center;
+    padding-top: 0px; 
+    padding-bottom: 0px; 
+    margin: 0px; 
+    height: 400px; 
+}

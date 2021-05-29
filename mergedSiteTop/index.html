@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<title>Combined Site</title>
+	<meta name="author" content="Your Name">
+	<meta name="description" content="Combined Site (top)!!">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href=""/>
+</head>
+    <style> 
+    
+    
+@font-face {
+    font-family: 'Reader Medium';
+    src: url('fonts/.eot'), url('fonts/Reader/reader-medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Reader Regular';
+    src: url('fonts/.eot'), url('fonts/Reader/reader-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tiempos Regular';
+    src: url('fonts/.eot'), url('fonts/Tiempos/TiemposText-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+@font-face {
+    font-family: 'Apercu Mono Medium';
+    src: url('fonts/.eot'), url('fonts/Apercu_Mono/apercu-mono-medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Apercu Mono Regular';
+    src: url('fonts/.eot'), url('fonts/Apercu_Mono/apercu-mono-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Apercu Mono Light';
+    src: url('fonts/.eot'), url('fonts/Apercu_Mono/apercu-mono-light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+                
+/* Top title section */
+
+#title {
+    font-family: 'Reader Medium';
+    font-size: 45px;
+    font-weight: 500; 
+    color: #F6772D; 
+}
+
+#preTitle {
+    font-family: 'Reader Regular';
+    color: #4EB1E9; 
+}
+
+#subtitle {
+    font-family: 'Reader Medium'; 
+    font-size: 26px; 
+    color: #4C6B8B;
+}
+
+.topSpace {
+    height: 90px;
+}
+
+#introDiv {
+    background-color: #F3F1A5; 
+    margin-left: 0px; 
+    margin-right: 0px; 
+    padding-left: 0px; 
+    padding-right: 0px; 
+}
+
+/* Explaining PPAs */
+
+#topPPA {
+    font-size: 30px; 
+    font-family: 'Reader Regular'; 
+    text-align: center;
+    color: #4EB1E9; 
+} 
+
+.break1 {
+    height: 40px; 
+}
+
+#PPAexplain {
+    text-align: center; 
+    font-family: 'Tiempos Regular'; 
+    font-size: 25px; 
+    padding-left: 20px; 
+    padding-right: 20px; 
+}
+
+#whyPPA {
+    text-align: center; 
+    font-size: 30px; 
+    font-weight: 400; 
+    font-family: 'Reader Medium'; 
+    color: #F6772D; 
+}
+
+#ppaAdv {
+
+}
+
+#ppaDef {
+     color: #4C6B8B;
+    font-family: 'Tiempos Regular';   
+}
+
+/* PPA Graphs */ 
+
+#thirdPartySize1 {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-around; 
+    margin-bottom: 0px;
+}
+
+#lawPie {
+    border: 2px black solid; 
+}
+
+#propStat {
+    padding-left: 20px;
+    padding-right: 20px; 
+    max-width: 550px; 
+     color: #4C6B8B;
+    font-family: 'Reader Medium'; 
+    font-size: 25px; 
+    position: relative; 
+    margin-top: 0px; 
+    
+}
+
+#fundProp {
+    /*
+    height: auto;
+    width: auto/9.5; 
+    */
+    margin-right: -10px;
+    padding-left: 0px; 
+    padding-right: 20px; 
+}
+
+#fundSizeViz {
+    display: inline-block; 
+    position: relative; 
+    width: 100%; 
+    padding-bottom: 35%; 
+    vertical-align: top; 
+    overflow: hidden;  
+}
+
+#fundBySize {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;   
+    margin-top: 0px; 
+    margin-bottom: 50px; 
+}
+
+#fund-size-main {
+    display: inline-block; 
+    position: absolute; 
+    top 0px; 
+    left: 0; 
+    margin-top: -50px; 
+    margin-bottom: -50px; 
+    padding-top: -0px;
+    padding-bottom: -150px;
+}
+#fundSizeStat {
+    padding-left: 20px; 
+    margin-top: -50px; 
+    color: #4C6B8B;
+    font-family: 'Reader Medium'; 
+    font-size: 25px; 
+    position: relative;  
+    margin-top: 0px; 
+    max-width: 500px; 
+    height: auto; 
+}
+    </style>
+    
+<body>
+	
+	<main>
+    
+    <div id=introDiv>
+        <div class=topSpace></div>
+        <span id=preTitle>Get solar on your school</span> <br><br><br>
+        <span id=title>How Schools Are Paying to Go Solar</span> <br><br>
+        
+        <span id=subtitle>Going solar doesn't have to be hard. Learn how you can flip the switch and help build a brighter future.</span>
+         <div class=topSpace></div>
+        
+    </div><div class=break1></div>
+    <div id=ppaDef>
+        <p id=topPPA>More than <strong>three-quarters</strong> of the cumulative solar capacity  installed on schools nationwide was funded through a form of third-party ownership.</p> <br>
+        
+        <span id=PPAexplain>Through third-party ownership, a third party finances, builds, owns, and maintains the solar system. These arrangements are typically structured as power purchasing agreements (PPA). In a PPA, the school agrees to pay the solar company an agreed-upon rate for the solar power generated by the system that is typically below the market rate. The agreement can include options for the school to buy the panels at certain points during the contract term or after it ends. PPA arrangements enable the host  school to avoid many of the traditional barriers to the installation of on-site solar systems: high upfront capital costs, system performance risk, and complex design and permitting processes. </span><br><br>
+        <p id=whyPPA>Why PPAs are a great option for schools: </p><ul id=ppaAdv>
+            <li>Schools lack tax liability, so are unable to take advantage of state or federal tax credits or accelerated depreciation for solar equipment. However, through PPAs the third party owner can generate tax savings and pass some of them on to the school.</li>
+            <li>Schools can have solar systems with little to no upfront costs.</li>
+            <li>The host school avoids many traditional barriers to on-site installation: high upfront capital costs, system performance risk, and complex design and permitting processes.</li>
+            <li>Solar PPAs can be cash flow positive for the school from the day the system is commisioned.</li>
+            </ul>
+        </div>
+        <div class=break1></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <div id=thirdPartySize1><span id=propStat>Over <strong>2/3</strong> of solar installed on schools was financed by a third party. The remaining portion was directly financed.</span><img id=fundProp src="fundSize.svg"/></div>
+    
+        <div id=fundBySize><span id=fundSizeStat>While small demonstration systems are mostly funded by grants and donations, for solar energy systems over 15 kW, third-party ownership becomes the primary funding mechanism and its utilization increases with the size of the solar energy system.</span><div id=fundSizeViz></div></div>
+        <br><br>
+        
+        
+    
+    </main>
+	<footer></footer>
+	<script src="https://d3js.org/d3.v6.min.js"></script>
+      <script>
+        // function to resize on window size change 
+// used for the stacked bar chart 
+function responsivefy(svg) {
+  const container = d3.select(svg.node().parentNode),
+      width = parseInt(svg.style('width'), 10),
+      height = parseInt(svg.style('height'), 10),
+      aspect = width / height;
+ 
+  svg.attr('viewBox', `0 0 ${width} ${height}`)
+      .attr('preserveAspectRatio', 'xMinYMid')
+      .call(resize);
+ 
+  d3.select(window).on(
+      'resize.' + container.attr('id'), 
+      resize
+  );
+    
+  function resize() {
+      const w = parseInt(container.style('width'));
+      svg.attr('width', w);
+      svg.attr('height', Math.round(w / aspect));
+  }
+}
+
+$(document).scroll((e) => {
+  // How much the user has scrolled
+  let percentScrolled = window.scrollY / window.innerHeight + .75;
+    
+  let minWidth = 75;
+  let maxWidth = 300;
+  // How wide the image should be
+  let width = percentScrolled   * (maxWidth - minWidth) + minWidth;
+
+  let minHeight = 75;
+  let maxHeight = 200;
+  // How tall the image should be
+  let height =percentScrolled * (maxHeight - minHeight) + minHeight;
+
+  // The starting position
+  let originalPosition = [100, 100];
+
+  // Update width and height
+  $("#fundProp").css("width", width + "px");
+  $(".fundProp").css("height", height + "px");
+
+  // Move the image so the center stays the same
+  $(".fundProp").css("left", originalPosition[0] - (width - minWidth) / 2 + "px");
+  $(".fundProp").css("top", originalPosition[1] - (height - minHeight) / 2 + "px");
+}); 
+
+// bar chart: funding type by project size 
+function drawFundBar() {
+    // funding percentages by size data array 
+    let sizesData = [{
+                 "title": "0-4.99 kW",
+                'Direct Ownership - Grants and Donations': 98, 
+                 "Direct Ownership - Bonds/Loan/Cash/Other": 0, 
+                 'Third-Party Ownership': 2,
+                 'total': 100
+                 }, 
+               {
+                 "title": "5-14.99 kW",
+                    'Direct Ownership - Grants and Donations': 81, 
+                 "Direct Ownership - Bonds/Loan/Cash/Other": 1, 
+                 'Third-Party Ownership': 17, 
+                 'total': 100
+                 }, 
+                {
+                 "title": "15-49.00 kW",
+                 'Direct Ownership - Grants and Donations': 38, 
+                 "Direct Ownership - Bonds/Loan/Cash/Other": 5, 
+                 'Third-Party Ownership': 57, 
+                 'total': 100
+                 }, 
+               {
+                 "title": "50-199.99 kW",
+                    'Direct Ownership - Grants and Donations': 12, 
+                 "Direct Ownership - Bonds/Loan/Cash/Other": 14, 
+                 'Third-Party Ownership': 74, 
+                 'total': 100
+                 }, 
+               {
+                 "title": "200-399.99 kW",
+                   'Direct Ownership - Grants and Donations': 9, 
+                 "Direct Ownership - Bonds/Loan/Cash/Other": 13, 
+                 'Third-Party Ownership': 78, 
+                 'total': 100
+                 }, 
+                {
+                "title":"400+ kW",
+                      'Direct Ownership - Grants and Donations': 17, 
+                 "Direct Ownership - Bonds/Loan/Cash/Other": 3, 
+                 'Third-Party Ownership': 80, 
+                 'total': 100
+                 }, ["title", 'Direct Ownership - Grants and Donations', 
+                     "Direct Ownership - Bonds/Loan/Cash/Other",'Third-Party Ownership'
+                 ]]; 
+    
+    
+    // svg margin convention + size 
+    const margin = {top:50, right:50, left:50, bottom:60}; 
+    const outerHeight = 300;  
+    const outerWidth = 400;
+    
+    let categories =  ['Third-Party Ownership', 'Direct Ownership - Grants and Donations', 
+                     "Direct Ownership - Bonds/Loan/Cash/Other"
+                 ]
+    const innerHeight = outerHeight - margin.top - margin.bottom; 
+    const innerWidth = outerWidth - margin.left - margin.right;   
+    
+    const largeFundSize = d3.select("div#fundSizeViz").append("svg")
+                    .attr("id", "fund-size-main")
+                    .attr("height", outerHeight)
+                    .attr("width", outerWidth)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 1)
+                    .call(responsivefy);
+    const innerFundSize = largeFundSize.append("g"); 
+    innerFundSize.attr("transform", "translate(" +margin.left+","+margin.top+")"); 
+
+    // stack bars 
+    series = d3.stack()
+        .keys(sizesData[6].slice(1))
+    (sizesData)
+        .map(d => (d.forEach(v => v.key = d.key), d))
+    
+    // axis scales 
+    x = d3.scaleBand()
+        .domain(sizesData.map(d => d.title))
+        .range([margin.left, innerWidth - margin.right])
+        .padding(0.1)
+
+    y = d3.scaleLinear()
+        .domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
+        .rangeRound([innerHeight - margin.bottom, margin.top])
+    
+    // function to color stacked bar segments 
+    const fundSizeColors = (type) => {
+        if (type ===  "Direct Ownership - Bonds/Loan/Cash/Other") {
+            return "#f6772d"; 
+            }
+        if (type ===  'Direct Ownership - Grants and Donations') {
+            return "#f3f1a5"; 
+        }
+        if (type === 'Third-Party Ownership') {
+            return  "#4c6b8b"; 
+        }
+    }
+    
+    // create axes 
+    xAxis = g => g
+        .attr("transform", `translate(0,${innerHeight - margin.bottom})`)
+        .style("font-family", "Reader Medium")
+        .style("font-size", "3px")
+        .attr("stroke-width", 0)
+        .call(d3.axisBottom(x).tickSize(0))
+        .call(g => g.selectAll(".domain").remove())
+
+    yAxis = g => g
+        .attr("transform", `translate(${margin.left},0)`)
+        .style("font-family", "Reader Medium")
+        .style("font-size", "6px")
+        .attr("stroke-width", 0)
+        .call(d3.axisLeft(y).ticks(null, "s").tickSize(0))
+        .call(g => g.selectAll(".domain").remove())
+
+    formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en")
+    
+    // join rectangles 
+    innerFundSize.selectAll("fundGroups")
+                .data(series)
+                .join("g")
+                .attr("fill", d=> fundSizeColors(d.key))
+                .selectAll("fundSizeRect")
+                .data(d => d) 
+                .join("rect")
+                    .attr("x", (d, i) => x(d.data.title))
+                    .attr("y", d=>y(d[1]))
+                    .attr("height", d => y(d[0]) - y(d[1]))
+                    .attr("width", x.bandwidth())
+                    .style("border", "1px solid white")
+                    .attr("stroke", "white")
+                    .attr("stroke-width", 0)
+                .append("title")
+                    .text(d=> `${d.data.title} ${d.key}${formatValue(d.data[d.key])}`);
+
+    innerFundSize.append("g")
+        .call(xAxis);
+
+    innerFundSize.append("g")
+        .call(yAxis);
+
+    // addlegends and titles 
+    const innerFundLeg = innerFundSize.append("g");
+
+
+    innerFundSize.append("text")
+                .attr("id", "fundSizeTitle")
+                .attr("text-anchor", "middle")
+                .attr("transform", `translate(${innerWidth/2 -10},25)`)
+                .text("School System Size Distribution by Financing Type")
+                .style("fill", "#4C6B8B")
+                .style("font-family", "Reader Medium")
+                .style("stroke", "#4C6B8B")
+                .style("font-size", "10px")
+
+    innerFundLeg.selectAll(".innerFundLegRect")
+                    .data(categories)
+                        .join("rect")
+                        .attr("width", innerWidth/3)
+                        .attr("height", innerHeight/7)
+                        .attr("class", "innerFundLegRect")
+                        .attr("x", (d, i)=> i*105 + 40)
+                        .style("fill", d=> fundSizeColors(d))
+                        .style("border", "1px solid black")
+                        .attr("stroke", "white")
+                        .attr("stroke-width", 1);
+    let categoriesPrim =  ['Third-Party Ownership', 'Direct Ownership ', 
+                     "Direct Ownership"
+                 ]
+    let categoriesSub =  ['', 'Grants and Donations', 
+                     "Bonds/Loan/Cash/Other"
+                 ]
+    function legFill(word, num) {
+        console.log(word, num);
+        if (word === "Direct Ownership " && num === 1) {
+            console.log("entered"); 
+            return "black";
+        } 
+        if (word === "Grants and Donations" && num === 1) {
+            return "black"; 
+            }
+        else {
+            return "white";
+        }
+    }
+
+    innerFundLeg.selectAll(".innerFundLegLabel")
+                        .data(categoriesPrim)
+                        .attr("class", "innerFundLegLabel")
+                        .join("text")
+                        .text(d=> d)
+                        .attr("x", (d, i)=> i*105 + 43)
+                        .attr("y", 10)
+                        .style('fill', (d,i)=> legFill(d, i))
+                        .attr("stroke-width", 0)
+                        .style("font-size", "6px")
+                        .style("font-family", "Reader Medium"); 
+
+    innerFundLeg.selectAll(".innerFundLegLabelSub")
+                        .data(categoriesSub)
+                        .attr("class", "innerFundLegLabelSub")
+                        .join("text")
+                        .text(d=> d)
+                        .attr("x", (d, i)=> i*105 + 43)
+                        .attr("y", 17)
+                        .style('fill', (d,i)=> legFill(d, i))
+                        .attr("stroke-width", 0)
+                        .style("font-size", "6px")
+                        .style("font-family", "Reader Regular"); 
+
+    innerFundLeg.attr("transform", "translate(" +(innerWidth/2 - 3*(105+40)/2)+","+(innerHeight-40)+")"); 
+
+};
+
+// run draw stacked bar graph function 
+drawFundBar();
+    </script>
+</body>
+
+</html>
